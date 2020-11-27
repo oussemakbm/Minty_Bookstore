@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="439.0" prefWidth="600.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.SignUpController">
+   <children>
+      <JFXButton fx:id="BtnSignUp" layoutX="265.0" layoutY="332.0" onAction="#signUpAction" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #151928; -fx-border-color: #a0a2ab;" text="Sign up" textFill="#ffffff8c" />
+      <Text fill="#ebd5d5" layoutX="212.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <Text fill="#ebdc97" layoutX="303.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="textUser" layoutX="222.0" layoutY="84.0" prefHeight="30.0" prefWidth="179.0" promptText="username" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="textPassword" layoutX="222.0" layoutY="170.0" prefHeight="30.0" prefWidth="179.0" promptText="Password" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXTextField fx:id="textEmail" layoutX="222.0" layoutY="128.0" prefHeight="30.0" prefWidth="179.0" promptText="email" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="textTel" layoutX="222.0" layoutY="212.0" prefHeight="30.0" prefWidth="179.0" promptText="telephone" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="textAdresse" layoutX="222.0" layoutY="249.0" prefHeight="30.0" prefWidth="179.0" promptText="adresse" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="textpic" layoutX="222.0" layoutY="279.0" prefHeight="30.0" prefWidth="179.0" promptText="profile picture" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <ImageView fitHeight="22.0" fitWidth="20.0" layoutX="175.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/localisation.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="20.0" layoutX="175.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/tel.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="32.0" layoutX="175.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/password.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="175.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/email.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="20.0" layoutX="175.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/username.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="gif" fitHeight="53.0" fitWidth="49.0" layoutX="276.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/loading-waiting.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="86.0" fitWidth="126.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logooMinty.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="BtnSignUp1" layoutX="496.0" layoutY="46.0" onAction="#loginAction" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #151928; -fx-border-color: #a0a2ab;" text="Login" textFill="#ffffff8c" />
+   </children>
+</AnchorPane>
