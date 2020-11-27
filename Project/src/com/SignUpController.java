@@ -8,9 +8,14 @@ package com;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.models.User;
+import com.services.ServiceUser;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,7 +79,16 @@ public class SignUpController implements Initializable {
         PauseTransition pt = new PauseTransition();
         pt.setDuration(Duration.seconds(3));
         pt.setOnFinished(ev -> {
-            System.out.println("Sign Up Successfully");
+            ServiceUser us = new ServiceUser();
+            User u = new User(textUser.getText(), textEmail.getText(), textPassword.getText(), "CLIENT", textTel.getText(), textAdresse.getText(), textpic.getText());
+            try {
+                us.addUser(u);
+            } catch (SQLException ex) {
+                System.out.println("Erreur Add USER");;
+            }
+            System.out.println("User Added Successfully");
+//            System.out.println("Sign Up Successfully");
+
             gif.setVisible(false);
         });
         pt.play(); 
