@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="448.0" prefWidth="600.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.HomeController">
+   <children>
+      <JFXTextField fx:id="textUsername" layoutX="214.0" layoutY="201.0" prefHeight="30.0" prefWidth="220.0" promptText="Email or username" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="textPassword" layoutX="214.0" layoutY="272.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXButton fx:id="jbtnSignUp" layoutX="462.0" layoutY="64.0" onAction="#SignUpAction" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #151928; -fx-border-color: #a0a2ab;" text="Sign up" textFill="#ffffff8c" />
+      <JFXButton fx:id="jbtnLLogin" layoutX="265.0" layoutY="313.0" onAction="#loginAction" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #151928; -fx-border-color: #a0a2ab;" text="Login" textFill="#ffffff8c" />
+      <Text fill="#ebd5d5" layoutX="208.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOK">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <Text fill="#ebdc97" layoutX="299.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORE">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="214.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logooMinty.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="26.0" layoutX="170.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/username.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="167.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/password.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="gifLoading" fitHeight="48.0" fitWidth="47.0" layoutX="277.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/loading-waiting.gif" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
