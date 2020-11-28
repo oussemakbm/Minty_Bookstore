@@ -19,22 +19,22 @@ import java.util.ArrayList;
  * @author DellXPS
  */
 public class ServiceComment {
-    
+
     public static ServiceComment INSTANCE;
-    private Connection con; 
-    
+    private Connection con;
+
     private ServiceComment() {
-        con =  MyConnection.getInstance().getConnection();
+        con = MyConnection.getInstance().getConnection();
     }
-    
+
     public static ServiceComment getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new ServiceComment();
         }
-        
-        return  INSTANCE;
+
+        return INSTANCE;
     }
-    
+
     public void addComment(Comment c, int userId, int bookId) {
         String insert = "INSERT INTO `comments`(`idUser`, `idBook`, `body`) VALUES (?,?,?)";
         try {
@@ -46,12 +46,12 @@ public class ServiceComment {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     public void deleteComment(int id) {
-    // Delete Comment     
-            String delete = "DELETE FROM `comments` WHERE id = ?";
+        // Delete Comment     
+        String delete = "DELETE FROM `comments` WHERE id = ?";
         try {
             PreparedStatement pst = con.prepareStatement(delete);
             pst.setInt(1, id);
@@ -60,9 +60,9 @@ public class ServiceComment {
             e.printStackTrace();
         }
     }
-    
+
     public void editComment(int id, String body) {
-    // Edit Comment 
+        // Edit Comment 
         String update = "UPDATE `comments` SET `body`= ? WHERE id = ?";
         try {
             PreparedStatement pst = con.prepareStatement(update);
@@ -73,29 +73,26 @@ public class ServiceComment {
             e.printStackTrace();
         }
     }
-    
+
     public ArrayList<Comment> getComments() {
-        
+
         ArrayList<Comment> result = new ArrayList<Comment>();
-        
-        
+
         String fetch = "SELECT * FROM comments";
-        
+
         try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(fetch);
-            while(rs.next()) {
-                Comment c  = new Comment(rs.getString("body"));
+            while (rs.next()) {
+                Comment c = new Comment(rs.getString("body"));
                 c.setId(rs.getInt("id"));
                 result.add(c);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return result;
     }
-    
-    
-    
+
 }

@@ -19,16 +19,25 @@ import java.util.ArrayList;
  * @author ihebf
  */
 public class ServiceWishList {
+
     private Connection cnx;
-    
-    public ServiceWishList(){
-        cnx=MyConnection.getInstance().getConnection();
+
+    public static ServiceWishList INSTANCE;
+
+    public static ServiceWishList getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceWishList();
+        }
+        return INSTANCE;
     }
-    
-    
+
+    private ServiceWishList() {
+        cnx = MyConnection.getInstance().getConnection();
+    }
+
     public void addWishList(WishList w) throws SQLException {
         String request = "INSERT INTO `wishlist` (`id`, `name`, `idUser`, `idBook`)"
-                + " VALUES (NULL, '"+w.getName()+"', '"+w.getIdUser()+"', '"+w.getIdBook()+"')";
+                + " VALUES (NULL, '" + w.getName() + "', '" + w.getIdUser() + "', '" + w.getIdBook() + "')";
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
@@ -74,7 +83,7 @@ public class ServiceWishList {
 
         pst.setString(1, w.getName());
         pst.setInt(2, w.getId());
-      
+
         pst.executeUpdate();
 
     }

@@ -23,8 +23,18 @@ import com.util.MyConnection;
 public class ServiceAuthor {
 
     private Connection cnx;
+    
+    private static ServiceAuthor INSTANCE;
+    
+    
+    public static ServiceAuthor getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new ServiceAuthor();
+        return INSTANCE;
+    }
+    
 
-    public ServiceAuthor() {
+    private ServiceAuthor() {
         cnx = MyConnection.getInstance().getConnection();
     }
     

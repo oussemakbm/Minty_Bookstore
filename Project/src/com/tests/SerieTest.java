@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class SerieTest {
     public static void main(String[] args) {
-            ServiceSerie sl = new ServiceSerie();
+            ServiceSerie sl = ServiceSerie.getInstance();
             try {
             /*System.out.println(sl.getSeries());
             sl.addSerie(new Serie("Serie 1"));

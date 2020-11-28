@@ -14,34 +14,44 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author MediaStudio
  */
 public class ServiceBook {
+
     private Connection cnx;
-    public ServiceBook() {
+
+    private static ServiceBook INSTANCE;
+
+    public static ServiceBook getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceBook();
+        }
+        return INSTANCE;
+    }
+
+    private ServiceBook() {
         cnx = MyConnection.getInstance().getConnection();
     }
+
     public void addBook(Book b) throws SQLException {
-        
+
         String request = "INSERT INTO `books` (`id`, `title`, `description`, `imageUrl`, `prix`, `quantity`, `rating`, `nbrPages`, `idAuthor`, `idCategory`, `idLanguage`, `idSerie`, `publishDate`) "
-                + " VALUES (NULL, '" + b.getTitle()  +"', '"+ b.getDescription() +"', '"+b.getImageUrl()+"', '"+b.getPrix()+"', '"+b.getQuantity()+"', '"+b.getRating()+ "', '"+b.getNbrPages()+"', '"+b.getIdAuthor()+"', '"+b.getIdCategory()+ "', '"+b.getIdLanguage()+"', '"+b.getIdSerie()+"', '"+b.getPublishDate() +"')";
-       
+                + " VALUES (NULL, '" + b.getTitle() + "', '" + b.getDescription() + "', '" + b.getImageUrl() + "', '" + b.getPrix() + "', '" + b.getQuantity() + "', '" + b.getRating() + "', '" + b.getNbrPages() + "', '" + b.getIdAuthor() + "', '" + b.getIdCategory() + "', '" + b.getIdLanguage() + "', '" + b.getIdSerie() + "', '" + b.getPublishDate() + "')";
+
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
-    
-    
+
     public void updateBook(Book b) throws SQLException {
-      
+
         String req = "UPDATE `books` SET `title`=?,`description`=?,`imageUrl`=?,"
                 + "`prix`=?,`quantity`=?,`rating`=?,`nbrPages`=?,"
                 + "`idAuthor`=?,`idCategory`=?,`idLanguage`=?,`idSerie`=?,"
                 + "`publishDate`=?"
                 + "WHERE `id` = ?";
-        
+
         PreparedStatement pst = cnx.prepareStatement(req);
 
         pst.setString(1, b.getTitle());
@@ -54,25 +64,25 @@ public class ServiceBook {
         pst.setInt(8, b.getIdAuthor());
         pst.setInt(9, b.getIdCategory());
         pst.setInt(10, b.getIdLanguage());
-        pst.setInt(11, b.getIdSerie());    
+        pst.setInt(11, b.getIdSerie());
         pst.setString(12, b.getPublishDate());
         pst.setInt(13, b.getId());
         pst.executeUpdate();
 
     }
-    
+
     public void deleteBook(int id) throws SQLException {
         String request = "DELETE FROM `books` WHERE id =" + id;
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
-    
-        public ArrayList<Book> getBooks() throws SQLException {
+
+    public ArrayList<Book> getBooks() throws SQLException {
         ArrayList<Book> results = new ArrayList<>();
         String request = "SELECT * FROM `books`";
         Statement stm = cnx.createStatement();
         ResultSet rst = stm.executeQuery(request);
-        
+
         while (rst.next()) {
             Book b = new Book();
             b.setId(rst.getInt(1));
@@ -88,13 +98,14 @@ public class ServiceBook {
             b.setIdLanguage(rst.getInt(11));
             b.setIdSerie(rst.getInt(12));
             b.setPublishDate(rst.getString(13));
-            
+
             results.add(b);
         }
 
         return results;
     }
-         public Book getBook(int id) throws SQLException {
+
+    public Book getBook(int id) throws SQLException {
         String request = "SELECT * FROM `books` WHERE id =" + id;
         Statement stm = cnx.createStatement();
         ResultSet rst = stm.executeQuery(request);
@@ -114,26 +125,11 @@ public class ServiceBook {
             b.setIdLanguage(rst.getInt(11));
             b.setIdSerie(rst.getInt(12));
             b.setPublishDate(rst.getString(13));
-            
-            
-            
-            
-            
-            
-            
-            
+
             return b;
         }
 
         return null;
     }
-    
-    
-    
-        
-        
-    
-    
-    
-    
+
 }

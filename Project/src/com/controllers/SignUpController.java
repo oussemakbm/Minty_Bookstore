@@ -79,7 +79,7 @@ public class SignUpController implements Initializable {
         PauseTransition pt = new PauseTransition();
         pt.setDuration(Duration.seconds(3));
         pt.setOnFinished(ev -> {
-            ServiceUser us = new ServiceUser();
+            ServiceUser us = ServiceUser.getInstance();
             User u = new User(textUser.getText(), textEmail.getText(), textPassword.getText(), "CLIENT", textTel.getText(), textAdresse.getText(), textpic.getText());
             try {
                 us.addUser(u);

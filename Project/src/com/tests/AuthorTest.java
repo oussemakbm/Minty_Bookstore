@@ -18,8 +18,8 @@ import java.sql.SQLException;
 public class AuthorTest {
 
     public static void main(String[] args) {
-        ServiceAuthor sa = new ServiceAuthor();
-        ServicePreferAuthor spa = new ServicePreferAuthor();
+        ServiceAuthor sa = ServiceAuthor.getInstance();
+        ServicePreferAuthor spa = ServicePreferAuthor.getInstance();
         try {
             AuthorPrefer ap = new AuthorPrefer(1, 1);
             spa.addPreferAuthor(ap);

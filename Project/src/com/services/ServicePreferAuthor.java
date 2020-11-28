@@ -20,20 +20,25 @@ import java.util.ArrayList;
  * @author ASUS
  */
 public class ServicePreferAuthor {
-    
-private Connection cnx;
 
-    public ServicePreferAuthor() {
+    private Connection cnx;
+
+    public static ServicePreferAuthor INSTANCE;
+
+    public static ServicePreferAuthor getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServicePreferAuthor();
+        }
+        return INSTANCE;
+    }
+
+    private ServicePreferAuthor() {
         cnx = MyConnection.getInstance().getConnection();
     }
-    
-   
 
     public void addPreferAuthor(AuthorPrefer ap) throws SQLException {
         String request = "INSERT INTO `favoriteauthors`(`id`, `idUser`, `idAuthor`) "
-                
-        + " VALUES (NULL, '" +  ap.getIdUser()+"', '"+ ap.getIdAuthor()+ "')";
-        
+                + " VALUES (NULL, '" + ap.getIdUser() + "', '" + ap.getIdAuthor() + "')";
 
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
@@ -50,8 +55,7 @@ private Connection cnx;
             ap.setId(rst.getInt(1));
             ap.setIdUser(rst.getInt(2));
             ap.setIdAuthor(rst.getInt(3));
-           
-            
+
             results.add(ap);
         }
 
@@ -68,8 +72,7 @@ private Connection cnx;
             ap.setId(rst.getInt(1));
             ap.setIdUser(rst.getInt(2));
             ap.setIdAuthor(rst.getInt(3));
-          
-           
+
             return ap;
         }
 
@@ -77,8 +80,8 @@ private Connection cnx;
     }
 
     public void updateAuthorPrefer(AuthorPrefer ap) throws SQLException {
-        
-        String request="UPDATE `favoriteauthors` SET `idUser`=?,`idAuthor`=? "
+
+        String request = "UPDATE `favoriteauthors` SET `idUser`=?,`idAuthor`=? "
                 + "WHERE `id` = ?";
         PreparedStatement pst = cnx.prepareStatement(request);
 

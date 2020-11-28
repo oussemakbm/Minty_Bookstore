@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class LangueTest {
         public static void main(String[] args) {
-            ServiceLangue sl = new ServiceLangue();
+            ServiceLangue sl = ServiceLangue.getInstance();
             try {
             //System.out.println(sl.getLangues());
             /*sl.addLangue(new Langue("EN"));

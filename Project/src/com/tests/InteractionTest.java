@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class InteractionTest {
 
     public static void main(String[] args) throws SQLException {
-        ServiceInteraction is = new ServiceInteraction();
+        ServiceInteraction is = ServiceInteraction.getInstance();
         Interaction i = new Interaction(1, 1, 4, 0);
         Interaction i2 = new Interaction(1, 1, 2, 1);
 

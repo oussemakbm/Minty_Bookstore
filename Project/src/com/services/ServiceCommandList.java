@@ -20,8 +20,17 @@ import java.util.ArrayList;
  * @author ali
  */
 public class ServiceCommandList {
-    
+
     private Connection cnx;
+
+    public static ServiceCommandList INSTANCE;
+
+    public static ServiceCommandList getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceCommandList();
+        }
+        return INSTANCE;
+    }
 
     public ServiceCommandList() {
         cnx = MyConnection.getInstance().getConnection();
@@ -29,12 +38,12 @@ public class ServiceCommandList {
 
     public void addCommandList(CommandList lc) throws SQLException {
         String request = "INSERT INTO `commandlist` (`id`, `status`, `totalprice`, 'idUser')"
-                + " VALUES (NULL, '" + lc.getStatus() + "', '" + lc.getTotalprice() + "', '"+ lc.getIdUser()+ "')";
+                + " VALUES (NULL, '" + lc.getStatus() + "', '" + lc.getTotalprice() + "', '" + lc.getIdUser() + "')";
 
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
-    
+
     public ArrayList<CommandList> getCommandList() throws SQLException {
         ArrayList<CommandList> results = new ArrayList<>();
         String request = "SELECT * FROM `commandlist`";
@@ -65,13 +74,11 @@ public class ServiceCommandList {
         pst.executeUpdate();
 
     }
-    
-     public void deleteCommandList(int id) throws SQLException {
+
+    public void deleteCommandList(int id) throws SQLException {
         String request = "DELETE FROM `commandlist` WHERE id =" + id;
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
 
 }
-
-
