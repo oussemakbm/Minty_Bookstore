@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.services;
+
 import com.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,33 +14,41 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import com.models.User;
 
-
-
 /**
  *
  * @author MediaStudio
  */
 public class ServiceUser {
+
     private Connection cnx;
 
-    public ServiceUser() {
+    public static ServiceUser INSTANCE;
+
+    public static ServiceUser getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceUser();
+        }
+        return INSTANCE;
+    }
+
+    private ServiceUser() {
         cnx = MyConnection.getInstance().getConnection();
     }
-    
+
     public void addUser(User u) throws SQLException {
-        
+
         String request = "INSERT INTO `users`(`id`, `name`, `email`, `password`, `numTel`, `adresse`, `role`, `picUrl`) "
-                + " VALUES (NULL, '" +  u.getName()+"', '"+ u.getEmail() +"', '"+u.getPassword()+"', '"+u.getNumTel()+"', '"+u.getAdresse()+"', '"+u.getRole()+ "', '"+u.getProfilePicture()+ "')";
-       
+                + " VALUES (NULL, '" + u.getName() + "', '" + u.getEmail() + "', '" + u.getPassword() + "', '" + u.getNumTel() + "', '" + u.getAdresse() + "', '" + u.getRole() + "', '" + u.getProfilePicture() + "')";
+
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
-    
+
     public void updateUser(User u) throws SQLException {
-      
+
         String req = "UPDATE `users` SET `name`=?,`email`=?,`password`=?,`numTel`=?,`adresse`=?,`role`=?,`picUrl`=?"
                 + "WHERE `id` = ?";
-        
+
         PreparedStatement pst = cnx.prepareStatement(req);
 
         pst.setString(1, u.getName());
@@ -54,19 +62,19 @@ public class ServiceUser {
         pst.executeUpdate();
 
     }
+
     public void deleteUser(int id) throws SQLException {
         String request = "DELETE FROM `users` WHERE id =" + id;
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
-    
-    
-        public ArrayList<User> getUsers() throws SQLException {
+
+    public ArrayList<User> getUsers() throws SQLException {
         ArrayList<User> results = new ArrayList<>();
         String request = "SELECT * FROM `users`";
         Statement stm = cnx.createStatement();
         ResultSet rst = stm.executeQuery(request);
-        
+
         while (rst.next()) {
             User u = new User();
             u.setId(rst.getInt(1));
@@ -77,13 +85,14 @@ public class ServiceUser {
             u.setNumTel(rst.getString(6));
             u.setAdresse(rst.getString(7));
             u.setProfilePicture(rst.getString(8));
-            
+
             results.add(u);
         }
 
         return results;
     }
-        public User getUser(int id) throws SQLException {
+
+    public User getUser(int id) throws SQLException {
         String request = "SELECT * FROM `users` WHERE id =" + id;
         Statement stm = cnx.createStatement();
         ResultSet rst = stm.executeQuery(request);
@@ -104,5 +113,4 @@ public class ServiceUser {
         return null;
     }
 
-        
 }

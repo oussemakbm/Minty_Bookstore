@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class UserTest {
     
     public static void main(String[] args) {
-         ServiceUser us = new ServiceUser();
+         ServiceUser us = ServiceUser.getInstance();
 //         CRUD ENTITY USER BY Yasser
         try {
            us.addUser(new User("yasser", "yasser.dghais@esprit.tn", "PASSWORD+58", "client", "52190201", "Nabeul", "profilePicture"));

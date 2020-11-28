@@ -5,7 +5,6 @@
  */
 package com.services;
 
-
 import com.models.CommandLine;
 import com.util.MyConnection;
 import java.sql.Connection;
@@ -15,27 +14,35 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author ali
  */
 public class ServiceCommandLine {
-    
+
     private Connection cnx;
 
-    public ServiceCommandLine() {
+    public static ServiceCommandLine INSTANCE;
+
+    public static ServiceCommandLine getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceCommandLine();
+        }
+        return INSTANCE;
+    }
+
+    private ServiceCommandLine() {
         cnx = MyConnection.getInstance().getConnection();
     }
 
     public void addCommandLine(CommandLine lng) throws SQLException {
         String request = "INSERT INTO `commandline` (`id`, `quantity', 'idCommandList', 'idBook')"
-                + " VALUES (NULL, '" + lng.getQuantity() + lng.getIdCommandList()+ lng.getIdBook()+ "')";
+                + " VALUES (NULL, '" + lng.getQuantity() + lng.getIdCommandList() + lng.getIdBook() + "')";
 
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
-    
+
     public ArrayList<CommandLine> getCommandLine() throws SQLException {
         ArrayList<CommandLine> results = new ArrayList<>();
         String request = "SELECT * FROM `commandline`";
@@ -51,9 +58,9 @@ public class ServiceCommandLine {
             results.add(lng);
         }
 
-        return results; 
+        return results;
     }
-    
+
     public void updateCommandLine(CommandLine lng) throws SQLException {
         String request = "UPDATE `commandlie` SET `quantity`=? 'idCommandLst'=? 'idBook'=?"
                 + "WHERE `id` = ?";
@@ -66,12 +73,11 @@ public class ServiceCommandLine {
         pst.executeUpdate();
 
     }
-    
-     public void deleteCommandLine(int id) throws SQLException {
+
+    public void deleteCommandLine(int id) throws SQLException {
         String request = "DELETE FROM `commandline` WHERE id =" + id;
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
 
-    
 }

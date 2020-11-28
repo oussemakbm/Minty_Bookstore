@@ -18,7 +18,7 @@ public class BookTest {
     
     public static void main(String[] args) {
         
-        ServiceBook sb = new ServiceBook();
+        ServiceBook sb = ServiceBook.getInstance();
       
 
         try {

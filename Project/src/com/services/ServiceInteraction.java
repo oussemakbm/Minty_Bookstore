@@ -19,16 +19,25 @@ import java.util.ArrayList;
  * @author ihebf
  */
 public class ServiceInteraction {
+
     private Connection cnx;
-    
-    public ServiceInteraction(){
-        cnx=MyConnection.getInstance().getConnection();
+
+    public static ServiceInteraction INSTANCE;
+
+    public static ServiceInteraction getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceInteraction();
+        }
+        return INSTANCE;
     }
-    
-    
+
+    private ServiceInteraction() {
+        cnx = MyConnection.getInstance().getConnection();
+    }
+
     public void addInteraction(Interaction i) throws SQLException {
         String request = "INSERT INTO `interactions` (`id`, `idUser`, `idBook`, `ratingValue`, `liked`)"
-                + " VALUES (NULL, '"+i.getIdUser()+"', '"+i.getIdBook()+"', '"+i.getRatingValue()+"', '"+i.getLiked()+"')";
+                + " VALUES (NULL, '" + i.getIdUser() + "', '" + i.getIdBook() + "', '" + i.getRatingValue() + "', '" + i.getLiked() + "')";
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }

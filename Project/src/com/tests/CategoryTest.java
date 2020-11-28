@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class CategoryTest {
 
     public static void main(String[] args) throws SQLException {
-        ServiceCategory cs = new ServiceCategory();
+        ServiceCategory cs = ServiceCategory.getInstance();
         Category c2 = new Category("Drama"); // (name)
         Category c3 = new Category("Action");
 

@@ -15,17 +15,28 @@ import com.models.Author;
 import com.models.Langue;
 import com.models.Serie;
 import com.util.MyConnection;
+
 /**
  *
  * @author Lenovo
  */
 public class ServiceSerie {
+
     private Connection cnx;
 
-    public ServiceSerie() {
+    public static ServiceSerie INSTANCE;
+
+    public static ServiceSerie getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceSerie();
+        }
+        return INSTANCE;
+    }
+
+    private ServiceSerie() {
         cnx = MyConnection.getInstance().getConnection();
     }
-    
+
     public void addSerie(Serie l) throws SQLException {
         String request = "INSERT INTO `series` (`name`)"
                 + " VALUES ('" + l.getName() + "')";

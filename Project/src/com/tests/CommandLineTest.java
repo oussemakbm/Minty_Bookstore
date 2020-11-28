@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class CommandLineTest {
 
     public static void main(String[] args) throws SQLException {
-        ServiceCommandLine scl = new ServiceCommandLine();
+        ServiceCommandLine scl = ServiceCommandLine.getInstance();
         CommandLine cl1 = new CommandLine(11, 3, 5); // (quantity,idCommandList,idBook)
         CommandLine cl2 = new CommandLine(7, 2, 4);
         scl.addCommandLine(cl1);

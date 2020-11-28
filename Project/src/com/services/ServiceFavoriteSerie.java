@@ -5,32 +5,31 @@
  */
 package com.services;
 
-import com.models.Comment;
-import com.models.FavoriteSerie;
 import com.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-
+import com.models.FavoriteSerie;
 /**
  *
  * @author DellXPS
  */
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public class ServiceFavoriteSerie {
 
-    public ServiceFavoriteSerie INSTANCE;
+    private static ServiceFavoriteSerie INSTANCE;
     private Connection con;
 
     private ServiceFavoriteSerie() {
         con = MyConnection.getInstance().getConnection();
     }
 
-    public ServiceFavoriteSerie getInstance() {
+    public static ServiceFavoriteSerie getInstance() {
         if (INSTANCE == null) {
-            this.INSTANCE = new ServiceFavoriteSerie();
+            INSTANCE = new ServiceFavoriteSerie();
         }
 
         return INSTANCE;
@@ -77,5 +76,4 @@ public class ServiceFavoriteSerie {
         }
         return result;
     }
-
 }

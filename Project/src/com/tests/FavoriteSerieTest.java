@@ -3,22 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.models;
+package com.tests;
+
+import com.services.ServiceFavoriteSerie;
 
 /**
  *
  * @author DellXPS
  */
-public class FavoriteSerie {
-    
-    private int id;
-    
-    public int getId() {
-        return this.id;
+public class FavoriteSerieTest {
+    public static void main(String[] args) {
+        ServiceFavoriteSerie ss = ServiceFavoriteSerie.getInstance();
     }
-    
-    public void setId(int id) {
-        this.id = id;
-    }
-    
 }

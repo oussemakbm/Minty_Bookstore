@@ -20,12 +20,22 @@ import com.util.MyConnection;
  * @author Lenovo
  */
 public class ServiceLangue {
+
     private Connection cnx;
 
-    public ServiceLangue() {
+    public static ServiceLangue INSTANCE;
+
+    public static ServiceLangue getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceLangue();
+        }
+        return INSTANCE;
+    }
+
+    private ServiceLangue() {
         cnx = MyConnection.getInstance().getConnection();
     }
-    
+
     public void addLangue(Langue l) throws SQLException {
         String request = "INSERT INTO `languages` (`name`)"
                 + " VALUES ('" + l.getName() + "')";
