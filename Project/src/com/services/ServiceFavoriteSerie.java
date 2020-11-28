@@ -17,7 +17,9 @@ import com.models.FavoriteSerie;
  */
 import java.sql.ResultSet;
 import java.sql.Statement;
+
 public class ServiceFavoriteSerie {
+
     private static ServiceFavoriteSerie INSTANCE;
     private Connection con;
 
