@@ -76,18 +76,18 @@ public class SignUpController implements Initializable {
     public void signUpAction(ActionEvent e) {
         gif.setVisible(true);
         PauseTransition pt = new PauseTransition();
-        pt.setDuration(Duration.seconds(3));
+        pt.setDuration(Duration.seconds(1));
         pt.setOnFinished(ev -> {
             ServiceUser us = ServiceUser.getInstance();
             User u = new User(textUser.getText(), textEmail.getText(), textPassword.getText(), "CLIENT", textTel.getText(), textAdresse.getText(), textpic.getText());
             try {
                 us.addUser(u);
             } catch (SQLException ex) {
+                
                 System.out.println("Erreur Add USER");;
             }
             System.out.println("User Added Successfully");
-//            System.out.println("Sign Up Successfully");
-
+            SceneLoader.getInstance().NavigateTo(this.BtnSignUp.getScene().getWindow(), "login");
             gif.setVisible(false);
         });
         pt.play();
@@ -96,7 +96,7 @@ public class SignUpController implements Initializable {
 
     public void loginAction(ActionEvent e1) throws IOException {
 
-        SceneLoader.getInstance().NavigateTo(BtnSignUp.getScene().getWindow(), "home");
+        SceneLoader.getInstance().NavigateTo(BtnSignUp.getScene().getWindow(), "login");
     }
 
 }

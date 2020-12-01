@@ -31,7 +31,7 @@ import javafx.util.Duration;
  *
  * @author DellXPS
  */
-public class HomeController implements Initializable {
+public class LoginController implements Initializable {
 
     /**
      * Initializes the controller class.

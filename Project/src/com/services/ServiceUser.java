@@ -36,12 +36,16 @@ public class ServiceUser {
     }
 
     public void addUser(User u) throws SQLException {
-
-        String request = "INSERT INTO `users`(`id`, `name`, `email`, `password`, `numTel`, `adresse`, `role`, `picUrl`) "
-                + " VALUES (NULL, '" + u.getName() + "', '" + u.getEmail() + "', '" + u.getPassword() + "', '" + u.getNumTel() + "', '" + u.getAdresse() + "', '" + u.getRole() + "', '" + u.getProfilePicture() + "')";
-
-        Statement stm = cnx.createStatement();
-        stm.executeUpdate(request);
+        String request = "INSERT INTO `users`(`name`, `email`, `password`, `numTel`, `adresse`, `role`, `picUrl`) VALUES (?,?,?,?,?,?,?)";
+        PreparedStatement pst = cnx.prepareStatement(request);
+        pst.setString(1, u.getName());
+        pst.setString(2, u.getEmail());
+        pst.setString(3, u.getPassword());
+        pst.setString(4, u.getNumTel());
+        pst.setString(5, u.getAdresse());
+        pst.setString(6, u.getRole());
+        pst.setString(7, u.getProfilePicture());
+        pst.executeUpdate();
     }
 
     public void updateUser(User u) throws SQLException {
