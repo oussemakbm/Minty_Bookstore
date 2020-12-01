@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class ServiceComment {
 
-    public static ServiceComment INSTANCE;
+    private static ServiceComment INSTANCE;
     private Connection con;
 
     private ServiceComment() {
