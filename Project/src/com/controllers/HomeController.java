@@ -5,6 +5,7 @@
  */
 package com.controllers;
 
+import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -22,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 /**
@@ -73,16 +75,8 @@ public class HomeController implements Initializable {
     
     @FXML
     public void SignUpAction(ActionEvent e1) throws IOException{
-        
-        jbtnLLogin.getScene().getWindow().hide();
-        Stage signUp = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("views/signUp.fxml"));
-        
-        Scene scene = new Scene(root);
-        signUp.setScene(scene);
-        signUp.show();
-        signUp.setResizable(false);
-        
+            Window currentWindow = this.jbtnLLogin.getScene().getWindow();
+            SceneLoader.getInstance().NavigateTo(currentWindow, "signUp");
     }
     
 }
