@@ -22,7 +22,17 @@ public class ServiceUser {
 
     private Connection cnx;
 
-    public static ServiceUser INSTANCE;
+    private static ServiceUser INSTANCE;
+
+    private static User connectedUser;
+
+    public static User getConnectedUser() {
+        return connectedUser;
+    }
+
+    public static void setConnectedUser(User u) {
+        connectedUser = u;
+    }
 
     public static ServiceUser getInstance() {
         if (INSTANCE == null) {
@@ -46,6 +56,33 @@ public class ServiceUser {
         pst.setString(6, u.getRole());
         pst.setString(7, u.getProfilePicture());
         pst.executeUpdate();
+    }
+
+    public void findUserByEmail(String email, String password) throws SQLException {
+//        Setting Connected user to null Initially
+        setConnectedUser(null);
+        
+        String query = "SELECT * FROM users WHERE email = ? AND password = ?";
+        PreparedStatement pst = cnx.prepareStatement(query);
+        pst.setString(1, email);
+        pst.setString(2, password);
+//         Fetch Result
+        ResultSet result = pst.executeQuery();
+
+        int count = 0;
+  
+            while (result.next()) {
+                System.out.println("Logged in");
+                int id = result.getInt("id");
+                String name = result.getString("name");
+                String numTel = result.getString("numTel");
+                String adresse = result.getString("adresse");
+                String profilePicture = result.getString("picUrl");
+                String role = result.getString("role");
+
+                setConnectedUser(new User(name, email, password, role, numTel, adresse, profilePicture));
+            }
+
     }
 
     public void updateUser(User u) throws SQLException {

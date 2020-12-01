@@ -5,9 +5,11 @@
  */
 package com;
 
+import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -23,7 +25,7 @@ public class SceneLoader {
 
     }
 
-    private Parent GetParent(String fileName) {
+    public Parent GetParent(String fileName) {
         Parent view = null;
         try {
             String path = "views/" + fileName.concat(".fxml");
@@ -34,6 +36,10 @@ public class SceneLoader {
         }
 
         return view;
+    }
+    
+    public VBox getDrawerContent() throws IOException{
+        return FXMLLoader.load(getClass().getResource("views/drawerContent.fxml"));
     }
 
     public void NavigateTo(Window currentWindow, String viewName) {
