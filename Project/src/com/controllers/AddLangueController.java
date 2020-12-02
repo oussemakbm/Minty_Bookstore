@@ -8,74 +8,62 @@ package com.controllers;
 import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
-import com.sun.javaws.progress.Progress;
-import java.io.IOException;
+import com.models.Langue;
+import com.services.ServiceLangue;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 
 /**
  * FXML Controller class
  *
- * @author DellXPS
+ * @author Lenovo
  */
-public class LoginController implements Initializable {
+public class AddLangueController implements Initializable {
 
     /**
      * Initializes the controller class.
      */
-    @FXML ProgressIndicator pi;
+    
     @FXML
-    private JFXTextField textUsername;
+    private JFXPasswordField textlangue;
 
     @FXML
-    private JFXPasswordField textPassword;
-
-    @FXML
-    private JFXButton jbtnSignUp;
-
-    @FXML
-    private JFXButton jbtnLLogin;
-
+    private JFXButton jbtnSave;
+    
     @FXML
     private ImageView gifLoading;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         // TODO
         gifLoading.setVisible(false);
-        textUsername.setStyle("-fx-text-inner-color: #a0a2ab");
-        textPassword.setStyle("-fx-text-inner-color: #a0a2ab");
-        
-    }    
+        textlangue.setStyle("-fx-text-inner-color: #a0a2ab");
+    }   
+    
     @FXML
-    public void loginAction(ActionEvent e){
+    public void saveAction(ActionEvent e){
         gifLoading.setVisible(true);
         PauseTransition pt = new PauseTransition();
         pt.setDuration(Duration.seconds(3));
         pt.setOnFinished(ev -> {
-            System.out.println("Login Successfully");
+            ServiceLangue ls = ServiceLangue.getInstance();
+            try {
+                ls.addLangue(new Langue(textlangue.getText()));
+            } catch (SQLException ex) {
+                System.out.println("Erreur Add LANGUE");;
+            }
+            System.out.println("LANGUE Added Successfully");
+            //SceneLoader.getInstance().NavigateTo(this.jbtnSave.getScene().getWindow(), "login");
             gifLoading.setVisible(false);
         });
         pt.play();
-    }
-    
-    @FXML
-    public void SignUpAction(ActionEvent e1) throws IOException{
-            Window currentWindow = this.jbtnLLogin.getScene().getWindow();
-            SceneLoader.getInstance().NavigateTo(currentWindow, "signUp");
     }
     
 }
