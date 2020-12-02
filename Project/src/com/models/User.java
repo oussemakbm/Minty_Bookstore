@@ -4,17 +4,19 @@
  * and open the template in the editor.
  */
 package com.models;
+
 /**
  *
  * @author MediaStudio
  */
 public class User {
+
     private int id;
 
-    private String name,email,password,role,numTel,adresse,profilePicture;
-    
-    public User(){
-        
+    private String name, email, password, role, numTel, adresse, profilePicture;
+
+    public User() {
+
     }
 
     public User(int id, String name, String email, String password, String role, String numTel, String adresse, String profilePicture) {
@@ -27,11 +29,20 @@ public class User {
         this.adresse = adresse;
         this.profilePicture = profilePicture;
     }
-        public User(String name, String email, String password, String role, String numTel, String adresse, String profilePicture) {
+
+    public User(String name, String email, String password, String role, String numTel, String adresse, String profilePicture) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.numTel = numTel;
+        this.adresse = adresse;
+        this.profilePicture = profilePicture;
+    }
+    public User(int id, String name, String email, String numTel, String adresse, String profilePicture) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
         this.numTel = numTel;
         this.adresse = adresse;
         this.profilePicture = profilePicture;
@@ -105,11 +116,5 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role + ", numTel=" + numTel + ", adresse=" + adresse + ", profilePicture=" + profilePicture + '}';
     }
-    
-    
-    
-    
-     
-    
-    
+
 }
