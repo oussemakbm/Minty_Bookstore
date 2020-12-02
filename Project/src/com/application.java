@@ -27,6 +27,7 @@ public class application extends Application {
         stage.setResizable(false);
     }
 
+   
     public static void main(String[] args) throws SQLException {
         launch(args);
     }

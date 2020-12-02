@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.controllers.AddauthorController">
+   <children>
+      <ImageView fitHeight="113.0" fitWidth="93.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Minty.png" />
+         </image>
+      </ImageView>
+      <AnchorPane id="AnchorPane" layoutX="5.0" layoutY="-4.0" prefHeight="448.0" prefWidth="600.0" style="-fx-background-color: #fff;">
+         <children>
+            <JFXButton fx:id="like" layoutX="14.0" layoutY="248.0" onAction="#LikeAction" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #c9e265; -fx-border-color: #a0a2ab;" text="Like" textFill="#2225188c">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="136.0" fitWidth="122.0" layoutX="15.0" layoutY="-33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Minty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="profile" fitHeight="101.0" fitWidth="110.0" layoutX="15.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons/forme-de-l'utilisateur.png" />
+               </image>
+            </ImageView>
+            <JFXTextField layoutX="8.0" layoutY="188.0" text="AuthorName" unFocusColor="#c9e265" />
+            <JFXTextArea fx:id="description" layoutX="175.0" layoutY="89.0" prefHeight="159.0" prefWidth="344.0" text="&#10;Michelle Gallen was born in County Tyrone in the mid 1970s and grew up during the Troubles a few miles from the border between what she was told was the&quot;'Free&quot; State and the &quot;United&quot; Kingdom. She studied English literature at Trinity College Dublin and won several prestigious prizes as a young writer. Following a devastating brain injury in her midtwenties, she co-founded three award-winning companies and won international recognition for digital innovation. She now lives in Dublin with her husband and kids." unFocusColor="#c9e265">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </JFXTextArea>
+            <JFXTextField fx:id="about" layoutX="157.0" layoutY="59.0" text="About" unFocusColor="#c9e265">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="titles" layoutX="158.0" layoutY="278.0" text="Tiltles" unFocusColor="#c9e265">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </JFXTextField>
+            <ImageView fx:id="image" fitHeight="112.0" fitWidth="86.0" layoutX="226.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Exemplebook.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="43.0" fitWidth="122.0" layoutX="25.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

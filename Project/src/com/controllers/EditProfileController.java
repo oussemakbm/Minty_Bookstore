@@ -13,6 +13,8 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.services.ServiceUser;
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -57,6 +60,9 @@ public class EditProfileController implements Initializable {
     private JFXHamburger hamburger;
 
     HamburgerBackArrowBasicTransition burgerTask;
+    
+    private FileInputStream fis;
+    
 
     @FXML
     void onClickCancel(ActionEvent event) {
@@ -68,14 +74,25 @@ public class EditProfileController implements Initializable {
 //        I have to validate all TextFields before sumbiting
 //        Validation Will Start Here
 //        Validation Will End Here
-    
-
-
     }
 
     @FXML
     void onClickUpload(ActionEvent event) {
-          
+        FileChooser fileChooser = new FileChooser();
+//        Filters to only get Image files 
+        FileChooser.ExtensionFilter extFilterJPG 
+                = new FileChooser.ExtensionFilter("JPG files (*.JPG)", "*.JPG");
+                FileChooser.ExtensionFilter extFilterjpg
+                = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
+        FileChooser.ExtensionFilter extFilterPNG
+                = new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG");
+        FileChooser.ExtensionFilter extFilterpng
+                = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+        fileChooser.getExtensionFilters()
+                .addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
+//       Open Browser Dialog to choose an image File 
+        File file = fileChooser.showOpenDialog(null);
+        
     }
 
     @Override
