@@ -27,9 +27,6 @@ public class application extends Application {
         stage.setResizable(false);
     }
 
-    /**
-     * @param args the command line argumentshh
-     */
     public static void main(String[] args) throws SQLException {
         launch(args);
     }
