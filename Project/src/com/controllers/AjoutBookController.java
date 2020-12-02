@@ -80,7 +80,7 @@ public class AjoutBookController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gif.setVisible(false);
-         ObservableList<String> listAuthor = FXCollections.observableArrayList("Alain-Fournie","Anouilh. Apollinaire","Barthes","Desnos");
+        ObservableList<String> listAuthor = FXCollections.observableArrayList("Alain-Fournie","Anouilh. Apollinaire","Barthes","Desnos");
          author.setItems(listAuthor);
          ObservableList<String> listLangue = FXCollections.observableArrayList("Anglais","Français","Arabe","Espagnol");
          langue.setItems(listLangue);
