@@ -9,9 +9,12 @@ import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.models.User;
+import com.services.ServiceUser;
 import com.sun.javaws.progress.Progress;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -36,9 +39,11 @@ public class LoginController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @FXML ProgressIndicator pi;
     @FXML
-    private JFXTextField textUsername;
+    ProgressIndicator pi;
+    
+    @FXML
+    private JFXTextField textEmail;
 
     @FXML
     private JFXPasswordField textPassword;
@@ -51,32 +56,46 @@ public class LoginController implements Initializable {
 
     @FXML
     private ImageView gifLoading;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         // TODO
         gifLoading.setVisible(false);
-        textUsername.setStyle("-fx-text-inner-color: #a0a2ab");
+//        textEmail.setStyle("-fx-text-inner-color: #a0a2ab");
         textPassword.setStyle("-fx-text-inner-color: #a0a2ab");
-        
-    }    
+
+    }
+
     @FXML
-    public void loginAction(ActionEvent e){
+    public void loginAction(ActionEvent e) {
+        String email = textEmail.getText();
+        String password = textPassword.getText();
         gifLoading.setVisible(true);
         PauseTransition pt = new PauseTransition();
-        pt.setDuration(Duration.seconds(3));
+        pt.setDuration(Duration.seconds(1));
         pt.setOnFinished(ev -> {
-            System.out.println("Login Successfully");
+            try {
+                System.out.println(textEmail.getText() + " " + textPassword.getText());
+                ServiceUser.getInstance().findUserByEmail(email, password);
+                if (ServiceUser.getConnectedUser() == null) {
+                    System.out.println("Wrong Email or password !");
+                } else {
+                    SceneLoader.getInstance().NavigateTo(this.jbtnLLogin.getScene().getWindow(), "profile");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             gifLoading.setVisible(false);
         });
-        pt.play();  
-        
+        pt.play();
+
     }
-    
+
     @FXML
-    public void SignUpAction(ActionEvent e1) throws IOException{
-            Window currentWindow = this.jbtnLLogin.getScene().getWindow();
-            SceneLoader.getInstance().NavigateTo(currentWindow, "signUp");
+    public void SignUpAction(ActionEvent e1) throws IOException {
+        Window currentWindow = this.jbtnLLogin.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "signUp");
     }
-    
+
 }

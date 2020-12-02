@@ -22,18 +22,13 @@ public class application extends Application {
     public void start(Stage stage) throws Exception {
        
         Parent root = FXMLLoader.load(getClass().getResource("views/Addauthor.fxml"));
-
         Scene scene = new Scene(root);
-
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
-        
     }
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) throws SQLException {
         launch(args);
     }
