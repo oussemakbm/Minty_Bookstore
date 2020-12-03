@@ -69,7 +69,7 @@ public class ServiceLangue {
 
         if (rst.next()) {
             Langue p = new Langue();
-            p.setId(rst.getInt("id"));
+            p.setId(rst.getInt(1));
             p.setName(rst.getString(2));
             return p;
         }
