@@ -17,7 +17,8 @@ public class CategoryTest {
 
     public static void main(String[] args) throws SQLException {
         ServiceCategory cs = ServiceCategory.getInstance();
-        Category c2 = new Category("Drama"); // (name)
+        try {
+            Category c2 = new Category("Drama"); // (name)
         Category c3 = new Category("Action");
 
         cs.addCategory(c2);
@@ -29,8 +30,13 @@ public class CategoryTest {
         cs.updateCategory(c4);
         System.out.println(cs.getCategories());
 
-        cs.deleteCategory(1);
+        cs.deleteCategory(5);
         System.out.println(cs.getCategories());
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
     }
 
 }

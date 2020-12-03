@@ -32,6 +32,7 @@ public class AuthorTest {
             sa.updateAuthor(a);
             System.out.println(sa.getAuthors());
             System.out.println(sa.getAuthor(2));
+//            System.out.println(sa.getNameAuthors());
         } catch (SQLException ex) {
             System.out.println("ereeur");
         }
