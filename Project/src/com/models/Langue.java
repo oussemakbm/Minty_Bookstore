@@ -15,10 +15,6 @@ public class Langue {
 
     public Langue() {
     }
-
-    public Langue(int id) {
-        this.id = id;
-    }
     
     public Langue(String name) {
         this.name = name;

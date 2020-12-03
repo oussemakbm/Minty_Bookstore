@@ -2,10 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group/>
+=======
         <group>
-            <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/EditProfileController.java</file>
-            <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/application.java</file>
-            <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/views/drawerContent.fxml</file>
+            <file>file:/C:/Users/Lenovo/Desktop/Minty/Minty_Bookstore/Project/src/com/controllers/ProfileController.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/Minty/Minty_Bookstore/Project/src/com/controllers/SignUpController.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/Minty/Minty_Bookstore/Project/src/com/controllers/LoginController.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/Minty/Minty_Bookstore/Project/src/com/controllers/AddLangueController.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/Minty/Minty_Bookstore/Project/src/com/services/ServiceLangue.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/Minty/Minty_Bookstore/Project/src/com/application.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/Minty/Minty_Bookstore/Project/src/com/views/addlangue.fxml</file>
         </group>
+>>>>>>> 178e80a107b5c7a61ee359d36c0a74b2fe05e236
     </open-files>
 </project-private>
