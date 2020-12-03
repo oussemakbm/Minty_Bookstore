@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.AddAuthorAdminController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="15.0" layoutY="6.0" prefHeight="448.0" prefWidth="600.0" style="-fx-background-color: #fff;">
+         <children>
+            <ImageView fitHeight="136.0" fitWidth="122.0" layoutX="15.0" layoutY="-33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Minty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="profile" fitHeight="101.0" fitWidth="110.0" layoutX="15.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons/forme-de-l'utilisateur.png" />
+               </image>
+            </ImageView>
+            <JFXTextField fx:id="name" layoutX="8.0" layoutY="188.0" promptText="AuthorName" unFocusColor="#c9e265" />
+            <JFXTextArea fx:id="description" layoutX="175.0" layoutY="118.0" prefHeight="130.0" prefWidth="344.0" promptText="description" text="&#10; " unFocusColor="#c9e265">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </JFXTextArea>
+            <ImageView fitHeight="43.0" fitWidth="122.0" layoutX="25.0" pickOnBounds="true" preserveRatio="true" />
+            <JFXButton fx:id="save" layoutX="412.0" layoutY="350.0" onAction="#saveAction" prefHeight="32.0" prefWidth="155.0" style="-fx-background-color: #c9e265; -fx-border-color: #a0a2ab;" text="Save" textFill="#2225188c">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <Text fill="#c9e265" layoutX="164.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About" wrappingWidth="94.68359375">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="save1" layoutX="9.0" layoutY="248.0" onAction="#saveAction" prefHeight="32.0" prefWidth="155.0" style="-fx-background-color: #c9e265; -fx-border-color: #a0a2ab;" text="Upload photo" textFill="#2225188c">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

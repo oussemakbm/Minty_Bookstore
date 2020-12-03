@@ -13,12 +13,14 @@ import com.services.ServiceUser;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -44,7 +46,7 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        wellcomeTxt.setText("Wellcome "+ ServiceUser.getConnectedUser().getName());
+        wellcomeTxt.setText("Welcome "+ ServiceUser.getConnectedUser().getName());
         try {
             VBox box = SceneLoader.getInstance().getDrawerContent();
             this.drawer.setSidePane(box);
@@ -67,6 +69,13 @@ public class ProfileController implements Initializable {
             this.drawer.open();
         }
 
+    }
+    
+    
+    @FXML
+    void goToEditProfile(ActionEvent event) {
+        Window currentWindow = this.wellcomeTxt.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "editProfile");
     }
 
 }

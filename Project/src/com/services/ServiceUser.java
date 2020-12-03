@@ -80,7 +80,7 @@ public class ServiceUser {
                 String profilePicture = result.getString("picUrl");
                 String role = result.getString("role");
 
-                setConnectedUser(new User(name, email, password, role, numTel, adresse, profilePicture));
+                setConnectedUser(new User(id, name, email, password, role, numTel, adresse, profilePicture));
             }
 
     }
