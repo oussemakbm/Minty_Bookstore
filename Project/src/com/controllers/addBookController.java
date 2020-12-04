@@ -239,29 +239,37 @@ public class addBookController implements Initializable {
 
     
     @FXML
-    public void AddBookAction(ActionEvent e){
+    public void AddBookAction(ActionEvent e) throws SQLException{
         gif.setVisible(true);
         PauseTransition pt = new PauseTransition();
         pt.setDuration(Duration.seconds(3));
         ServiceBook sb = ServiceBook.getInstance();
-        ServiceLangue sa = ServiceLangue.getInstance();
-        String a = langue.getValue().toString();
         
-//        try {
-//             idLangue = sa.getIdLangue(a).getId();
-//            
-//        } catch (SQLException e2) {
-//            System.out.println("");
-//        }
+        //get id langue choisit
+        ServiceLangue sl = ServiceLangue.getInstance();
+        String langue_choisit = langue.getValue().toString();
+        int id_langue=  sl.getLangues().stream().filter(l->l.toString().equals(langue_choisit)).mapToInt(l->l.getId()).findFirst().getAsInt();
         
+        //get id autheur choisit
+        ServiceAuthor sau = ServiceAuthor.getInstance();
+        String autheur_choist = author.getValue().toString();
+        int id_autheur = sau.getAuthors().stream().filter(l->l.toString().equals(autheur_choist)).mapToInt(l->l.getId()).findFirst().getAsInt();
+        //get id serie choisit
         
+        ServiceSerie ss = ServiceSerie.getInstance();
+        String serie_choist = serie.getValue().toString();
+        int id_serie = ss.getSeries().stream().filter(l->l.toString().equals(serie_choist)).mapToInt(l->l.getId()).findFirst().getAsInt();
         
-          
-           
+        //getget id categorie choisit
+        
+        ServiceCategory sc = ServiceCategory.getInstance();
+        String category_choisit = category.getValue().toString();
+        int id_category = sc.getCategories().stream().filter(l->l.toString().equals(category_choisit)).mapToInt(l->l.getId()).findFirst().getAsInt();
+
             try {
                 
-                sb.addBook(new Book(1, 1, 1, 1, Integer.parseInt(quantity.getText()), Integer.parseInt(nbr_page.getText()), 1, title.getText(), desc.getText(), img_url.getText(), pub_date.getText(), Float.parseFloat(price.getText())));
-                System.out.println("aaaa");
+                sb.addBook(new Book(id_serie, id_category, id_autheur, id_langue, Integer.parseInt(quantity.getText()), Integer.parseInt(nbr_page.getText()), 1, title.getText(), desc.getText(), img_url.getText(), pub_date.getText(), Float.parseFloat(price.getText())));
+               
             } catch (SQLException ex) {
                 System.out.println("Error Add Book");
             }
