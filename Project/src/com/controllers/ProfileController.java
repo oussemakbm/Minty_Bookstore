@@ -37,41 +37,38 @@ public class ProfileController implements Initializable {
 
     @FXML
     private JFXDrawer drawer;
-    
+
     @FXML
     private Label wellcomeTxt;
-    
 
     HamburgerBackArrowBasicTransition burgerTask;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        wellcomeTxt.setText("Welcome "+ ServiceUser.getConnectedUser().getName());
+        wellcomeTxt.setText("Welcome " + ServiceUser.getConnectedUser().getName());
         try {
             VBox box = SceneLoader.getInstance().getDrawerContent();
             this.drawer.setSidePane(box);
+            burgerTask = new HamburgerBackArrowBasicTransition(hamburger);
+            burgerTask.setRate(-1);
+            hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> this.burgerClick(e));
         } catch (Exception e) {
             e.printStackTrace();
         }
-       
-        burgerTask = new HamburgerBackArrowBasicTransition(hamburger);
-        burgerTask.setRate(-1);
-        hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> this.burgerClick(e));
 
     }
 
     private void burgerClick(MouseEvent event) {
         burgerTask.setRate(burgerTask.getRate() * -1);
         burgerTask.play();
-        if (this.drawer.isVisible()) {
+        if (this.drawer.isShown()) {
             this.drawer.close();
         } else {
             this.drawer.open();
         }
 
     }
-    
-    
+
     @FXML
     void goToEditProfile(ActionEvent event) {
         Window currentWindow = this.wellcomeTxt.getScene().getWindow();

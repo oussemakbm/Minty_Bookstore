@@ -12,18 +12,28 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.models.User;
 import com.services.ServiceUser;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -60,8 +70,10 @@ public class EditProfileController implements Initializable {
     private JFXHamburger hamburger;
 
     HamburgerBackArrowBasicTransition burgerTask;
-    
+
     private FileInputStream fis;
+    
+    byte[] person_image = null;
     
 
     @FXML
@@ -74,25 +86,48 @@ public class EditProfileController implements Initializable {
 //        I have to validate all TextFields before sumbiting
 //        Validation Will Start Here
 //        Validation Will End Here
+        
+        User u = ServiceUser.getConnectedUser();
+        u.setName(nameTxt.getText());
+        try {
+            ServiceUser.getInstance().updateUser(u);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }   
     }
 
     @FXML
     void onClickUpload(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
 //        Filters to only get Image files 
-        FileChooser.ExtensionFilter extFilterJPG 
-                = new FileChooser.ExtensionFilter("JPG files (*.JPG)", "*.JPG");
-                FileChooser.ExtensionFilter extFilterjpg
-                = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
-        FileChooser.ExtensionFilter extFilterPNG
-                = new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG");
-        FileChooser.ExtensionFilter extFilterpng
-                = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
-        fileChooser.getExtensionFilters()
-                .addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("GIF", "*.gif"),
+                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
 //       Open Browser Dialog to choose an image File 
         File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            System.out.println(file.getName());
+            System.out.println("Path: " + file.getPath());
+        }
         
+        BufferedImage bf;
+        
+        try {
+             bf = ImageIO.read(file);
+             Image image = SwingFXUtils.toFXImage(bf, null);
+             this.avatarPic.setImage(image);
+             
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+
+
     }
 
     @Override
@@ -112,8 +147,7 @@ public class EditProfileController implements Initializable {
         this.emailTxt.setText(ServiceUser.getConnectedUser().getEmail());
         this.adressTxt.setText(ServiceUser.getConnectedUser().getAdresse());
         this.numTelTxt.setText(ServiceUser.getConnectedUser().getNumTel());
-        
-        
+
     }
 
     private void burgerClick(MouseEvent event) {
