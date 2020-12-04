@@ -36,12 +36,14 @@ public class ServiceLangue {
         cnx = MyConnection.getInstance().getConnection();
     }
 
-    public void addLangue(Langue l) throws SQLException {
+    public boolean addLangue(Langue l) throws SQLException {
         String request = "INSERT INTO `languages` (`name`)"
                 + " VALUES ('" + l.getName() + "')";
 
         Statement stm = cnx.createStatement();
-        stm.executeUpdate(request);
+        int rowcount = stm.executeUpdate(request);
+        System.out.println("Success - "+rowcount+" rows affected.");
+        return ((rowcount > 0) ? true : false); 
     }
 
     public ArrayList<Langue> getLangues() throws SQLException {
@@ -75,21 +77,22 @@ public class ServiceLangue {
         return null;
     }
 
-    public void updateLangue(Langue p) throws SQLException {
+    public boolean updateLangue(Langue p) throws SQLException {
         String request = "UPDATE `languages` SET `name`=?"
                 + "WHERE `id` = ?";
         PreparedStatement pst = cnx.prepareStatement(request);
 
         pst.setString(1, p.getName());
         pst.setInt(2, p.getId());
-        pst.executeUpdate();
-
+        int rowcount = pst.executeUpdate();
+        return ((rowcount > 0) ? true : false); 
     }
 
-    public void deleteLangue(int id) throws SQLException {
+    public boolean deleteLangue(int id) throws SQLException {
         String request = "DELETE FROM `languages` WHERE id =" + id;
         Statement stm = cnx.createStatement();
-        stm.executeUpdate(request);
+        int rowcount = stm.executeUpdate(request);
+        return ((rowcount > 0) ? true : false); 
     }
 
 }

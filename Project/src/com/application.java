@@ -20,9 +20,9 @@ public class application extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-       
-        Parent root = FXMLLoader.load(getClass().getResource("views/addBook.fxml"));
 
+        Parent root = FXMLLoader.load(getClass().getResource("views/addlangue.fxml"));
+        
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
