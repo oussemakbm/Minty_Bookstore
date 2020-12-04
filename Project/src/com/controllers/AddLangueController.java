@@ -5,9 +5,8 @@
  */
 package com.controllers;
 
-import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import com.models.Langue;
 import com.services.ServiceLangue;
 import java.net.URL;
@@ -27,19 +26,16 @@ import javafx.util.Duration;
  */
 public class AddLangueController implements Initializable {
 
+    @FXML
+    private JFXTextField textlangue;
+    @FXML
+    private JFXButton jbtnSave;
+    @FXML
+    private ImageView gifLoading;
+
     /**
      * Initializes the controller class.
      */
-    
-    @FXML
-    private JFXPasswordField textlangue;
-
-    @FXML
-    private JFXButton jbtnSave;
-    
-    @FXML
-    private ImageView gifLoading;
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
