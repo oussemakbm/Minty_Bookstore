@@ -41,6 +41,9 @@ public class SceneLoader {
     public VBox getDrawerContent() throws IOException{
         return FXMLLoader.load(getClass().getResource("views/drawerContent.fxml"));
     }
+    public VBox getDrawerContentAdmin() throws IOException{
+        return FXMLLoader.load(getClass().getResource("views/drawerContentAdmin.fxml"));
+    }
 
     public void NavigateTo(Window currentWindow, String viewName) {
 //        1 - Hide current window
