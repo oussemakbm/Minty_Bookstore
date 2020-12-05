@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/AddAuthorAdminController.java</file>
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/EditProfileController.java</file>
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/ProfileController.java</file>
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/LoginController.java</file>
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/application.java</file>
+=======
+            <file>file:/C:/Users/MediaStudio/Desktop/Nouveau%20dossier/Minty_Bookstore/Project/src/com/models/Book.java</file>
+            <file>file:/C:/Users/MediaStudio/Desktop/Nouveau%20dossier/Minty_Bookstore/Project/src/com/application.java</file>
+            <file>file:/C:/Users/MediaStudio/Desktop/Nouveau%20dossier/Minty_Bookstore/Project/src/com/tests/LangueTest.java</file>
+            <file>file:/C:/Users/MediaStudio/Desktop/Nouveau%20dossier/Minty_Bookstore/Project/src/com/controllers/addBookController.java</file>
+>>>>>>> 15a230eb68766e7ab581c12668a42b0fe459df46
         </group>
     </open-files>
 </project-private>
