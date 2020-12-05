@@ -89,7 +89,6 @@ public class LoginController implements Initializable {
             gifLoading.setVisible(false);
         });
         pt.play();
-
     }
 
     @FXML

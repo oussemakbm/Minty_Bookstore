@@ -61,7 +61,7 @@ public class ProfileController implements Initializable {
     private void burgerClick(MouseEvent event) {
         burgerTask.setRate(burgerTask.getRate() * -1);
         burgerTask.play();
-        if (this.drawer.isShown()) {
+        if (this.drawer.isOpened()) {
             this.drawer.close();
         } else {
             this.drawer.open();
