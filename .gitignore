@@ -1,8 +1,9 @@
-# NetBeans specific #
+# NetBeans specific
 Project/nbproject/private/
 Project/nbproject/private/build-impl
 Project/nbproject/private/private.properties
 Project/nbproject/private/private.xml
+Project/nbproject/private/configs/Run_in_Browser.properties
 Project/nbproject/project.properties
 Project/build/
 Project/nbbuild/
