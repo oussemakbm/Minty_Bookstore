@@ -63,7 +63,7 @@ public class WishList {
 
     @Override
     public String toString() {
-        return "WishList{" + "id=" + id + ", idUser=" + idUser + ", idBook=" + idBook + ", name=" + name + '}';
+        return name;
     }
     
     
