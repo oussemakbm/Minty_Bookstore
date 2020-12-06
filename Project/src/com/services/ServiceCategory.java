@@ -37,7 +37,7 @@ public class ServiceCategory {
     }
 
     public void addCategory(Category c) throws SQLException {
-        String request = "INSERT INTO 'categories' ('id', 'name' )"
+        String request = "INSERT INTO `categories` (`id`, `name` )"
                 + " VALUES (NULL, '" + c.getName() + "')";
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
@@ -52,19 +52,31 @@ public class ServiceCategory {
 
         while (rst.next()) {
             Category c = new Category();
-            c.SetId(rst.getInt(1));
+            c.SetId(rst.getInt("id"));
             c.SetName(rst.getString(2));
 
             results.add(c);
+        }
+        return null;
+
+    }
+    public Category getCategory(int id) throws SQLException {
+        ArrayList<Category> results = new ArrayList<Category>();
+        String request = "SELECT * FROM 'categories' WHERE id =" +id;
+        Statement stm = cnx.createStatement();
+        ResultSet rst = stm.executeQuery(request);
+        if (rst.next()){
+            Category c = new Category();
+            c.SetId(rst.getInt(1));
+            c.SetName(rst.getString(2));
+            return c;
             
         }
-        
-        return results;
-
+        return null;
     }
 
     public void deleteCategory(int id) throws SQLException {
-        String request = "DELETE FROM `categories` WHERE id =" + id;
+        String request = "DELETE FROM `Categories` WHERE id =" + id;
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
 
