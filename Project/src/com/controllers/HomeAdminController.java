@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
+
 
 import javafx.stage.Window;
 
@@ -25,7 +27,7 @@ public class HomeAdminController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @FXML
+     @FXML
     private JFXButton homeBtn;
 
     @FXML
@@ -42,31 +44,183 @@ public class HomeAdminController implements Initializable {
 
     @FXML
     private JFXButton goCategorys;
+        @FXML
+    private JFXButton addBookbtn;
+
+    @FXML
+    private JFXButton biewBookBtn;
+    
+    @FXML
+    private JFXButton addUserBtn;
+
+    @FXML
+    private JFXButton ViewUsersbtn;
+    
+    @FXML
+    private JFXButton addAuthorBtn;
+
+    @FXML
+    private JFXButton ViewAuthorsbtn;
+    @FXML
+    private JFXButton addLanguageBtn;
+
+    @FXML
+    private JFXButton ViewLanguagebtn;
+    @FXML
+    private JFXButton addCategoryBtn;
+
+    @FXML
+    private JFXButton ViewCategorysbtn;
+    
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        addBookbtn.setVisible(false);
+        biewBookBtn.setVisible(false);
+        addUserBtn.setVisible(false);
+        ViewUsersbtn.setVisible(false);
+        addAuthorBtn.setVisible(false);
+        ViewAuthorsbtn.setVisible(false);
+        addLanguageBtn.setVisible(false);
+        ViewLanguagebtn.setVisible(false);
+        addCategoryBtn.setVisible(false);
+        ViewCategorysbtn.setVisible(false);
+
+    }
+    
+    
+    @FXML
+    void goCategory(MouseEvent event) {
+        addBookbtn.setVisible(false);
+        biewBookBtn.setVisible(false);
+        addUserBtn.setVisible(false);
+        ViewUsersbtn.setVisible(false);
+        addAuthorBtn.setVisible(false);
+        ViewAuthorsbtn.setVisible(false);
+        addLanguageBtn.setVisible(false);
+        ViewLanguagebtn.setVisible(false);
+         if (addCategoryBtn.isVisible()){
+        addCategoryBtn.setVisible(false);
+        ViewCategorysbtn.setVisible(false);
+        }
+        else{
+        addCategoryBtn.setVisible(true);
+        ViewCategorysbtn.setVisible(true);
+        }
         
 
     }
-      @FXML
-    void goAuthors(ActionEvent event) {
+    
+    
+    @FXML
+    void goLanguage(MouseEvent event) {
+        addBookbtn.setVisible(false);
+        biewBookBtn.setVisible(false);
+        addUserBtn.setVisible(false);
+        ViewUsersbtn.setVisible(false);
+        addAuthorBtn.setVisible(false);
+        ViewAuthorsbtn.setVisible(false);
+        addCategoryBtn.setVisible(false);
+        ViewCategorysbtn.setVisible(false);
+         if (addLanguageBtn.isVisible()){
+        addLanguageBtn.setVisible(false);
+        ViewLanguagebtn.setVisible(false);
+        }
+        else{
+        addLanguageBtn.setVisible(true);
+        ViewLanguagebtn.setVisible(true);
+        }
+        
+        
+
+    }
+    
+    @FXML
+    void goAuthors(MouseEvent event) {
+        addBookbtn.setVisible(false);
+        biewBookBtn.setVisible(false);
+        addUserBtn.setVisible(false);
+        ViewUsersbtn.setVisible(false);
+        addLanguageBtn.setVisible(false);
+        ViewLanguagebtn.setVisible(false);
+        addCategoryBtn.setVisible(false);
+        ViewCategorysbtn.setVisible(false);
+        if (addAuthorBtn.isVisible()){
+        addAuthorBtn.setVisible(false);
+        ViewAuthorsbtn.setVisible(false);
+        }
+        else{
+        addAuthorBtn.setVisible(true);
+        ViewAuthorsbtn.setVisible(true);
+        }
+        
+
+    }
+    
+
+    @FXML
+    void goUsers(MouseEvent event) {
+        addBookbtn.setVisible(false);
+        biewBookBtn.setVisible(false);
+        addLanguageBtn.setVisible(false);
+        ViewLanguagebtn.setVisible(false);
+        addAuthorBtn.setVisible(false);
+        ViewAuthorsbtn.setVisible(false);
+        addCategoryBtn.setVisible(false);
+        ViewCategorysbtn.setVisible(false);
+
+        if (addUserBtn.isVisible()){
+        addUserBtn.setVisible(false);
+        ViewUsersbtn.setVisible(false);
+        }
+        else{
+        addUserBtn.setVisible(true);
+        ViewUsersbtn.setVisible(true);
+        }
+        
+        
+        
+
+    }
+ 
+
+    @FXML
+    void bookCilck(MouseEvent event) {
+        addUserBtn.setVisible(false);
+        ViewUsersbtn.setVisible(false);
+        addLanguageBtn.setVisible(false);
+        ViewLanguagebtn.setVisible(false);
+        addCategoryBtn.setVisible(false);
+        ViewCategorysbtn.setVisible(false);
+        if (addBookbtn.isVisible()){
+        addBookbtn.setVisible(false);
+        biewBookBtn.setVisible(false);
+        }
+        else{
+            addBookbtn.setVisible(true);
+        biewBookBtn.setVisible(true);
+        }
+        
+
+    }
+        @FXML
+    void AddAuthor(ActionEvent event) {
+        Window currentWindow = this.homeBtn.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "AddAuthorAdmin");
 
     }
 
     @FXML
     void goBook(ActionEvent event) {
+        
         Window currentWindow = this.homeBtn.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "addBook");
 
-    }
-
-    @FXML
-    void goCategory(ActionEvent event) {
-        Window currentWindow = this.homeBtn.getScene().getWindow();
-        SceneLoader.getInstance().NavigateTo(currentWindow, "AddAuthorAdmin");
 
     }
+
+
 
     @FXML
     void goHome(ActionEvent event) {
@@ -76,20 +230,22 @@ public class HomeAdminController implements Initializable {
 
     }
 
-    @FXML
-    void goLanguage(ActionEvent event) {
+ 
+        @FXML
+    void AddLanguage(ActionEvent event) {
         Window currentWindow = this.homeBtn.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "addlangue");
-        
 
     }
+    
 
-    @FXML
-    void goUsers(ActionEvent event) {
-        Window currentWindow = this.homeBtn.getScene().getWindow();
-        SceneLoader.getInstance().NavigateTo(currentWindow, "AddUserAdmin");
-
-    }
+//    @FXML
+//    void goUsers(ActionEvent event) {
+//        Window currentWindow = this.homeBtn.getScene().getWindow();
+//        SceneLoader.getInstance().NavigateTo(currentWindow, "AddUserAdmin");
+//
+//    }
+ 
 
     
     
