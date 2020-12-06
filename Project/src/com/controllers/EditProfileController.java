@@ -153,7 +153,7 @@ public class EditProfileController implements Initializable {
     private void burgerClick(MouseEvent event) {
         burgerTask.setRate(burgerTask.getRate() * -1);
         burgerTask.play();
-        if (this.drawer.isVisible()) {
+        if (this.drawer.isShown()) {
             this.drawer.close();
         } else {
             this.drawer.open();
