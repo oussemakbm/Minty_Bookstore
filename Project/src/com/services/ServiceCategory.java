@@ -57,7 +57,7 @@ public class ServiceCategory {
 
             results.add(c);
         }
-        return null;
+        return results;
 
     }
     public Category getCategory(int id) throws SQLException {

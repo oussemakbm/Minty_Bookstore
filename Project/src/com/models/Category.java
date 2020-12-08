@@ -31,18 +31,14 @@ public class Category {
     public String getName(){
         return this.name;
     }
-    public void SetId(int id){
+    public void setId(int id){
         this.id=id;
     }
-    public void SetName(String name){
+    public void setName(String name){
         this.name=name;
     }
      public String toString() {
         return "Category{" + "id=" + id + ", name=" + name +  '}';
-    }
-    
-    
-   
-    
+    }   
     
 }

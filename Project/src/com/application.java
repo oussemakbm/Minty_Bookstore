@@ -20,15 +20,15 @@ public class application extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-       
-        Parent root = FXMLLoader.load(getClass().getResource("views/addlangue.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("views/ListBook.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("css/liststylesheet.css");
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
     }
 
-   
     public static void main(String[] args) throws SQLException {
         launch(args);
     }

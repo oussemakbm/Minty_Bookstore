@@ -5,7 +5,6 @@
  */
 package com.controllers;
 
-import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.models.Author;
@@ -21,18 +20,12 @@ import com.services.ServiceSerie;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-//import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import java.net.URL;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
-import static java.util.Collections.list;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.PauseTransition;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,18 +36,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
-import javafx.util.Callback;
 import javafx.util.Duration;
 import javafx.util.StringConverter;
 
 /**
  * FXML Controller class
  *
- * @author MediaStudio
+ * @author user
  */
-
-
-public class addBookController implements Initializable {
+public class UpdateBookController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -95,7 +85,6 @@ public class addBookController implements Initializable {
     @FXML
     private ComboBox serie;
     
-    
      @FXML
     private ImageView gif;
      @FXML
@@ -105,16 +94,36 @@ public class addBookController implements Initializable {
      ObservableList<Category> listCategorys = null;
      ObservableList<Serie> listSeries = null;
      
+    public Book book  = null;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gif.setVisible(false);
+        getBook("3");
+        System.out.println(book);
         getAuthors();
         getLangues();
         getCategory();
         getSerie();
-
-    
     }
+    
+    public void getBook(String x){
+        ServiceBook sb  = ServiceBook.getInstance();
+        try {
+                book = sb.getBook(Integer.parseInt(x));
+               
+        } catch (SQLException ex) {
+            System.out.println("Error Update Book");
+        } 
+        title.setText(book.getTitle());
+        desc.setText(book.getDescription());
+        pub_date.setText(book.getPublishDate());
+        nbr_page.setText(Integer.toString(book.getNbrPages()));
+        quantity.setText(Integer.toString(book.getQuantity()));
+        price.setText(Float.toString(book.getPrix()));
+        img_url.setText(book.getImageUrl());
+    }
+    
     public void getCategory() 
     {
         ServiceCategory sc  = ServiceCategory.getInstance();
@@ -132,9 +141,9 @@ public class addBookController implements Initializable {
                     return null;
                 }
             };
-        category.setConverter(converter);
-        category.setItems(listCategorys);
-            
+            category.setConverter(converter);
+            category.setItems(listCategorys);
+            category.getSelectionModel().select(book.getIdCategory());
             
         } catch (Exception e) {
             System.out.println("error category list");
@@ -161,7 +170,8 @@ public class addBookController implements Initializable {
             };
         serie.setConverter(converter);
         serie.setItems(listSeries);
-            
+       
+        serie.getSelectionModel().select(book.getIdSerie());
             
         } catch (Exception e) {
             System.out.println("error category list");
@@ -187,10 +197,8 @@ public class addBookController implements Initializable {
             };
         langue.setConverter(converter);
         langue.setItems(listLangue);
+        langue.getSelectionModel().select(book.getIdLanguage());    
            
-            
-           
-            
         } catch (Exception e) {
         }
     }
@@ -214,32 +222,17 @@ public class addBookController implements Initializable {
         };
         author.setConverter(converter);
         author.setItems(listAuthor);
-            
-           
-            
+        author.getSelectionModel().select(book.getIdAuthor());
         } catch (Exception e) {
         }
     }
     
-     @FXML
-    void DraggerButtonAction(DragEvent event) {
-        if(event.getDragboard().hasFiles()){
-        event.acceptTransferModes(TransferMode.ANY);
-        }
-        
-
-    }
-    @FXML
-    void handleDrop(DragEvent event) throws FileNotFoundException {
-        List<File> files = event.getDragboard().getFiles();
-        Image img = new Image(new FileInputStream(files.get(0)));
-        imgGridView.setImage(img);
-
-    }
-
     
-    @FXML
-    public void AddBookAction(ActionEvent e) throws SQLException{
+    public void transferMessage(String x){
+        System.out.println(x);
+    }
+    
+    public void UpdateBookAction(ActionEvent e) throws SQLException{
         gif.setVisible(true);
         PauseTransition pt = new PauseTransition();
         pt.setDuration(Duration.seconds(3));
@@ -254,8 +247,8 @@ public class addBookController implements Initializable {
         ServiceAuthor sau = ServiceAuthor.getInstance();
         String autheur_choist = author.getValue().toString();
         int id_autheur = sau.getAuthors().stream().filter(l->l.toString().equals(autheur_choist)).mapToInt(l->l.getId()).findFirst().getAsInt();
-        //get id serie choisit
         
+        //get id serie choisit
         ServiceSerie ss = ServiceSerie.getInstance();
         String serie_choist = serie.getValue().toString();
         int id_serie = ss.getSeries().stream().filter(l->l.toString().equals(serie_choist)).mapToInt(l->l.getId()).findFirst().getAsInt();
@@ -267,27 +260,29 @@ public class addBookController implements Initializable {
         int id_category = sc.getCategories().stream().filter(l->l.toString().equals(category_choisit)).mapToInt(l->l.getId()).findFirst().getAsInt();
 
             try {
-                
-                sb.addBook(new Book(id_serie, id_category, id_autheur, id_langue, Integer.parseInt(quantity.getText()), Integer.parseInt(nbr_page.getText()), 1, title.getText(), desc.getText(), img_url.getText(), pub_date.getText(), Float.parseFloat(price.getText())));
+                sb.updateBook(new Book(book.getId(), id_serie, id_category, id_autheur, id_langue, Integer.parseInt(quantity.getText()), Integer.parseInt(nbr_page.getText()), 1, title.getText(), desc.getText(), img_url.getText(), pub_date.getText(), Float.parseFloat(price.getText())));
                
             } catch (SQLException ex) {
-                System.out.println("Error Add Book");
-            }
-            
-            System.out.println("Book Added Successfully");
-            
+                System.out.println("Error Update Book");
+            }            
             pt.setOnFinished(ev -> {
-            
-            
-            
-            
-            
-            gif.setVisible(false);
+                gif.setVisible(false);
         });
         pt.play();
     }
     
-    public void transferMessage(String x){
-        System.out.println(x);
+     @FXML
+    void DraggerButtonAction(DragEvent event) {
+        if(event.getDragboard().hasFiles()){
+        event.acceptTransferModes(TransferMode.ANY);
+        }
+    }
+    
+    @FXML
+    void handleDrop(DragEvent event) throws FileNotFoundException {
+        List<File> files = event.getDragboard().getFiles();
+        Image img = new Image(new FileInputStream(files.get(0)));
+        imgGridView.setImage(img);
+
     }
 }
