@@ -97,7 +97,7 @@ public class ServiceBook {
             b.setIdCategory(rst.getInt(10));
             b.setIdLanguage(rst.getInt(11));
             b.setIdSerie(rst.getInt(12));
-            b.setPublishDate(rst.getString(13));
+//            b.setPublishDate("12-1-2019");
 
             results.add(b);
         }
@@ -124,8 +124,7 @@ public class ServiceBook {
             b.setIdCategory(rst.getInt(10));
             b.setIdLanguage(rst.getInt(11));
             b.setIdSerie(rst.getInt(12));
-            b.setPublishDate(rst.getString(13));
-
+//            b.setPublishDate(rst.getString(13));
             return b;
         }
 

@@ -60,6 +60,24 @@ public class ServiceWishList {
 
         return results;
     }
+    
+    public ArrayList<WishList> getUserWishLists(int id) throws SQLException {
+        ArrayList<WishList> results = new ArrayList<>();
+        String request = "SELECT * FROM `wishlist`WHERE idUser="+id;
+        Statement stm = cnx.createStatement();
+        ResultSet rst = stm.executeQuery(request);
+
+        while (rst.next()) {
+            WishList w = new WishList();
+            w.setId(rst.getInt(1));
+            w.setName(rst.getString(2));
+            w.setIdUser(rst.getInt(3));
+            w.setIdBook(rst.getInt(4));
+            results.add(w);
+        }
+
+        return results;
+    }
 
     public WishList getWishList(int id) throws SQLException {
         String request = "SELECT * FROM `wishlist` WHERE id =" + id;
