@@ -81,12 +81,12 @@ public class ContactUsController implements Initializable {
         String password = "mna3na3Team";
 
         //Create a session with account credentials
-//        Session session = Session.getInstance(properties, new Authenticator() {
-//            @Override
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication(myAccountEmail, password);
-//            }
-//        });
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+        });
 
         //Prepare email message
         Message message = prepareMessage(session, myAccountEmail, recepient);
