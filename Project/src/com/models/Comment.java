@@ -18,6 +18,12 @@ public class Comment {
         return userId;
     }
 
+    public Comment(int userId, int bookId, String body) {
+        this.userId = userId;
+        this.bookId = bookId;
+        this.body = body;
+    }
+
     public void setUserId(int userId) {
         this.userId = userId;
     }
