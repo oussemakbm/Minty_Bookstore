@@ -68,7 +68,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="ViewAuthorsbtn" layoutX="198.0" layoutY="266.0" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #c9e265;" text="View authors" textFill="WHITE" visible="false">
+      <JFXButton fx:id="ViewAuthorsbtn" layoutX="198.0" layoutY="266.0" onAction="#View_Authors" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #c9e265;" text="View authors" textFill="WHITE" visible="false">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

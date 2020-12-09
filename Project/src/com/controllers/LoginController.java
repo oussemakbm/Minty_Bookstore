@@ -81,7 +81,12 @@ public class LoginController implements Initializable {
                 if (ServiceUser.getConnectedUser() == null) {
                     System.out.println("Wrong Email or password !");
                 } else {
-                    SceneLoader.getInstance().NavigateTo(this.jbtnLLogin.getScene().getWindow(), "profile");
+                    System.out.println(ServiceUser.getConnectedUser().getRole());
+                    if (ServiceUser.getConnectedUser().getRole().equalsIgnoreCase("CLIENT")) {
+                            SceneLoader.getInstance().NavigateTo(this.jbtnLLogin.getScene().getWindow(), "profile");
+                    } else {
+                        SceneLoader.getInstance().NavigateTo(this.jbtnLLogin.getScene().getWindow(), "homeAdmin");
+                    }
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();

@@ -21,9 +21,9 @@ public class application extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("views/ListBook.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/DisplayAuthorsAdmin.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("css/liststylesheet.css");
+        scene.getStylesheets().add("css/listStyleSheet.css");
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);

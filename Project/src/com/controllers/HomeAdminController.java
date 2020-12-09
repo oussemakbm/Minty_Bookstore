@@ -237,6 +237,12 @@ public class HomeAdminController implements Initializable {
         SceneLoader.getInstance().NavigateTo(currentWindow, "addlangue");
 
     }
+    @FXML
+    void View_Authors(ActionEvent event) {
+        Window currentWindow = this.homeBtn.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayAuthorsAdmin");
+        
+    }
     
 
 //    @FXML

@@ -11,6 +11,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -72,22 +73,6 @@ public class SceneLoader {
         newStage.setScene(scene);
         newStage.show();
     }
-    public void NavigateTo(Window currentWindow, String viewName,Book b ) {
-//        1 - Hide current window
-//        2 - create new Stage 
-//        3 - Create a new Parent Object
-//        4 - Create new Scene and inject Parent Object in it
-//        5 - Stage.setScene(Parent Object Created)  
-//        6 - Show Stage
-
-        currentWindow.hide();
-        Stage newStage = new Stage();
-        Parent root = this.GetParent(viewName);
-        Scene scene = new Scene(root);
-        newStage.setUserData(b);
-        newStage.setScene(scene);
-        newStage.show();
-    }
 
     public static SceneLoader getInstance() {
         if (INSTANCE == null) {
@@ -95,5 +80,4 @@ public class SceneLoader {
         }
         return INSTANCE;
     }
-
 }

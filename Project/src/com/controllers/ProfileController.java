@@ -18,6 +18,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
@@ -40,12 +42,16 @@ public class ProfileController implements Initializable {
 
     @FXML
     private Label wellcomeTxt;
+    
+    @FXML
+    private ImageView avatar;
 
     HamburgerBackArrowBasicTransition burgerTask;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         wellcomeTxt.setText("Welcome " + ServiceUser.getConnectedUser().getName());
+        avatar.setImage(new Image(ServiceUser.getConnectedUser().getProfilePicture()));
         try {
             VBox box = SceneLoader.getInstance().getDrawerContent();
             this.drawer.setSidePane(box);
@@ -55,6 +61,7 @@ public class ProfileController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
 
     }
 
