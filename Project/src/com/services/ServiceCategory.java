@@ -52,12 +52,12 @@ public class ServiceCategory {
 
         while (rst.next()) {
             Category c = new Category();
-            c.SetId(rst.getInt("id"));
-            c.SetName(rst.getString(2));
+            c.setId(rst.getInt("id"));
+            c.setName(rst.getString(2));
 
             results.add(c);
         }
-        return null;
+        return results;
 
     }
     public Category getCategory(int id) throws SQLException {
@@ -67,8 +67,8 @@ public class ServiceCategory {
         ResultSet rst = stm.executeQuery(request);
         if (rst.next()){
             Category c = new Category();
-            c.SetId(rst.getInt(1));
-            c.SetName(rst.getString(2));
+            c.setId(rst.getInt(1));
+            c.setName(rst.getString(2));
             return c;
             
         }

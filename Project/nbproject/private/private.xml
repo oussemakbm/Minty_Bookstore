@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/EditProfileController.java</file>
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/util/HttpPost.java</file>
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/ProfileController.java</file>
@@ -12,6 +13,15 @@
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/services/ServiceUser.java</file>
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/BookDetailsController.java</file>
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/HomeAdminController.java</file>
+=======
+            <file>file:/C:/Users/user.DESKTOP-HSJU6B7/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/services/ServiceLangue.java</file>
+            <file>file:/C:/Users/user.DESKTOP-HSJU6B7/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/controllers/ListBookController.java</file>
+            <file>file:/C:/Users/user.DESKTOP-HSJU6B7/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/controllers/AddauthorController.java</file>
+            <file>file:/C:/Users/user.DESKTOP-HSJU6B7/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/controllers/AjoutBookController.java</file>
+            <file>file:/C:/Users/user.DESKTOP-HSJU6B7/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/application.java</file>
+            <file>file:/C:/Users/user.DESKTOP-HSJU6B7/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/views/ListBook.fxml</file>
+            <file>file:/C:/Users/user.DESKTOP-HSJU6B7/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/util/MyConnection.java</file>
+>>>>>>> b1a42e25a7f4d6cdd2c91fbad3dafd7614f073f6
         </group>
     </open-files>
 </project-private>

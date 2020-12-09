@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="582.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.DisplayWishListsController">
+   <children>
+      <JFXListView fx:id="wishlists" prefHeight="582.0" prefWidth="235.0" style="-fx-selection-bar: #c9e265; -fx-selection-bar-non-focused: #c9e265; -fx-background-insets: 0;" />
+      <VBox fx:id="wishlistsbooks" layoutX="235.0" layoutY="57.0" prefHeight="525.0" prefWidth="537.0" />
+      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="235.0" layoutY="-1.0" prefHeight="43.0" prefWidth="537.0" style="-fx-font-weight: bold;" text="Choose a wish list" textAlignment="CENTER" textFill="#c9e265">
+         <font>
+            <Font name="Verdana" size="31.0" />
+         </font>
+      </Label>
+      <Label fx:id="empty" alignment="CENTER" contentDisplay="CENTER" layoutX="235.0" layoutY="-2.0" prefHeight="582.0" prefWidth="537.0" style="-fx-font-weight: bold;" text="This wish list is empty" textAlignment="CENTER" textFill="#c9e265" visible="false">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

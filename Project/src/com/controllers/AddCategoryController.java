@@ -51,7 +51,7 @@ public class AddCategoryController implements Initializable {
         PauseTransition pt = new PauseTransition();
         pt.setDuration(Duration.seconds(3));
         Category c = new Category();
-        c.SetName(title.getText());
+        c.setName(title.getText());
         ServiceCategory sc = ServiceCategory.getInstance();
         try {
                 
