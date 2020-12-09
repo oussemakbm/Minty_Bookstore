@@ -14,14 +14,20 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.models.User;
 import com.services.ServiceUser;
+import com.util.HttpPost;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -34,6 +40,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 
 /**
  * FXML Controller class
@@ -89,6 +96,9 @@ public class EditProfileController implements Initializable {
         
         User u = ServiceUser.getConnectedUser();
         u.setName(nameTxt.getText());
+        u.setAdresse(adressTxt.getText());
+//        i have to check if email exists before updating email
+        
         try {
             ServiceUser.getInstance().updateUser(u);
         } catch (SQLException e) {
@@ -96,39 +106,41 @@ public class EditProfileController implements Initializable {
         }   
     }
 
-    @FXML
-    void onClickUpload(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-//        Filters to only get Image files 
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("GIF", "*.gif"),
-                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
-//       Open Browser Dialog to choose an image File 
-        File file = fileChooser.showOpenDialog(null);
 
-        if (file != null) {
-            System.out.println(file.getName());
-            System.out.println("Path: " + file.getPath());
-        }
-        
-        BufferedImage bf;
+    @FXML
+    void onClickUpload(ActionEvent event) throws IOException{
+        User currentUser = ServiceUser.getConnectedUser();
+        final JFileChooser fc = new JFileChooser();
+        fc.showOpenDialog(fc);
+        FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("JPG files(*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter ext2 = new FileChooser.ExtensionFilter("PNG files(*.png)", "*.PNG");
+        File selectedFile = fc.getSelectedFile();
+        String path = selectedFile.getAbsolutePath();
+        System.out.println(selectedFile.getAbsolutePath());
+        String filename = "file:///" + path;
+        Image img = new Image(filename);
+        avatarPic.setImage(img);
         
         try {
-             bf = ImageIO.read(file);
-             Image image = SwingFXUtils.toFXImage(bf, null);
-             this.avatarPic.setImage(image);
-             
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-
-
+            HttpPost httpPost = new HttpPost(new URL("http://localhost/bookstore/upload_profile_img.php"));
+            httpPost.setFileNames(new String[]{ selectedFile.getAbsolutePath() });
+            httpPost.post();
+            User newUser = currentUser;
+            newUser.setProfilePicture("http://localhost/bookstore/profileImages/"+selectedFile.getName());
+            try {
+                ServiceUser.getInstance().updateUser(newUser);
+                ServiceUser.setConnectedUser(ServiceUser.getInstance().getUser(currentUser.getId()));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println(httpPost.getOutput());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(HttpPost.class.getName()).log(Level.ALL.SEVERE, null, ex);
+        }        
     }
+
+    
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -158,7 +170,6 @@ public class EditProfileController implements Initializable {
         } else {
             this.drawer.open();
         }
-
     }
 
 }

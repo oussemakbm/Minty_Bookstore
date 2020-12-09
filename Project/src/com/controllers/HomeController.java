@@ -117,7 +117,7 @@ public class HomeController implements Initializable {
         Button button = new Button();
         //Setting the location of the button
         button.setTranslateX(120);
-
+        
         //Setting the size of the button
         button.setPrefSize(120, 120);
         //Setting a graphic to the button

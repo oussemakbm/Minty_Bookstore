@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ProfileController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ProfileController">
    <children>
-      <JFXHamburger fx:id="hamburger" layoutX="546.0" layoutY="14.0" />
+      <JFXHamburger fx:id="hamburger" layoutX="734.0" layoutY="26.0" />
       <JFXDrawer fx:id="drawer" defaultDrawerSize="190.0" prefHeight="400.0" prefWidth="169.0" />
-      <Label fx:id="wellcomeTxt" layoutX="300.0" layoutY="106.0" text="Wellcome, " textFill="#c9e265">
+      <Label fx:id="wellcomeTxt" layoutX="394.0" layoutY="222.0" text="Wellcome, " textFill="#c9e265">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <JFXButton layoutX="494.0" layoutY="111.0" onAction="#goToEditProfile" text="Edit">
+      <JFXButton layoutX="653.0" layoutY="223.0" onAction="#goToEditProfile" text="Edit">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -27,5 +27,10 @@
             </ImageView>
          </graphic>
       </JFXButton>
+      <ImageView fx:id="avatar" fitHeight="150.0" fitWidth="200.0" layoutX="439.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/icons/avatar.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

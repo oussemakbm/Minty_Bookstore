@@ -96,4 +96,25 @@ public class ServiceInteraction {
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
+    
+    
+    public ArrayList<Interaction> getBookInteractions(int bookId) throws SQLException {
+        ArrayList<Interaction> results = new ArrayList<>();
+        String request = "SELECT * FROM interactions WHERE idBook = 1 ";
+        Statement pst = cnx.createStatement();
+        ResultSet rst = pst.executeQuery(request);
+
+        while (rst.next()) {
+            Interaction i = new Interaction();
+            i.setId(rst.getInt(1));
+            i.setIdUser(rst.getInt(2));
+            i.setIdBook(rst.getInt(3));
+            i.setRatingValue(rst.getFloat(4));
+            i.setLiked(rst.getInt(5));
+            results.add(i);
+        }
+
+        return results;
+    }
+    
 }

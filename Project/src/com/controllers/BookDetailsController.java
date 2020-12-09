@@ -8,16 +8,27 @@ package com.controllers;
 import com.SceneLoader;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.models.Book;
+import com.models.Interaction;
 import com.services.ServiceAuthor;
 import com.services.ServiceBook;
+import com.services.ServiceInteraction;
+import com.services.ServiceUser;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -34,7 +45,6 @@ import javafx.stage.Window;
 public class BookDetailsController implements Initializable {
 
     private int bookId;
-
 
     @FXML
     private ImageView bookCover;
@@ -60,23 +70,23 @@ public class BookDetailsController implements Initializable {
     @FXML
     private Text authorTxt;
 
-    HamburgerBackArrowBasicTransition burgerTask;
+    @FXML
+    private ImageView likeIcon;
 
+    @FXML
+    private JFXListView<Label> commentsList;
+
+    HamburgerBackArrowBasicTransition burgerTask;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initDrawerContent();
         initBookDetails();
-//        try {
-//            System.out.println("Setting id " + SceneLoader.getInstance().getSelectedBookId() + " to get book by id method ");
-//            Book b = ServiceBook.getInstance().getBook(SceneLoader.getInstance().getSelectedBookId());
-//            System.out.println("Selected Book : " + b.toString());
-//            
-//        } catch (Exception e) {
-//        }
+        System.out.println("User liked book :" + userLikedBook());
+         String likeIconUrl = userLikedBook() ?"http://localhost/bookstore/icons/heart-solid_liked.png" :  "http://localhost/bookstore/icons/heart-solid_unliked.png" ;
+        likeIcon.setImage(new Image(likeIconUrl));
+        
     }
-
-
 
     private void burgerClick(MouseEvent event) {
         burgerTask.setRate(burgerTask.getRate() * -1);
@@ -100,7 +110,7 @@ public class BookDetailsController implements Initializable {
             this.priceTxt.setText(Float.toString(b.getPrix()) + " DT");
             this.nbpageTxt.setText(Integer.toString(b.getNbrPages()));
             this.authorTxt.setText(sa.getAuthor(b.getIdAuthor()).getName());
-            
+           
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -117,6 +127,51 @@ public class BookDetailsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean userLikedBook() {
+        int bookId = SceneLoader.getInstance().getSelectedBookId();
+        int userId = ServiceUser.getConnectedUser().getId();
+
+        try {
+            ArrayList<Interaction> bookInteracations = ServiceInteraction.getInstance().getBookInteractions(bookId);
+            for (Interaction i : bookInteracations) {
+                if (i.getIdUser() == userId && i.getLiked() == 1) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @FXML
+    void onLike(ActionEvent event) {
+        int bookId = SceneLoader.getInstance().getSelectedBookId();
+        int userId = ServiceUser.getConnectedUser().getId();
+        String likeIconUrl = userLikedBook() ? "/com/img/icons/heart-solid_unliked.png" : "/com/img/icons/heart-solid_liked.png";
+        likeIcon.setImage(new Image(likeIconUrl));
+        if (userLikedBook()) {
+            
+            Interaction i = new Interaction(userId, bookId, 3, 0);
+            i.setId(1);
+            try {
+                ServiceInteraction.getInstance().updateInteraction(i);
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            Interaction i = new Interaction(userId, bookId, 3, 1);
+            i.setId(1);
+            try {
+                ServiceInteraction.getInstance().addInteraction(i);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 }
