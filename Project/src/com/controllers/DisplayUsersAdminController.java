@@ -20,6 +20,7 @@ import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,6 +30,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -49,24 +51,24 @@ public class DisplayUsersAdminController implements Initializable {
     
      
     @FXML
-    private ScrollPane sPaneUsersList;
-    @FXML
     private VBox vBoxUsersList;
     @FXML
     private JFXButton buttonAdd;
     @FXML
     private JFXTextField textFieldSearch;
     List<User> users;
+    @FXML
+    private JFXButton buttonBack;
+    @FXML
+    private Pagination pagination;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          ServiceUser su=ServiceUser.getInstance();
-         buttonAdd.setOnAction((event) -> {
-        Window currentWindow = this.buttonAdd.getScene().getWindow();
-        SceneLoader.getInstance().NavigateTo(currentWindow, "AddUserAdmin");
-         });
+         
+      
         users=new ArrayList();
         try {
             users = su.getUsers();
@@ -79,6 +81,20 @@ public class DisplayUsersAdminController implements Initializable {
          //OptionalDouble average = employees.stream().filter((e)->{return (e.getName().charAt(0)=='s');}).mapToInt((e)->{return e.getSalary();}).average();
               
     }    
+    
+    @FXML
+    void AddUser(ActionEvent event) {
+        Window currentWindow = this.buttonAdd.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "AddUserAdmin");
+    }
+        @FXML
+    void BackAdmin(ActionEvent event) {
+        Window currentWindow = this.buttonBack.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
+
+    }
+    
+    @FXML
     public void search(){
         refresh(searchUsers(textFieldSearch.getText()));
     }
@@ -110,16 +126,18 @@ public class DisplayUsersAdminController implements Initializable {
         Label email=new Label(user.getEmail());
         Label role=new Label(user.getRole());
         HBox actions=new HBox();
-        File fileSettings = new File("C:\\Users\\ihebf\\OneDrive\\Documents\\NetBeansProjects\\Minty_Bookstore\\Project\\src\\com\\img\\icons\\Settings.png");
-        Image image = new Image(fileSettings.toURI().toString());
+        //File fileSettings = new File("C:\\Users\\ihebf\\OneDrive\\Documents\\NetBeansProjects\\Minty_Bookstore\\Project\\src\\com\\img\\icons\\Settings.png");
+        Image image = new Image("/com/img/icons/Settings.png");
         ImageView imageview=new ImageView();
+        imageview.setPickOnBounds(true);
         imageview.setImage(image);
         imageview.setFitWidth(40);
         imageview.setFitHeight(40);
         
-        File fileDelete = new File("C:\\Users\\ihebf\\OneDrive\\Documents\\NetBeansProjects\\Minty_Bookstore\\Project\\src\\com\\img\\icons\\delete.png");
-        Image imageDelete = new Image(fileDelete.toURI().toString());
+        //File fileDelete = new File("C:\\Users\\ihebf\\OneDrive\\Documents\\NetBeansProjects\\Minty_Bookstore\\Project\\src\\com\\img\\icons\\delete.png");
+        Image imageDelete = new Image("/com/img/icons/delete.png");
         ImageView delete=new ImageView();
+        delete.setPickOnBounds(true);
         delete.setImage(imageDelete);
         delete.setFitWidth(32);
         delete.setFitHeight(32);
@@ -195,5 +213,6 @@ public class DisplayUsersAdminController implements Initializable {
         vBoxUsersList.getChildren().add(box);
         }
     }
+  
     
 }
