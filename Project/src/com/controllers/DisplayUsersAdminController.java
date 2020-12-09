@@ -5,6 +5,7 @@
  */
 package com.controllers;
 
+import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.models.User;
@@ -19,6 +20,7 @@ import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,6 +34,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -50,6 +53,7 @@ public class DisplayUsersAdminController implements Initializable {
     private JFXButton buttonAdd;
     @FXML
     private JFXTextField textFieldSearch;
+    
     List<User> users;
     /**
      * Initializes the controller class.
@@ -69,7 +73,21 @@ public class DisplayUsersAdminController implements Initializable {
         // TODO
          //OptionalDouble average = employees.stream().filter((e)->{return (e.getName().charAt(0)=='s');}).mapToInt((e)->{return e.getSalary();}).average();
               
-    }    
+    }  
+   
+    
+    
+       @FXML
+    void AddUser(ActionEvent event) {
+        Window currentWindow = this.sPaneUsersList.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "AddUserAdmin");
+    }
+        @FXML
+    void BackAdmin(ActionEvent event) {
+        Window currentWindow = this.sPaneUsersList.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
+
+    }
     public void search(){
         refresh(searchUsers(textFieldSearch.getText()));
     }
@@ -87,6 +105,8 @@ public class DisplayUsersAdminController implements Initializable {
         }
         return result;
     }
+    
+    
     
     public void refresh(List<User> users){
      

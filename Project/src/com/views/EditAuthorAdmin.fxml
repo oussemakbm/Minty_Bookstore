@@ -9,8 +9,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.AddAuthorAdminController">
-   <children>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.EditAuthorAdminController">
+     <children>
       <AnchorPane id="AnchorPane" layoutX="15.0" layoutY="6.0" prefHeight="448.0" prefWidth="600.0" style="-fx-background-color: #fff;">
          <children>
             <ImageView fitHeight="136.0" fitWidth="122.0" layoutX="15.0" layoutY="-33.0" pickOnBounds="true" preserveRatio="true">
@@ -40,17 +40,13 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <JFXButton fx:id="save1" layoutX="9.0" layoutY="248.0" onAction="#saveAction" prefHeight="32.0" prefWidth="155.0" style="-fx-background-color: #c9e265; -fx-border-color: #a0a2ab;" text="Upload photo" textFill="#2225188c">
+            <JFXButton fx:id="uploadPhoto" layoutX="9.0" layoutY="248.0" prefHeight="32.0" prefWidth="155.0" style="-fx-background-color: #c9e265; -fx-border-color: #a0a2ab;" text="Upload photo" textFill="#2225188c">
                <font>
                   <Font size="14.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="buttonBack" layoutX="501.0" layoutY="25.0" onAction="#BackAdmin1" prefHeight="54.0" prefWidth="81.0" style="-fx-background-color: #c9e265;" text="&lt;-">
-               <font>
-                  <Font size="25.0" />
                </font>
             </JFXButton>
          </children>
       </AnchorPane>
    </children>
+    
 </AnchorPane>

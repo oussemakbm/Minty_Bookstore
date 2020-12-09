@@ -5,6 +5,7 @@
  */
 package com.controllers;
 
+import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -23,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -146,6 +148,12 @@ public class AddUserAdminController implements Initializable {
             }
         });
         
-    }    
+    }  
+      @FXML
+    void BackAdmin(ActionEvent event) {
+         Window currentWindow = this.tfname.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
+
+    }
     
 }

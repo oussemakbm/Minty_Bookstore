@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="666.0" prefWidth="1020.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.DisplayUsersAdminController">
+<AnchorPane id="AnchorPane" prefHeight="666.0" prefWidth="1020.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.DisplayUsersAdminController">
    <children>
       <ScrollPane fx:id="sPaneUsersList" layoutY="122.0" prefHeight="547.0" prefWidth="1020.0" style="-fx-background-color: transparent;">
          <content>
@@ -24,11 +24,16 @@
             <Label alignment="CENTER" minWidth="255.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="Action" />
          </children>
       </HBox>
-      <JFXButton fx:id="buttonAdd" layoutX="97.0" layoutY="7.0" prefHeight="54.0" prefWidth="52.0" style="-fx-background-color: #d9d9d9;" text="+">
+      <JFXButton fx:id="buttonAdd" layoutX="97.0" layoutY="7.0" onAction="#AddUser" prefHeight="54.0" prefWidth="52.0" style="-fx-background-color: #d9d9d9;" text="+">
          <font>
             <Font size="25.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="textFieldSearch" alignment="CENTER" layoutX="825.0" layoutY="22.0" onKeyReleased="#search" promptText="Search" />
+      <JFXTextField fx:id="textFieldSearch" alignment="CENTER" layoutX="471.0" layoutY="22.0" onKeyReleased="#search" promptText="Search" />
+      <JFXButton fx:id="buttonBack" layoutX="909.0" layoutY="8.0" onAction="#BackAdmin" prefHeight="54.0" prefWidth="62.0" style="-fx-background-color: #d9d9d9;" text="&lt;-">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
