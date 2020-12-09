@@ -128,14 +128,14 @@ public class ServiceUser {
 
         while (rst.next()) {
             User u = new User();
-            u.setId(rst.getInt(1));
-            u.setName(rst.getString(2));
-            u.setEmail(rst.getString(3));
-            u.setPassword(rst.getString(4));
-            u.setRole(rst.getString(5));
-            u.setNumTel(rst.getString(6));
-            u.setAdresse(rst.getString(7));
-            u.setProfilePicture(rst.getString(8));
+            u.setId(rst.getInt("id"));
+            u.setName(rst.getString("name"));
+            u.setEmail(rst.getString("email"));
+            u.setPassword(rst.getString("password"));
+            u.setRole(rst.getString("role"));
+            u.setNumTel(rst.getString("numtel"));
+            u.setAdresse(rst.getString("adresse"));
+            u.setProfilePicture(rst.getString("picurl"));
 
             results.add(u);
         }
