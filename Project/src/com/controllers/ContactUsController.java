@@ -138,15 +138,5 @@ public class ContactUsController implements Initializable {
             gifLoading.setVisible(false);
         });
         pt.play();
-        
-        
-        
-
     }
-    
-
-   
-    
-    
-    
 }
