@@ -3,8 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/HomeController.java</file>
             <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/services/ServiceUser.java</file>
+=======
+            <file>file:/C:/Users/MediaStudio/Desktop/java%20Project/Minty_Bookstore/Project/src/com/controllers/DisplayAuthorsAdminController.java</file>
+            <file>file:/C:/Users/MediaStudio/Desktop/java%20Project/Minty_Bookstore/Project/src/com/controllers/AddUserAdminController.java</file>
+            <file>file:/C:/Users/MediaStudio/Desktop/java%20Project/Minty_Bookstore/Project/src/com/controllers/DisplayUsersAdminController.java</file>
+            <file>file:/C:/Users/MediaStudio/Desktop/java%20Project/Minty_Bookstore/Project/src/com/application.java</file>
+>>>>>>> f4bf6bc2756f79ecf269c900a5d084069668b235
         </group>
     </open-files>
 </project-private>

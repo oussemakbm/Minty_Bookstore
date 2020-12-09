@@ -27,6 +27,16 @@ public class ServiceAuthor {
     private static ServiceAuthor INSTANCE;
     
     
+    private static Author thisAuthor;
+    public static Author getThisAuthor(){
+        return thisAuthor;
+    }
+    public static void setThisAuthor(Author a){
+        thisAuthor = a;
+        
+    }
+    
+    
     public static ServiceAuthor getInstance() {
         if (INSTANCE == null)
             INSTANCE = new ServiceAuthor();

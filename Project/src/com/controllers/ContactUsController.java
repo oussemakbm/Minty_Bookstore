@@ -26,6 +26,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.security.auth.Subject;
 
 /**
  * FXML Controller class
@@ -61,7 +62,7 @@ public class ContactUsController implements Initializable {
         
         
     } 
-    public static void sendMail(String recepient) throws Exception {
+    public  void sendMail(String recepient) throws Exception {
         
         System.out.println("Preparing to send email");
         Properties properties = new Properties();
@@ -101,7 +102,7 @@ public class ContactUsController implements Initializable {
      
      
 
-    private static Message prepareMessage(Session session, String myAccountEmail, String recepient) {
+    private  Message prepareMessage(Session session, String myAccountEmail, String recepient) {
         
         
         try {
@@ -110,8 +111,8 @@ public class ContactUsController implements Initializable {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            message.setSubject("Email from minty Book STORE");
-            String htmlCode = "<h1> Minty Book store </h1> <br/> <h2><b>JavaFX </b></h2>";
+            message.setSubject(subject.getText());
+            String htmlCode = Email.getText()+" <br> "+contectText.getText();
             message.setContent(htmlCode, "text/html");
             return message;
         } catch (Exception ex) {
@@ -121,7 +122,7 @@ public class ContactUsController implements Initializable {
     }
       @FXML
      void  SendMailAction(ActionEvent event) throws Exception {
-        String  UserEmail =Email.getText();
+        String  UserEmail ="mintyBookStore@gmail.com";
         String subjectMail = subject.getText();
         String contect = contectText.getText();
         
@@ -137,15 +138,5 @@ public class ContactUsController implements Initializable {
             gifLoading.setVisible(false);
         });
         pt.play();
-        
-        
-        
-
     }
-    
-
-   
-    
-    
-    
 }

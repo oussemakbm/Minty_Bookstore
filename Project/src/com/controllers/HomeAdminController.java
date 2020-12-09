@@ -219,6 +219,20 @@ public class HomeAdminController implements Initializable {
 
 
     }
+        @FXML
+    void AddUser(ActionEvent event) {
+        Window currentWindow = this.homeBtn.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "AddUserAdmin");
+        
+
+    }
+    
+        @FXML
+    void DisplayUsers(ActionEvent event) {
+         Window currentWindow = this.homeBtn.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayUsersAdmin");
+
+    }
 
 
 
@@ -236,6 +250,12 @@ public class HomeAdminController implements Initializable {
         Window currentWindow = this.homeBtn.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "addlangue");
 
+    }
+    @FXML
+    void View_Authors(ActionEvent event) {
+        Window currentWindow = this.homeBtn.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayAuthorsAdmin");
+        
     }
     
 

@@ -7,6 +7,7 @@
 package com.services;
 
 import com.models.CommandList;
+import com.models.User;
 import com.util.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -76,9 +77,30 @@ public class ServiceCommandList {
     }
 
     public void deleteCommandList(int id) throws SQLException {
-        String request = "DELETE FROM `commandlist` WHERE id =" + id;
+        String request = "DELETE FROM `commandline` WHERE idCommandlist =" + id;
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
+         request = "DELETE FROM `commandlist` WHERE id =" + id;
+        stm.executeUpdate(request);
     }
+    public ArrayList<CommandList> getCommandListUser(int id) throws SQLException {
+        ArrayList<CommandList> results = new ArrayList<>();
+        User u = ServiceUser.getConnectedUser();
+        String request ="SELECT * FROM `commandlist` WHERE idUser =" + id;
+        Statement stm = cnx.createStatement();
+        ResultSet rst = stm.executeQuery(request);
+        while (rst.next()) {
+            CommandList lc = new CommandList();
+            lc.setId(rst.getInt("id"));
+            lc.setStatus(rst.getString("status"));
+            lc.setTotalprice(rst.getFloat("totalprice"));
+            lc.setIdUser(rst.getInt("iduser"));
+            results.add(lc);
+        }
+        return results;
+    }
+    
+    
+    
 
 }

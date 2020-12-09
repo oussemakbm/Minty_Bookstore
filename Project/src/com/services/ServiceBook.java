@@ -97,9 +97,10 @@ public class ServiceBook {
             b.setIdCategory(rst.getInt(10));
             b.setIdLanguage(rst.getInt(11));
             b.setIdSerie(rst.getInt(12));
-//            b.setPublishDate("12-1-2019");
+            b.setPublishDate(rst.getString(13));
 
             results.add(b);
+            System.out.println(b);
         }
 
         return results;

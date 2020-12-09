@@ -5,6 +5,7 @@
  */
 package com.controllers;
 
+import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.models.User;
@@ -24,14 +25,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -57,7 +63,10 @@ public class DisplayUsersAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          ServiceUser su=ServiceUser.getInstance();
-         
+         buttonAdd.setOnAction((event) -> {
+        Window currentWindow = this.buttonAdd.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "AddUserAdmin");
+         });
         users=new ArrayList();
         try {
             users = su.getUsers();
@@ -76,6 +85,7 @@ public class DisplayUsersAdminController implements Initializable {
     
     public List<User> searchUsers(String searchText){
         List<User> result=new ArrayList();
+        
         for (User user : users){
             if ((user.getName().toUpperCase().indexOf(searchText.toUpperCase())!=-1) ||
                  (user.getEmail().toUpperCase().indexOf(searchText.toUpperCase()) !=-1) ||
@@ -107,17 +117,49 @@ public class DisplayUsersAdminController implements Initializable {
         imageview.setFitWidth(40);
         imageview.setFitHeight(40);
         
-         File fileDelete = new File("C:\\Users\\ihebf\\OneDrive\\Documents\\NetBeansProjects\\Minty_Bookstore\\Project\\src\\com\\img\\icons\\delete.png");
+        File fileDelete = new File("C:\\Users\\ihebf\\OneDrive\\Documents\\NetBeansProjects\\Minty_Bookstore\\Project\\src\\com\\img\\icons\\delete.png");
         Image imageDelete = new Image(fileDelete.toURI().toString());
         ImageView delete=new ImageView();
         delete.setImage(imageDelete);
         delete.setFitWidth(32);
         delete.setFitHeight(32);
+        
+        ServiceUser su=ServiceUser.getInstance();
+        
+        
+        delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                Alert alert=new Alert(AlertType.WARNING, "Delete the user "+user.getName()+" ?", ButtonType.YES, ButtonType.NO);
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.YES) {
+                    try {
+                        su.deleteUser(user.getId());
+                        users.remove(user);
+                        refresh(users); 
+                        alert=new Alert(Alert.AlertType.INFORMATION, "User deleted successfully !", ButtonType.OK);
+                        alert.showAndWait();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(DisplayUsersAdminController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+                
+            }            
+        });
+        imageview.setOnMouseClicked((MouseEvent event) -> {
+             ServiceUser.setuserToUpdate(user);
+             Window currentWindow = this.buttonAdd.getScene().getWindow();
+             SceneLoader.getInstance().NavigateTo(currentWindow, "UpdateUserAdmin");
+            
+        });
+        
+        
         //JFXButton update=new JFXButton("*");
         //JFXButton delete=new JFXButton("-");
         
         actions.setSpacing(50);
-
+        
         name.setAlignment(Pos.CENTER);
         email.setAlignment(Pos.CENTER);
         role.setAlignment(Pos.CENTER);
