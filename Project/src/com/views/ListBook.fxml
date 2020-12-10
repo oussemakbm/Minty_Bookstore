@@ -29,18 +29,18 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="40.0" layoutY="206.0" promptText="Find By Code" />
-            <TextField layoutX="40.0" layoutY="270.0" promptText="Find By Name" />
+            <TextField fx:id="fcode" layoutX="40.0" layoutY="206.0" promptText="Find By Code" />
+            <TextField fx:id="fname" layoutX="40.0" layoutY="270.0" promptText="Find By Title" />
             <Label layoutX="42.0" layoutY="527.0" text="Range Of Price" textFill="#c7f9cc">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="40.0" layoutY="338.0" promptText="Find By Author" />
-            <TextField layoutX="40.0" layoutY="404.0" promptText="Find By Category" />
-            <JFXCheckBox layoutX="42.0" layoutY="634.0" selected="true" text="Show Unavailable" textFill="#c7f9cc" />
-            <JFXSlider blockIncrement="1000.0" layoutX="22.0" layoutY="562.0" majorTickUnit="200.0" max="1000.0" prefHeight="60.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" value="1000.0" />
-            <TextField layoutX="40.0" layoutY="470.0" promptText="Find By Serie" />
+            <TextField fx:id="fauthor" layoutX="40.0" layoutY="338.0" promptText="Find By Author" />
+            <TextField fx:id="fcate" layoutX="40.0" layoutY="404.0" promptText="Find By Category" />
+            <JFXCheckBox fx:id="cbAvail" layoutX="42.0" layoutY="634.0" selected="true" text="Show Unavailable" textFill="#c7f9cc" />
+            <JFXSlider fx:id="sliderP" blockIncrement="200.0" layoutX="22.0" layoutY="562.0" majorTickUnit="10.0" max="200.0" minorTickCount="2" prefHeight="60.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="200.0" />
+            <TextField fx:id="fserie" layoutX="40.0" layoutY="470.0" promptText="Find By Serie" />
          </children>
       </Pane>
       <Pane layoutX="250.0" layoutY="2.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-region-background: #22577a;">
