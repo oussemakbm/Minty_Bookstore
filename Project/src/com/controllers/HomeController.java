@@ -110,8 +110,8 @@ public class HomeController implements Initializable {
         //Creating a graphic (image)
         Image img = new Image(b.getImageUrl());
         ImageView view = new ImageView(img);
-        view.setFitHeight(80);
-        view.setFitWidth(80);
+        view.setFitHeight(100);
+        view.setFitWidth(100);
         view.setPreserveRatio(true);
         //Creating a Button
         Button button = new Button();

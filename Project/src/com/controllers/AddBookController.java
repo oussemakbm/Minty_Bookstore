@@ -18,9 +18,12 @@ import com.services.ServiceBook;
 import com.services.ServiceCategory;
 import com.services.ServiceLangue;
 import com.services.ServiceSerie;
+import com.util.HttpPost;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
 //import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import java.net.URL;
 
@@ -43,9 +46,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import javafx.util.StringConverter;
+import javax.swing.JFileChooser;
 
 /**
  * FXML Controller class
@@ -54,7 +59,7 @@ import javafx.util.StringConverter;
  */
 
 
-public class addBookController implements Initializable {
+public class AddBookController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -94,6 +99,11 @@ public class addBookController implements Initializable {
 
     @FXML
     private ComboBox serie;
+    
+    @FXML
+    private ImageView bookCoverImg;
+    
+    private String bookCoverUrl;
     
     
      @FXML
@@ -267,21 +277,14 @@ public class addBookController implements Initializable {
         int id_category = sc.getCategories().stream().filter(l->l.toString().equals(category_choisit)).mapToInt(l->l.getId()).findFirst().getAsInt();
 
             try {
-                
-                sb.addBook(new Book(id_serie, id_category, id_autheur, id_langue, Integer.parseInt(quantity.getText()), Integer.parseInt(nbr_page.getText()), 1, title.getText(), desc.getText(), img_url.getText(), pub_date.getText(), Float.parseFloat(price.getText())));
-               
+                Book newBook = new Book(id_serie, id_category, id_autheur, id_langue, Integer.parseInt(quantity.getText()), Integer.parseInt(nbr_page.getText()), 1, title.getText(), desc.getText(), bookCoverUrl , pub_date.getText(), Float.parseFloat(price.getText()));
+                sb.addBook(newBook);
+               System.out.println("Book Added Successfully");
             } catch (SQLException ex) {
                 System.out.println("Error Add Book");
+                System.out.println(ex.getMessage());
             }
-            
-            System.out.println("Book Added Successfully");
-            
             pt.setOnFinished(ev -> {
-            
-            
-            
-            
-            
             gif.setVisible(false);
         });
         pt.play();
@@ -290,4 +293,30 @@ public class addBookController implements Initializable {
     public void transferMessage(String x){
         System.out.println(x);
     }
+    
+        @FXML
+    public void onUploadClicked(ActionEvent event) throws IOException {
+        final JFileChooser fc = new JFileChooser();
+        fc.showOpenDialog(fc);
+        FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("JPG files(*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter ext2 = new FileChooser.ExtensionFilter("PNG files(*.png)", "*.PNG");
+        File selectedFile = fc.getSelectedFile();
+        String path = selectedFile.getAbsolutePath();
+        System.out.println(selectedFile.getAbsolutePath());
+        String filename = "file:///" + path;
+        Image img = new Image(filename);
+        bookCoverImg.setImage(img);
+        
+        try {
+            HttpPost httpPost = new HttpPost(new URL("http://localhost/bookstore/upload_book_cover.php"));
+            httpPost.setFileNames(new String[]{ selectedFile.getAbsolutePath() });
+            httpPost.post();
+            bookCoverUrl = "http://localhost/bookstore/bookCovers/"+selectedFile.getName();
+            System.out.println(httpPost.getOutput());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(HttpPost.class.getName()).log(Level.ALL.SEVERE, null, ex);
+        }  
+    }
+    
+    
 }

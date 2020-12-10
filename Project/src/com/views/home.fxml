@@ -8,6 +8,6 @@
    <children>
       <JFXDrawer fx:id="drawer" defaultDrawerSize="190.0" prefHeight="600.0" prefWidth="190.0" />
       <JFXHamburger fx:id="hamburger" layoutX="741.0" layoutY="21.0" />
-      <AnchorPane fx:id="booksContainer" layoutX="89.0" layoutY="69.0" prefHeight="531.0" prefWidth="613.0" />
+      <AnchorPane fx:id="booksContainer" layoutX="194.0" layoutY="69.0" prefHeight="491.0" prefWidth="541.0" style="-fx-background-color: #fff;" />
    </children>
 </AnchorPane>
