@@ -53,12 +53,12 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="addUserBtn" layoutX="198.0" layoutY="185.0" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #c9e265;" text="Add user" textFill="WHITE" visible="false">
+      <JFXButton fx:id="addUserBtn" layoutX="198.0" layoutY="185.0" onAction="#AddUser" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #c9e265;" text="Add user" textFill="WHITE" visible="false">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="ViewUsersbtn" layoutX="198.0" layoutY="220.0" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #c9e265;" text="View users" textFill="WHITE" visible="false">
+      <JFXButton fx:id="ViewUsersbtn" layoutX="198.0" layoutY="220.0" onAction="#DisplayUsers" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: #c9e265;" text="View users" textFill="WHITE" visible="false">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

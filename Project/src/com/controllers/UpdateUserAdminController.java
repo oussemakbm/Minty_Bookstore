@@ -7,7 +7,6 @@ package com.controllers;
 
 import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -33,24 +32,20 @@ import javafx.stage.Window;
  *
  * @author ihebf
  */
-public class AddUserAdminController implements Initializable {
+public class UpdateUserAdminController implements Initializable {
 
-    @FXML
-    private JFXRadioButton rbadmin;
-    @FXML
-    private JFXRadioButton rbmember;
     @FXML
     private JFXTextField tfname;
     @FXML
     private JFXTextField tfemail;
     @FXML
-    private JFXPasswordField tfpassword;
-    @FXML
     private JFXTextField tftel;
     @FXML
     private JFXTextField tfaddress;
     @FXML
-    private JFXButton add;
+    private JFXRadioButton rbadmin;
+    @FXML
+    private JFXRadioButton rbmember;
     @FXML
     private Label erreurName;
     @FXML
@@ -64,11 +59,14 @@ public class AddUserAdminController implements Initializable {
     @FXML
     private Label lresultat;
     @FXML
+    private JFXPasswordField tfpassword;
+    @FXML
     private JFXButton reset;
     @FXML
     private JFXButton btnBack;
+    @FXML
+    private JFXButton update;
 
-    
     /**
      * Initializes the controller class.
      */
@@ -78,8 +76,21 @@ public class AddUserAdminController implements Initializable {
         rbadmin.setToggleGroup(group);
         rbadmin.setSelected(true);
         rbmember.setToggleGroup(group);
+        User user=ServiceUser.getuserToUpdate();
+        tfname.setText(user.getName());
+        tfemail.setText(user.getEmail());
+        tftel.setText(user.getNumTel());
+        tfpassword.setText(user.getPassword());
+        if (user.getRole().equalsIgnoreCase("ADMIN")){
+            rbadmin.setSelected(true);
+            rbmember.setSelected(false);
+        }else{
+             rbadmin.setSelected(false);
+            rbmember.setSelected(true);
+        }
+        tfaddress.setText(user.getAdresse());
         
-        add.setOnAction(new EventHandler<ActionEvent>() {
+        update.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 
@@ -90,6 +101,7 @@ public class AddUserAdminController implements Initializable {
                 erreurAddress.setText("");
                 
                 User u=new User();
+                u.setId(ServiceUser.getuserToUpdate().getId());
                 u.setName(tfname.getText());
                 u.setEmail(tfemail.getText());
                 u.setNumTel(tftel.getText());
@@ -130,11 +142,11 @@ public class AddUserAdminController implements Initializable {
                 }
                try {
                    if (formValid){
-                    su.addUser(u);
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION, "User added successfully !", ButtonType.OK);
+                    su.updateUser(u);
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION, "User updated successfully !", ButtonType.OK);
                     alert.showAndWait();
                     if (alert.getResult() == ButtonType.OK) {
-                        Window currentWindow = add.getScene().getWindow();
+                        Window currentWindow = update.getScene().getWindow();
                          SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayUsersAdmin");
                     }
                    }
@@ -143,7 +155,10 @@ public class AddUserAdminController implements Initializable {
                 }
             }
         });
-        reset.setOnAction(new EventHandler<ActionEvent>() {
+        
+        
+        
+          reset.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 tfname.setText("");
@@ -157,7 +172,7 @@ public class AddUserAdminController implements Initializable {
              Window currentWindow = this.btnBack.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayUsersAdmin");
         });
-        
+       
     }    
     
 }

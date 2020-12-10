@@ -5,6 +5,7 @@
  */
 package com.controllers;
 
+import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -17,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -38,10 +40,12 @@ public class AddAuthorAdminController implements Initializable {
 
     @FXML
     private JFXTextField image;
-      @FXML
+     @FXML
     private JFXTextField name;
       @FXML
     private AnchorPane UploadPhoto;
+    @FXML
+    private JFXButton buttonBack;
     /**
      * Initializes the controller class.
      */
@@ -49,6 +53,7 @@ public class AddAuthorAdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 
+    
      public void saveAction(ActionEvent e) {
          ServiceAuthor sa    = ServiceAuthor.getInstance();
          Author a = new Author(name.getText(), description.getText(), image.getText());
@@ -61,6 +66,14 @@ public class AddAuthorAdminController implements Initializable {
      
      
      }
+     
+    @FXML
+    void BackAdmin1(ActionEvent event) {
+        Window currentWindow = this.name.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
+
+    }
+   
       public void UploadPhotoAction(ActionEvent e) {
          ServiceAuthor sa    = ServiceAuthor.getInstance();
          Author a = new Author( name.getText(), description.getText(), image.getText());
@@ -73,6 +86,9 @@ public class AddAuthorAdminController implements Initializable {
      
      
      }
+      
+     
+      
     
     
 }

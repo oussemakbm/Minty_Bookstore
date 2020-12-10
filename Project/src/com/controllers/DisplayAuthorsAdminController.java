@@ -20,18 +20,22 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -58,6 +62,7 @@ public class DisplayAuthorsAdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ServiceAuthor sa = ServiceAuthor.getInstance();
+        
          
         authors=new ArrayList();
         try {
@@ -83,9 +88,12 @@ public class DisplayAuthorsAdminController implements Initializable {
         public void delete (int id){
             ServiceAuthor sa = ServiceAuthor.getInstance();
                 try {
+                    Alert alert=new Alert(AlertType.ERROR, "Delete this author ?", ButtonType.YES, ButtonType.NO);
+                    alert.showAndWait();
+                        if (alert.getResult() == ButtonType.YES) {
                     sa.deleteAuthor(id);
                     authors = sa.getAuthors();
-                    refresh(authors);
+                    refresh(authors);}
                     
 
                 } catch (SQLException ex) {
@@ -96,6 +104,20 @@ public class DisplayAuthorsAdminController implements Initializable {
             
             
         }
+            @FXML
+        void BackAdmin(ActionEvent event) {
+            Window currentWindow = this.buttonAdd.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
+            
+
+        }
+         @FXML
+    void addBook(ActionEvent event) {
+        Window currentWindow = this.buttonAdd.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "AddAuthorAdmin");
+
+    }
+
     
     public void refresh(List<Author> authors){
      
@@ -108,6 +130,7 @@ public class DisplayAuthorsAdminController implements Initializable {
         Label name=new Label(author.getName());
         Label desc=new Label(author.getDescription());
         Label pic=new Label(author.getPicUrl());
+        
         HBox actions=new HBox();
         File fileSettings = new File("C:\\Users\\MediaStudio\\Desktop\\java Project\\Minty_Bookstore\\Project\\src\\com\\img\\settings.png");
         Image image = new Image(fileSettings.toURI().toString());
@@ -115,6 +138,13 @@ public class DisplayAuthorsAdminController implements Initializable {
         imageview.setImage(image);
         imageview.setFitWidth(40);
         imageview.setFitHeight(40);
+        
+        imageview.setOnMouseClicked((ActionEvent ) -> {
+            ServiceAuthor.setThisAuthor(author);
+            Window currentWindow = this.vBoxAuthorList.getScene().getWindow();
+            SceneLoader.getInstance().NavigateTo(currentWindow, "EditAuthorAdmin");
+        });
+        
         
          File fileDelete = new File("C:\\Users\\MediaStudio\\Desktop\\java Project\\Minty_Bookstore\\Project\\src\\com\\img\\bin.png");
         Image imageDelete = new Image(fileDelete.toURI().toString());
@@ -125,7 +155,7 @@ public class DisplayAuthorsAdminController implements Initializable {
         delete.setOnMouseClicked(new EventHandler(){           
             @Override
             public void handle(Event event) {
-                delete(author.getId());
+                delete(author.getId() );
 
                 
                 

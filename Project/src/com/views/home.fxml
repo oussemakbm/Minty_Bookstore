@@ -4,10 +4,10 @@
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HomeController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url(&quot;https://img.freepik.com/free-vector/colorful-blurred-background-made-with-gradient-mesh_105895-545.jpg?size=626&amp;ext=jpg&quot;); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HomeController">
    <children>
       <JFXDrawer fx:id="drawer" defaultDrawerSize="190.0" prefHeight="600.0" prefWidth="190.0" />
       <JFXHamburger fx:id="hamburger" layoutX="741.0" layoutY="21.0" />
-      <AnchorPane fx:id="booksContainer" layoutX="89.0" prefHeight="600.0" prefWidth="613.0" />
+      <AnchorPane fx:id="booksContainer" layoutX="89.0" layoutY="69.0" prefHeight="531.0" prefWidth="613.0" />
    </children>
 </AnchorPane>

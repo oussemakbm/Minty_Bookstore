@@ -101,5 +101,11 @@ public class LoginController implements Initializable {
         Window currentWindow = this.jbtnLLogin.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "signUp");
     }
+        @FXML
+    void ContactAction(ActionEvent event) {
+        Window currentWindow = this.jbtnLLogin.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "contactUs");
+
+    }
 
 }
