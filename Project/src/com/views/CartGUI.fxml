@@ -4,35 +4,47 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="613.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CartController">
-   <center>
-      <ListView fx:id="lvBooks" prefHeight="252.0" prefWidth="438.0" BorderPane.alignment="CENTER" />
-   </center>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
-   <bottom>
-      <VBox fillWidth="false" spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="tfAmount" prefWidth="90.0" promptText="New amount" />
-            <HBox spacing="10.0">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CartController">
+   <children>
+      <BorderPane layoutX="2.0" layoutY="94.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="702.0">
+         <center>
+            <ListView fx:id="lvBooks" prefHeight="252.0" prefWidth="438.0" BorderPane.alignment="CENTER" />
+         </center>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <bottom>
+            <VBox fillWidth="false" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnDelete" mnemonicParsing="false" text="Delete" />
-                  <Button mnemonicParsing="false" text="Order" />
-                  <Button fx:id="btnDeleteBook" mnemonicParsing="false" text="Delete Book" />
+                  <TextField fx:id="tfAmount" prefWidth="90.0" promptText="New amount" />
+                  <HBox spacing="10.0">
+                     <children>
+                        <Button fx:id="btnDelete" mnemonicParsing="false" text="Delete" />
+                        <Button fx:id="btnDeleteBook" mnemonicParsing="false" text="Delete Book" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-         </children>
-         <BorderPane.margin>
-            <Insets top="10.0" />
-         </BorderPane.margin>
-      </VBox>
-   </bottom>
-   <left>
-      <ListView fx:id="lvCommandlist" prefHeight="282.0" prefWidth="136.0" BorderPane.alignment="CENTER" />
-   </left>
-</BorderPane>
+               <BorderPane.margin>
+                  <Insets top="10.0" />
+               </BorderPane.margin>
+            </VBox>
+         </bottom>
+         <left>
+            <ListView fx:id="lvCommandlist" prefHeight="282.0" prefWidth="136.0" BorderPane.alignment="CENTER" />
+         </left>
+      </BorderPane>
+      <ImageView fitHeight="101.0" fitWidth="109.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Minty.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
