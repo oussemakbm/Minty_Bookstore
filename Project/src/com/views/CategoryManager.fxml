@@ -4,6 +4,8 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -22,11 +24,21 @@
             <Label alignment="CENTER" minWidth="255.0" style="-fx-font-size: 14; -fx-font-weight: bold;" text="Action" />
          </children>
       </HBox>
-      <JFXButton fx:id="buttonAdd" layoutX="97.0" layoutY="7.0" prefHeight="54.0" prefWidth="52.0" style="-fx-background-color: #d9d9d9;" text="+">
+      <JFXButton fx:id="buttonAdd" layoutX="123.0" layoutY="4.0" onAction="#AddCategoryAction" prefHeight="54.0" prefWidth="52.0" style="-fx-background-color: #d9d9d9;" text="+">
          <font>
             <Font size="25.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="textFieldSearch" alignment="CENTER" layoutX="435.0" layoutY="18.0" onKeyReleased="#search" promptText="Search" />
+      <JFXTextField fx:id="textFieldSearch" alignment="CENTER" layoutX="401.0" layoutY="8.0" onKeyReleased="#search" promptText="Search" />
+      <ImageView fitHeight="86.0" fitWidth="92.0" layoutX="-3.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Minty.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="buttonBack" layoutX="563.0" layoutY="-2.0" onAction="#BackHomeAdmin" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: #d9d9d9;" text="&lt;-">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

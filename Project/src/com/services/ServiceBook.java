@@ -99,7 +99,6 @@ public class ServiceBook {
 //            b.setPublishDate(rst.getString(13));
 
             results.add(b);
-            System.out.println(b);
         }
 
         return results;
