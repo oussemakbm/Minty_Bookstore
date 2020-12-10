@@ -112,7 +112,7 @@ public class DisplayAuthorsAdminController implements Initializable {
 
         }
          @FXML
-    void addBook(ActionEvent event) {
+    void addAuthor(ActionEvent event) {
         Window currentWindow = this.buttonAdd.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "AddAuthorAdmin");
 
@@ -130,6 +130,13 @@ public class DisplayAuthorsAdminController implements Initializable {
         Label name=new Label(author.getName());
         Label desc=new Label(author.getDescription());
         Label pic=new Label(author.getPicUrl());
+//        ImageView view3 = new ImageView(pic);
+//        view3.setFitHeight(32);
+//        view3.setFitWidth(32);
+//        view3.setPreserveRatio(true);
+        
+        
+        
         
         HBox actions=new HBox();
         File fileSettings = new File("C:\\Users\\MediaStudio\\Desktop\\java Project\\Minty_Bookstore\\Project\\src\\com\\img\\settings.png");
@@ -138,6 +145,7 @@ public class DisplayAuthorsAdminController implements Initializable {
         imageview.setImage(image);
         imageview.setFitWidth(40);
         imageview.setFitHeight(40);
+        
         
         imageview.setOnMouseClicked((ActionEvent ) -> {
             ServiceAuthor.setThisAuthor(author);
@@ -171,6 +179,7 @@ public class DisplayAuthorsAdminController implements Initializable {
         desc.setAlignment(Pos.CENTER);
         pic.setAlignment(Pos.CENTER);
         actions.setAlignment(Pos.CENTER);
+       
         
         name.setStyle("-fx-font-size:14");
         desc.setStyle("-fx-font-size:14");
@@ -178,7 +187,7 @@ public class DisplayAuthorsAdminController implements Initializable {
         
         name.setMinWidth(255);
         actions.setMinWidth(255);
-        desc.setMinWidth(255);
+        desc.setMinWidth(300);
         pic.setMinWidth(255);
         
         name.setMinHeight(50);
