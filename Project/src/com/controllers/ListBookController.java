@@ -160,7 +160,7 @@ public class ListBookController implements Initializable {
             Parent root = loader.load();
             
             //Get controller
-            addBookController addBookController = loader.getController();
+            AddBookController addBookController = loader.getController();
             addBookController.transferMessage("Find");
             
             Stage stage = new Stage();
