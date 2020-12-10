@@ -8,7 +8,9 @@ package com.controllers;
 import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXSlider;
+import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.models.Author;
 import com.models.Book;
 import com.models.Category;
@@ -36,12 +38,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -53,6 +57,9 @@ public class ListBookController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    @FXML
+    private JFXButton btnAdd;
     
     @FXML
     private TextField fcode;
@@ -88,6 +95,10 @@ public class ListBookController implements Initializable {
 
     private List<Serie> listseries;
 
+    @FXML
+    private JFXDrawer drawer;
+    
+    HamburgerBackArrowBasicTransition burgerTask;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -97,10 +108,23 @@ public class ListBookController implements Initializable {
         getCategories();
         getSeries();
         getListeners();
+        
+        btnAdd.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                JFXButton btn = (JFXButton) event.getSource();
+                String id = btn.getId();
+                try {
+                    Window window = btnAdd.getScene().getWindow();
+                    SceneLoader.getInstance().NavigateTo(window, "addBook");  
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
     }    
     
     public void afficher(){
-        System.out.println("Afficher : \n"+displaylist);
         idPane.getChildren().clear();
         VBox vbox = new VBox();
         for (int i = 0; i < displaylist.size(); i++) {
@@ -139,7 +163,14 @@ public class ListBookController implements Initializable {
             btnc.setOnAction((ActionEvent event) -> {
                 JFXButton btn = (JFXButton) event.getSource();
                 String id = btn.getId();
-                System.out.println(id);
+                try {
+                    System.out.println("Setting BookId: "+ btn.getId().substring(1) + " To Scene Loader setBookId method");
+                    SceneLoader.getInstance().setBookId(Integer.parseInt(btn.getId().substring(1)));
+                    Window window = btnc.getScene().getWindow();
+                    SceneLoader.getInstance().NavigateTo(window, "bookDetails");  
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             });
             
             btnc.setLayoutX(772);
@@ -152,7 +183,14 @@ public class ListBookController implements Initializable {
             btne.setOnAction((ActionEvent event) -> {
                 JFXButton btn = (JFXButton) event.getSource();
                 String id = btn.getId();
-                System.out.println(id);
+                try {
+                    System.out.println("Setting BookId: "+ btn.getId().substring(1) + " To Scene Loader setBookId method");
+                    SceneLoader.getInstance().setBookId(Integer.parseInt(btn.getId().substring(1)));
+                    Window window = btnc.getScene().getWindow();
+                    SceneLoader.getInstance().NavigateTo(window, "UpdateBook");  
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             });
             
             btne.setLayoutX(845);
@@ -160,17 +198,30 @@ public class ListBookController implements Initializable {
             btne.setStyle("-fx-background-color: #a6a6a6; -fx-padding:16 10 10 10;");
             //btne.getStyleClass().add("button");
             JFXButton btnd = new JFXButton("Delete");
+//            Image img = new Image("img\\icons\\delete.png");
+//            ImageView view = new ImageView(img);
+//            btnd.setGraphic(view);
             //btnd.setGraphic(new ImageView("img/bin.png"));
             btnd.setId("d"+displaylist.get(i).getId());
             
             btnd.setOnAction((ActionEvent event) -> {
                 JFXButton btn = (JFXButton) event.getSource();
-                String id = btn.getId();
-                System.out.println(id);
+                System.out.println(btn.getId().substring(1));
+                ServiceBook sb = ServiceBook.getInstance();
+                try {
+                    sb.deleteBook(Integer.parseInt(btn.getId().substring(1)));
+                    Book b = displaylist.get(Integer.parseInt(btn.getId().substring(1)));
+                    //displaylist.remove(Integer.parseInt(btn.getId().substring(1)));
+                    listbooks.remove(b);
+                    displaylist = listbooks;
+                    afficher();
+                } catch (SQLException e) {
+                    System.out.println("erreor add author");
+               }
             });
             
-            btne.setLayoutX(905);
-            btne.setLayoutY(20);
+            btnd.setLayoutX(905);
+            btnd.setLayoutY(20);
             btnd.setStyle("-fx-background-color: #a6a6a6; -fx-padding:16 10 10 10;");
             //btnd.getStyleClass().add("button");
             Pane pbtn = new Pane();
@@ -338,45 +389,5 @@ public class ListBookController implements Initializable {
                     afficher();
         });
 
-    }
-    
-    @FXML
-    public void AddBookAction(ActionEvent e){
-        //SceneLoader.getInstance().NavigateTo(BtnAdd.getScene().getWindow(), "addBook");
-        System.out.println("Add Book");
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("view/addBook.fxml"));
-            Parent root = loader.load();
-            
-            //Get controller
-            AddBookController addBookController = loader.getController();
-            addBookController.transferMessage("Find");
-            
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Add Book");
-            stage.show();
-        } catch (IOException ex) {
-            System.err.println(ex);
-        }
-    }
-    
-    public void ConsultBookAction(ActionEvent e){
-        //SceneLoader.getInstance().NavigateTo(BtnConsult.getScene().getWindow(), "consultBook");
-    }
-    
-    public void EditBookAction(ActionEvent e){  
-        //SceneLoader.getInstance().NavigateTo(BtnEdit.getScene().getWindow(), "editBook");
-    }
-    
-    public void DeleteBookAction(ActionEvent e){
-        ServiceBook sb    = ServiceBook.getInstance();
-         int x = Integer.parseInt("5");
-         try {
-             sb.deleteBook(x);
-             
-         } catch (SQLException e1) {
-             System.out.println("erreor add author");
-        }
     }
 }
