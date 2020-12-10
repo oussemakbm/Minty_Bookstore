@@ -10,43 +10,64 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.addBookController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.addBookController">
    <children>
       <ImageView fitHeight="119.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Minty.png" />
          </image>
       </ImageView>
-      <Text fill="#c9e265" layoutX="230.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add BOOK" textAlignment="CENTER">
+      <Text fill="#c9e265" layoutX="313.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add BOOK" textAlignment="CENTER">
          <font>
-            <Font size="32.0" />
+            <Font name="System Bold" size="32.0" />
          </font>
       </Text>
-      <JFXTextField fx:id="title" focusColor="#d9d9d9" layoutX="60.0" layoutY="107.0" prefHeight="25.0" prefWidth="135.0" promptText="title" unFocusColor="#c9e265" />
-      <JFXTextField fx:id="desc" focusColor="#d9d9d9" layoutX="315.0" layoutY="206.0" promptText="description" unFocusColor="#c9e265" />
-      <JFXTextField fx:id="price" focusColor="#d9d9d9" layoutX="315.0" layoutY="151.0" promptText="price" unFocusColor="#c9e265" />
-      <JFXTextField fx:id="img_url" focusColor="#d9d9d9" layoutX="52.0" layoutY="346.0" promptText="image url" unFocusColor="#c9e265" />
-      <JFXTextField fx:id="quantity" focusColor="#d9d9d9" layoutX="315.0" layoutY="107.0" promptText="quantity" unFocusColor="#c9e265" />
-      <JFXTextField fx:id="pub_date" focusColor="#d9d9d9" layoutX="60.0" layoutY="200.0" prefHeight="25.0" prefWidth="135.0" promptText="publish date" unFocusColor="#c9e265" />
-      <JFXTextField fx:id="nbr_page" focusColor="#d9d9d9" layoutX="60.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="nombre de pages" unFocusColor="#c9e265" />
-      <ComboBox fx:id="author" layoutX="308.0" layoutY="247.0" prefWidth="150.0" promptText="author" style="-fx-background-color: #c9e265;" />
-      <ComboBox fx:id="langue" layoutX="308.0" layoutY="284.0" prefWidth="150.0" promptText="langue" style="-fx-background-color: #c9e265;" />
-      <ComboBox fx:id="category" layoutX="53.0" layoutY="247.0" prefWidth="150.0" promptText="category" style="-fx-background-color: #c9e265;">
+      <JFXTextField fx:id="title" focusColor="#d9d9d9" layoutX="133.0" layoutY="93.0" prefHeight="50.0" prefWidth="200.0" promptText="title" unFocusColor="#c9e265">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="desc" focusColor="#d9d9d9" layoutX="451.0" layoutY="259.0" prefHeight="50.0" prefWidth="200.0" promptText="description" unFocusColor="#c9e265">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="price" focusColor="#d9d9d9" layoutX="452.0" layoutY="169.0" prefHeight="50.0" prefWidth="200.0" promptText="price" unFocusColor="#c9e265">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="img_url" focusColor="#d9d9d9" layoutX="131.0" layoutY="525.0" prefHeight="50.0" prefWidth="200.0" promptText="image url" unFocusColor="#c9e265">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="quantity" focusColor="#d9d9d9" layoutX="453.0" layoutY="93.0" prefHeight="50.0" prefWidth="200.0" promptText="quantity" unFocusColor="#c9e265">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="pub_date" focusColor="#d9d9d9" layoutX="132.0" layoutY="259.0" prefHeight="50.0" prefWidth="200.0" promptText="publish date" unFocusColor="#c9e265">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="nbr_page" focusColor="#d9d9d9" layoutX="131.0" layoutY="169.0" prefHeight="50.0" prefWidth="200.0" promptText="nombre de pages" unFocusColor="#c9e265">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <ComboBox fx:id="author" layoutX="452.0" layoutY="350.0" prefHeight="50.0" prefWidth="200.0" promptText="author" style="-fx-background-color: #c9e265;" />
+      <ComboBox fx:id="langue" layoutX="453.0" layoutY="437.0" prefHeight="50.0" prefWidth="200.0" promptText="langue" style="-fx-background-color: #c9e265;" />
+      <ComboBox fx:id="category" layoutX="131.0" layoutY="350.0" prefHeight="50.0" prefWidth="200.0" promptText="category" style="-fx-background-color: #c9e265;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </ComboBox>
-      <ComboBox fx:id="serie" layoutX="53.0" layoutY="284.0" prefWidth="150.0" promptText="serie" style="-fx-background-color: #c9e265;" />
-      <JFXButton fx:id="jbtnAddBook" layoutX="315.0" layoutY="339.0" onAction="#AddBookAction" prefHeight="39.0" prefWidth="109.0" style="-fx-background-color: #a6a6a6; -fx-border-color: #a0a2ab;" text="Add book" textFill="#ffffff8c">
+      <ComboBox fx:id="serie" layoutX="131.0" layoutY="437.0" prefHeight="50.0" prefWidth="200.0" promptText="serie" style="-fx-background-color: #c9e265;" />
+      <JFXButton fx:id="jbtnAddBook" layoutX="293.0" layoutY="613.0" onAction="#AddBookAction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #a6a6a6; -fx-border-color: #a0a2ab;" text="Add book" textFill="#ffffff8c">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </JFXButton>
-      <ImageView fx:id="gif" fitHeight="53.0" fitWidth="65.0" layoutX="481.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="gif" fitHeight="53.0" fitWidth="65.0" layoutX="371.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/loading-waiting.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgGridView" fitHeight="107.0" fitWidth="119.0" layoutX="458.0" layoutY="110.0" onDragDropped="#handleDrop" onDragOver="#DraggerButtonAction" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgGridView" fitHeight="200.0" fitWidth="200.0" layoutX="297.0" layoutY="209.0" onDragDropped="#handleDrop" onDragOver="#DraggerButtonAction" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
