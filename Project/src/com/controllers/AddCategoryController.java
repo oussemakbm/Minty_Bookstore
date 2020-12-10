@@ -44,12 +44,14 @@ public class AddCategoryController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        gif.setVisible(false);
        jbtnAddCategory.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                 gif.setVisible(true);
         PauseTransition pt = new PauseTransition();
         pt.setDuration(Duration.seconds(3));
+        
         Category c = new Category();
         c.setName(title.getText());
         ServiceCategory sc = ServiceCategory.getInstance();

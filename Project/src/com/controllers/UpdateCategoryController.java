@@ -5,8 +5,11 @@
  */
 package com.controllers;
 
+import com.SceneLoader;
+import com.jfoenix.controls.JFXButton;
 import com.models.Category;
 import com.services.ServiceCategory;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -36,6 +40,8 @@ public class UpdateCategoryController implements Initializable {
     private ListView lvCategories;
     @FXML
     private TextField tfCategoryName;
+    @FXML
+    private JFXButton buttonBack;
 
     /**
      * Initializes the controller class.
@@ -88,5 +94,12 @@ public class UpdateCategoryController implements Initializable {
         }
 
     }
+    public void BackCategoryManager(ActionEvent e1) throws IOException {
+        Window currentWindow = this.buttonBack.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "CategoryManager");
+    }
+
+    
+
 
 }
