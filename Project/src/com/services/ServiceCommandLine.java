@@ -38,9 +38,8 @@ public class ServiceCommandLine {
     }
 
     public void addCommandLine(CommandLine lng) throws SQLException {
-        String request = "INSERT INTO `commandline` (`id`, `quantity', 'idCommandList', 'idBook')"
-                + " VALUES (NULL, '" + lng.getQuantity() + lng.getIdCommandList() + lng.getIdBook() + "')";
-
+        String request = "INSERT INTO `commandline` (`id`, `quantity`, `idCommandList`, `idBook`)"
+                + " VALUES (NULL, " + lng.getQuantity()+"," + lng.getIdCommandList()+","+ lng.getIdBook() + ")";
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
