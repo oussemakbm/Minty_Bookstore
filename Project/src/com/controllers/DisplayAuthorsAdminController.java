@@ -55,161 +55,155 @@ public class DisplayAuthorsAdminController implements Initializable {
     private JFXButton buttonAdd;
     @FXML
     private JFXTextField textFieldSearch;
-    
-    
+
     List<Author> authors;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ServiceAuthor sa = ServiceAuthor.getInstance();
-        
-         
-        authors=new ArrayList();
+
+        authors = new ArrayList();
         try {
             authors = sa.getAuthors();
         } catch (SQLException ex) {
             Logger.getLogger(DisplayUsersAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
         refresh(authors);
-    }    
-    public void search(){
+    }
+
+    public void search() {
         refresh(searchUsers(textFieldSearch.getText()));
     }
-    
-        public List<Author> searchUsers(String searchText){
-        List<Author> result=new ArrayList();
-        for (Author author : authors){
-            if ((author.getName().toUpperCase().indexOf(searchText.toUpperCase())!=-1) ){
+
+    public List<Author> searchUsers(String searchText) {
+        List<Author> result = new ArrayList();
+        for (Author author : authors) {
+            if ((author.getName().toUpperCase().indexOf(searchText.toUpperCase()) != -1)) {
                 result.add(author);
             }
         }
         return result;
     }
-        public void delete (int id){
-            ServiceAuthor sa = ServiceAuthor.getInstance();
-                try {
-                    Alert alert=new Alert(AlertType.ERROR, "Delete this author ?", ButtonType.YES, ButtonType.NO);
-                    alert.showAndWait();
-                        if (alert.getResult() == ButtonType.YES) {
-                    sa.deleteAuthor(id);
-                    authors = sa.getAuthors();
-                    refresh(authors);}
-                    
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(DisplayAuthorsAdminController.class.getName()).log(Level.SEVERE, null, ex);
-                    
-                }
-                
-            
-            
+    public void delete(int id) {
+        ServiceAuthor sa = ServiceAuthor.getInstance();
+        try {
+            Alert alert = new Alert(AlertType.ERROR, "Delete this author ?", ButtonType.YES, ButtonType.NO);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                sa.deleteAuthor(id);
+                authors = sa.getAuthors();
+                refresh(authors);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DisplayAuthorsAdminController.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-            @FXML
-        void BackAdmin(ActionEvent event) {
-            Window currentWindow = this.buttonAdd.getScene().getWindow();
+
+    }
+
+    @FXML
+    void BackAdmin(ActionEvent event) {
+        Window currentWindow = this.buttonAdd.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
-            
 
-        }
-         @FXML
+    }
+
+    @FXML
     void addAuthor(ActionEvent event) {
         Window currentWindow = this.buttonAdd.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "AddAuthorAdmin");
 
     }
 
-    
-    public void refresh(List<Author> authors){
-     
-        boolean odd=true;
-        
+    public void refresh(List<Author> authors) {
+
+        boolean odd = true;
+
         vBoxAuthorList.getChildren().clear();
-        for (Author author : authors){
-            
-        HBox box=new HBox();
-        Label name=new Label(author.getName());
-        Label desc=new Label(author.getDescription());
-        Label pic=new Label(author.getPicUrl());
-//        ImageView view3 = new ImageView(pic);
-//        view3.setFitHeight(32);
-//        view3.setFitWidth(32);
-//        view3.setPreserveRatio(true);
-        
-        
-        
-        
-        HBox actions=new HBox();
-        File fileSettings = new File("C:\\Users\\MediaStudio\\Desktop\\java Project\\Minty_Bookstore\\Project\\src\\com\\img\\settings.png");
-        Image image = new Image(fileSettings.toURI().toString());
-        ImageView imageview=new ImageView();
-        imageview.setImage(image);
-        imageview.setFitWidth(40);
-        imageview.setFitHeight(40);
-        
-        
-        imageview.setOnMouseClicked((ActionEvent ) -> {
-            ServiceAuthor.setThisAuthor(author);
-            Window currentWindow = this.vBoxAuthorList.getScene().getWindow();
-            SceneLoader.getInstance().NavigateTo(currentWindow, "EditAuthorAdmin");
-        });
-        
-        
-         File fileDelete = new File("C:\\Users\\MediaStudio\\Desktop\\java Project\\Minty_Bookstore\\Project\\src\\com\\img\\bin.png");
-        Image imageDelete = new Image(fileDelete.toURI().toString());
-        ImageView delete=new ImageView();
-        delete.setImage(imageDelete);
-        delete.setFitWidth(32);
-        delete.setFitHeight(32);
-        delete.setOnMouseClicked(new EventHandler(){           
-            @Override
-            public void handle(Event event) {
-                delete(author.getId() );
+        for (Author author : authors) {
 
-                
-                
+            HBox box = new HBox();
+            Label name = new Label(author.getName());
+            Label desc = new Label(author.getDescription());
+//            Label pic = new Label(author.getPicUrl());
+            Image pic = new Image(author.getPicUrl());
             
+            ImageView view3 = new ImageView(pic);
+            view3.setFitHeight(100);
+            view3.setFitWidth(100);
+            view3.setPreserveRatio(true);
+
+            HBox actions = new HBox();
+//        File fileSettings = new File("C:\\Users\\MediaStudio\\Desktop\\java Project\\Minty_Bookstore\\Project\\src\\com\\img\\settings.png");
+            Image image = new Image("/com/img/settings.png");
+            ImageView imageview = new ImageView();
+            imageview.setImage(image);
+            imageview.setFitWidth(40);
+            imageview.setFitHeight(40);
+
+            imageview.setOnMouseClicked((ActionEvent) -> {
+                ServiceAuthor.setThisAuthor(author);
+                Window currentWindow = this.vBoxAuthorList.getScene().getWindow();
+                SceneLoader.getInstance().NavigateTo(currentWindow, "EditAuthorAdmin");
+            });
+
+//         File fileDelete = new File("C:\\Users\\MediaStudio\\Desktop\\java Project\\Minty_Bookstore\\Project\\src\\com\\img\\bin.png");
+            Image imageDelete = new Image("/com/img/bin.png");
+            ImageView delete = new ImageView();
+            delete.setImage(imageDelete);
+            delete.setFitWidth(80);
+            delete.setFitHeight(80);
+            delete.setOnMouseClicked(new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    delete(author.getId());
+
+                }
+            });
+            //JFXButton update=new JFXButton("*");
+            //JFXButton delete=new JFXButton("-");
+
+            actions.setSpacing(50);
+
+            name.setAlignment(Pos.CENTER);
+            desc.setAlignment(Pos.CENTER);
+//            pic.setAlignment(Pos.CENTER);
+            actions.setAlignment(Pos.CENTER);
+
+            name.setStyle("-fx-font-size:14");
+            desc.setStyle("-fx-font-size:14");
+//            pic.setStyle("-fx-font-size:14");
+
+            name.setMinWidth(255);
+            actions.setMinWidth(255);
+            desc.setMinWidth(300);
+//            pic.setMinWidth(255);
+
+            name.setMinHeight(50);
+            desc.setMinHeight(50);
+            actions.setMinHeight(50);
+//            pic.setMinHeight(50);
+            desc.setWrapText(true);
+
+            if (odd) {
+                box.setStyle("-fx-background-color:#fff");
+            } else {
+                box.setStyle("-fx-background-color: #d9d9d9");
             }
-        });
-        //JFXButton update=new JFXButton("*");
-        //JFXButton delete=new JFXButton("-");
-        
-        actions.setSpacing(50);
+            odd = !odd;
 
-        name.setAlignment(Pos.CENTER);
-        desc.setAlignment(Pos.CENTER);
-        pic.setAlignment(Pos.CENTER);
-        actions.setAlignment(Pos.CENTER);
-       
-        
-        name.setStyle("-fx-font-size:14");
-        desc.setStyle("-fx-font-size:14");
-        pic.setStyle("-fx-font-size:14");
-        
-        name.setMinWidth(255);
-        actions.setMinWidth(255);
-        desc.setMinWidth(300);
-        pic.setMinWidth(255);
-        
-        name.setMinHeight(50);
-        desc.setMinHeight(50);
-        actions.setMinHeight(50);
-        pic.setMinHeight(50);
-        desc.setWrapText(true);
-        
-        if (odd) box.setStyle("-fx-background-color:#fff");
-        else box.setStyle("-fx-background-color: #d9d9d9");
-        odd=!odd;
+            actions.getChildren().add(imageview);
+            actions.getChildren().add(delete);
+            box.getChildren().add(name);
+            box.getChildren().add(desc);
+            box.getChildren().add(view3);
+            box.getChildren().add(actions);
 
-       
-        actions.getChildren().add(imageview);
-        actions.getChildren().add(delete);
-        box.getChildren().add(name);
-        box.getChildren().add(desc);
-        box.getChildren().add(pic);
-        box.getChildren().add(actions);
-        
-        vBoxAuthorList.getChildren().add(box);
+            vBoxAuthorList.getChildren().add(box);
         }
     }
-    
+
 }
