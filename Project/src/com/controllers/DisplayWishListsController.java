@@ -59,8 +59,8 @@ public class DisplayWishListsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ServiceWishList sw=ServiceWishList.getInstance();
-      /*  WishList ws=new WishList();
+        ServiceWishList sw = ServiceWishList.getInstance();
+        /*  WishList ws=new WishList();
         WishList ws3=new WishList();
         WishList ws4=new WishList();
         Book b=new Book();
@@ -88,112 +88,105 @@ public class DisplayWishListsController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(DisplayWishListsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-*/
-       wishlists.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<WishList>() {
-    @Override
-    public void changed(ObservableValue<? extends WishList> observable, WishList oldValue, WishList newValue) {
-        wishlistsbooks.getChildren().clear();
-        title.setText("Books in "+newValue);
-        ArrayList<Book> list;
-        try {
-            list = sw.getBooksInWishList(newValue);
-            if (list.size()==0){
-                empty.setVisible(true);
-                title.setVisible(false);
-            }else{
-                title.setVisible(true);
-                empty.setVisible(false);
-            
-             for (Book book : list){
-                wishlistsbooks.getChildren().add(convert(book,newValue));
-            }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DisplayWishListsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-           
-    }
+         */
+        wishlists.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<WishList>() {
+            @Override
+            public void changed(ObservableValue<? extends WishList> observable, WishList oldValue, WishList newValue) {
+                wishlistsbooks.getChildren().clear();
+                title.setText("Books in " + newValue);
+                ArrayList<Book> list;
+                try {
+                    list = sw.getBooksInWishList(newValue);
+                    if (list.size() == 0) {
+                        empty.setVisible(true);
+                        title.setVisible(false);
+                    } else {
+                        title.setVisible(true);
+                        empty.setVisible(false);
 
-    });
+                        for (Book book : list) {
+                            wishlistsbooks.getChildren().add(convert(book, newValue));
+                        }
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(DisplayWishListsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        });
         try {
-            ArrayList<WishList> list=sw.getUserWishLists(1);  // User ID = 1
-            for (WishList wishList : list){
+            ArrayList<WishList> list = sw.getUserWishLists(1);  // User ID = 1
+            for (WishList wishList : list) {
                 wishlists.getItems().add(wishList);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DisplayWishListsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }    
-    
-    
-    public HBox convert(Book book,WishList wishlist){
-        HBox box=new HBox();
-        ImageView imageview=new ImageView();
-        
-        
-        
+
+    }
+
+    public HBox convert(Book book, WishList wishlist) {
+        HBox box = new HBox();
+        ImageView imageview = new ImageView();
+
         // Quelques modifications seront apportées à l'importation des images
-        File file = new File("C:\\Users\\ihebf\\OneDrive\\Documents\\NetBeansProjects\\Minty_Bookstore\\Project\\src\\com\\img\\Exemplebook.png");
-        File fileBin = new File("C:\\Users\\ihebf\\OneDrive\\Documents\\NetBeansProjects\\Minty_Bookstore\\Project\\src\\com\\img\\bin.png");
+        //File file = new File("C:\\Users\\ihebf\\OneDrive\\Documents\\NetBeansProjects\\Minty_Bookstore\\Project\\src\\com\\img\\Exemplebook.png");
+        //File fileBin = new File("C:\\Users\\ihebf\\OneDrive\\Documents\\NetBeansProjects\\Minty_Bookstore\\Project\\src\\com\\img\\bin.png");
         //********************************************************************
-        
-        
-        Image image = new Image(file.toURI().toString());
+        Image image = new Image("/com/img/Exemplebook.png");
         imageview.setImage(image);
         imageview.setFitHeight(100);
         imageview.setFitWidth(100);
-        
-        Label title=new Label(book.getTitle());
-        title.setPadding(new Insets(0,30,0,30));
+
+        Label title = new Label(book.getTitle());
+        title.setPadding(new Insets(0, 30, 0, 30));
         title.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        
-        Label prix=new Label(Float.toString(book.getPrix()));
-        prix.setPadding(new Insets(0,30,0,30));
-        
+
+        Label prix = new Label(Float.toString(book.getPrix()));
+        prix.setPadding(new Insets(0, 30, 0, 30));
+
         final Pane spacer = new Pane();
-    HBox.setHgrow(spacer, Priority.ALWAYS);
-    spacer.setMinSize(10, 1);
-    
-    ImageView bin=new ImageView();
-        Image imageBin = new Image(fileBin.toURI().toString());
-        bin.setImage(imageBin);
-         bin.setFitHeight(50);
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        spacer.setMinSize(10, 1);
+
+        ImageView bin = new ImageView(new Image("/com/img/icons/delete.png"));
+        bin.setFitHeight(50);
         bin.setFitWidth(50);
         bin.setOnMouseClicked((MouseEvent e) -> {
-            ServiceWishList sw=ServiceWishList.getInstance();
-                try {
-                    sw.deleteBookFromWishList(wishlist, book);
-                    wishlistsbooks.getChildren().clear();
-                            title.setText("Books in "+wishlist);
+            ServiceWishList sw = ServiceWishList.getInstance();
+            try {
+                sw.deleteBookFromWishList(wishlist, book);
+                wishlistsbooks.getChildren().clear();
+                title.setText("Books in " + wishlist);
 
-                    ArrayList<Book> list = sw.getBooksInWishList(wishlist);
-                    if (list.size()==0){
-                        title.setVisible(false);
-                empty.setVisible(true);
-            }else{
-                        title.setVisible(true);
-                empty.setVisible(false);
-            
-                    for (Book b : list){
-                    wishlistsbooks.getChildren().add(convert(b,wishlist));
+                ArrayList<Book> list = sw.getBooksInWishList(wishlist);
+                if (list.size() == 0) {
+                    title.setVisible(false);
+                    empty.setVisible(true);
+                } else {
+                    title.setVisible(true);
+                    empty.setVisible(false);
+
+                    for (Book b : list) {
+                        wishlistsbooks.getChildren().add(convert(b, wishlist));
                     }
                 }
-                } catch (SQLException ex) {
-                    Logger.getLogger(DisplayWishListsController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DisplayWishListsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
-        Label rating=new Label(Float.toString(book.getRating()));
-                rating.setPadding(new Insets(0,30,0,30));
-                box.getChildren().add(imageview);
-                
-                box.getChildren().add(title);
-                box.getChildren().add(spacer);
-                box.getChildren().add(bin);
-        
-        box.setPadding(new Insets(30,0,30,0));
+        Label rating = new Label(Float.toString(book.getRating()));
+        rating.setPadding(new Insets(0, 30, 0, 30));
+        box.getChildren().add(imageview);
+
+        box.getChildren().add(title);
+        box.getChildren().add(spacer);
+        box.getChildren().add(bin);
+
+        box.setPadding(new Insets(30, 0, 30, 0));
         return box;
     }
-    
+
 }
