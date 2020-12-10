@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="666.0" prefWidth="1020.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.AddUserAdminController">
+<AnchorPane id="AnchorPane" prefHeight="666.0" prefWidth="1020.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.UpdateUserAdminController">
    <children>
       <JFXTextField fx:id="tfname" layoutX="297.0" layoutY="166.0" prefHeight="44.0" prefWidth="329.0">
          <font>
@@ -52,7 +52,7 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <JFXButton fx:id="add" layoutX="813.0" layoutY="578.0" prefHeight="44.0" prefWidth="140.0" style="-fx-background-color: #c9e265;" text="Add user">
+      <JFXButton fx:id="update" layoutX="813.0" layoutY="578.0" prefHeight="44.0" prefWidth="140.0" style="-fx-background-color: #c9e265;" text="Update user">
          <font>
             <Font size="20.0" />
          </font></JFXButton>

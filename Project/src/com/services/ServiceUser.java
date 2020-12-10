@@ -33,6 +33,16 @@ public class ServiceUser {
     public static void setConnectedUser(User u) {
         connectedUser = u;
     }
+    
+    private static User userToUpdate;
+
+    public static User getuserToUpdate() {
+        return userToUpdate;
+    }
+
+    public static void setuserToUpdate(User u) {
+        userToUpdate = u;
+    }
 
     public static ServiceUser getInstance() {
         if (INSTANCE == null) {
@@ -61,7 +71,7 @@ public class ServiceUser {
     public void findUserByEmail(String email, String password) throws SQLException {
 //        Setting Connected user to null Initially
         setConnectedUser(null);
-
+        
         String query = "SELECT * FROM users WHERE email = ? AND password = ?";
         PreparedStatement pst = cnx.prepareStatement(query);
         pst.setString(1, email);
@@ -70,26 +80,25 @@ public class ServiceUser {
         ResultSet result = pst.executeQuery();
 
         int count = 0;
+  
+            while (result.next()) {
+                System.out.println("Logged in");
+                int id = result.getInt("id");
+                String name = result.getString("name");
+                String numTel = result.getString("numTel");
+                String adresse = result.getString("adresse");
+                String profilePicture = result.getString("picUrl");
+                String role = result.getString("role");
 
-        while (result.next()) {
-            User u = new User();
-            u.setId(result.getInt("id"));
-            u.setName(result.getString("name"));
-            u.setEmail(result.getString("email"));
-            u.setPassword(result.getString("password"));
-            u.setRole(result.getString("role"));
-            u.setNumTel(result.getString("numTel"));
-            u.setAdresse(result.getString("adresse"));
-            u.setProfilePicture(result.getString("picUrl"));
-
-            setConnectedUser(u);
-        }
+                setConnectedUser(new User(id, name, email, password, role, numTel, adresse, profilePicture));
+            }
 
     }
 
     public void updateUser(User u) throws SQLException {
 
-        String req = "UPDATE `users` SET `name`= ?,`email`= ?,`password`= ?,`numTel`= ?,`adresse`= ? ,`role`= ?,`picUrl`= ?  WHERE id = ?";
+        String req = "UPDATE `users` SET `name`=?,`email`=?,`password`=?,`numTel`=?,`adresse`=?,`role`=?,`picUrl`=?"
+                + "WHERE `id` = ?";
 
         PreparedStatement pst = cnx.prepareStatement(req);
 
@@ -119,14 +128,14 @@ public class ServiceUser {
 
         while (rst.next()) {
             User u = new User();
-            u.setId(rst.getInt(1));
-            u.setName(rst.getString(2));
-            u.setEmail(rst.getString(3));
-            u.setPassword(rst.getString(4));
-            u.setRole(rst.getString(5));
-            u.setNumTel(rst.getString(6));
-            u.setAdresse(rst.getString(7));
-            u.setProfilePicture(rst.getString(8));
+            u.setId(rst.getInt("id"));
+            u.setName(rst.getString("name"));
+            u.setEmail(rst.getString("email"));
+            u.setPassword(rst.getString("password"));
+            u.setRole(rst.getString("role"));
+            u.setNumTel(rst.getString("numtel"));
+            u.setAdresse(rst.getString("adresse"));
+            u.setProfilePicture(rst.getString("picurl"));
 
             results.add(u);
         }
@@ -137,18 +146,18 @@ public class ServiceUser {
     public User getUser(int id) throws SQLException {
         String request = "SELECT * FROM `users` WHERE id =" + id;
         Statement stm = cnx.createStatement();
-        ResultSet result = stm.executeQuery(request);
+        ResultSet rst = stm.executeQuery(request);
 
-        if (result.next()) {
+        if (rst.next()) {
             User u = new User();
-            u.setId(result.getInt("id"));
-            u.setName(result.getString("name"));
-            u.setEmail(result.getString("email"));
-            u.setPassword(result.getString("password"));
-            u.setRole(result.getString("role"));
-            u.setNumTel(result.getString("numTel"));
-            u.setAdresse(result.getString("adresse"));
-            u.setProfilePicture(result.getString("picUrl"));
+            u.setId(rst.getInt(1));
+            u.setName(rst.getString(2));
+            u.setEmail(rst.getString(3));
+            u.setPassword(rst.getString(4));
+            u.setRole(rst.getString(5));
+            u.setNumTel(rst.getString(6));
+            u.setAdresse(rst.getString(7));
+            u.setProfilePicture(rst.getString(8));
             return u;
         }
 

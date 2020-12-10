@@ -95,4 +95,26 @@ public class ServiceComment {
         return result;
     }
 
+    public ArrayList<Comment> getComments(int bookId) {
+
+        ArrayList<Comment> result = new ArrayList<Comment>();
+
+        String fetch = "SELECT * FROM comments WHERE idBook = ?";
+
+        try {
+            PreparedStatement statement = con.prepareStatement(fetch);
+            statement.setInt(1, bookId);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Comment c = new Comment(rs.getString("body"));
+                c.setId(rs.getInt("id"));
+                result.add(c);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
 }

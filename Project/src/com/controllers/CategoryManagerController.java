@@ -41,14 +41,16 @@ import javafx.stage.Window;
 public class CategoryManagerController implements Initializable {
 
     @FXML
-    private ScrollPane sPaneUsersList;
-    @FXML
     private VBox vBoxCategoriesList;
     @FXML
     private JFXButton buttonAdd;
     @FXML
     private JFXTextField textFieldSearch;
     List<Category> categories;
+    @FXML
+    private ScrollPane sPaneCategoriesList;
+    @FXML
+    private JFXButton buttonBack;
 
     /**
      * Initializes the controller class.
@@ -158,13 +160,26 @@ refresh(SearchCategories(textFieldSearch.getText()));
                 }
               
           });
+          update.setOnMouseClicked((MouseEvent e)->{
+               Window currentWindow = this.buttonAdd.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "UpdateCategory");
+             
+          });
+         
+          
     }
  }
-       /* @FXML
+        @FXML
     public void AddCategoryAction(ActionEvent e1) throws IOException {
         Window currentWindow = this.buttonAdd.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "AddCategory");
     }
-*/
+
+    @FXML
+    private void BackHomeAdmin(ActionEvent event)throws IOException  {
+        Window currentWindow = this.buttonAdd.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
+    }
+
             
 }

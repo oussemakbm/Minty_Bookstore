@@ -6,14 +6,19 @@
 package com.controllers;
 
 import com.SceneLoader;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.models.Book;
+import com.models.Comment;
 import com.models.Interaction;
 import com.services.ServiceAuthor;
 import com.services.ServiceBook;
+import com.services.ServiceComment;
+import com.services.ServiceCommentProfanity;
 import com.services.ServiceInteraction;
 import com.services.ServiceUser;
 import java.io.FileInputStream;
@@ -31,11 +36,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.controlsfx.control.Rating;
 
 /**
  * FXML Controller class
@@ -76,16 +83,26 @@ public class BookDetailsController implements Initializable {
     @FXML
     private JFXListView<Label> commentsList;
 
+    @FXML
+    private JFXButton submitRatingBtn;
+
     HamburgerBackArrowBasicTransition burgerTask;
+
+    @FXML
+    private Rating rating;
+
+    @FXML
+    private JFXTextArea commentBody;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        initDrawerContent();
-        initBookDetails();
+        this.initDrawerContent();
+        this.initBookDetails();
+        this.displayComments();
         System.out.println("User liked book :" + userLikedBook());
-         String likeIconUrl = userLikedBook() ?"http://localhost/bookstore/icons/heart-solid_liked.png" :  "http://localhost/bookstore/icons/heart-solid_unliked.png" ;
+        String likeIconUrl = userLikedBook() ? "http://localhost/bookstore/icons/heart-solid_liked.png" : "http://localhost/bookstore/icons/heart-solid_unliked.png";
         likeIcon.setImage(new Image(likeIconUrl));
-        
+
     }
 
     private void burgerClick(MouseEvent event) {
@@ -110,7 +127,7 @@ public class BookDetailsController implements Initializable {
             this.priceTxt.setText(Float.toString(b.getPrix()) + " DT");
             this.nbpageTxt.setText(Integer.toString(b.getNbrPages()));
             this.authorTxt.setText(sa.getAuthor(b.getIdAuthor()).getName());
-           
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -153,12 +170,12 @@ public class BookDetailsController implements Initializable {
         String likeIconUrl = userLikedBook() ? "/com/img/icons/heart-solid_unliked.png" : "/com/img/icons/heart-solid_liked.png";
         likeIcon.setImage(new Image(likeIconUrl));
         if (userLikedBook()) {
-            
+
             Interaction i = new Interaction(userId, bookId, 3, 0);
             i.setId(1);
             try {
                 ServiceInteraction.getInstance().updateInteraction(i);
-                
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -171,6 +188,44 @@ public class BookDetailsController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    void handleRatingDone(ActionEvent event) {
+        double ratingValue = rating.getRating();
+        System.out.println("Rating value: " + ratingValue);
+    }
+
+    @FXML
+    void submitComment(ActionEvent event) {
+        int userId = ServiceUser.getConnectedUser().getId();
+        int bookId = SceneLoader.getInstance().getSelectedBookId();
+        String body = commentBody.getText();
+
+        try {
+            String result = ServiceCommentProfanity.getInstance().getCleanComment(body);
+            
+            if (result != "REQUEST_ERROR") {
+                Comment comment = new Comment(userId, bookId, result);
+                ServiceComment.getInstance().addComment(comment, userId, bookId);
+                this.commentBody.setText("");
+                this.displayComments();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void displayComments() {
+
+        int bookId = SceneLoader.getInstance().getSelectedBookId();
+
+        ArrayList<Comment> comments = ServiceComment.getInstance().getComments(bookId);
+
+        comments.forEach(comment -> {
+            commentsList.getItems().add(new Label(comment.getBody()));
+        });
 
     }
 
