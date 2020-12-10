@@ -34,6 +34,6 @@
             <Font size="25.0" />
          </font>
       </JFXButton>
-      <Pagination fx:id="pagination" layoutY="624.0" prefHeight="39.0" prefWidth="1020.0" />
+      <Pagination fx:id="pagination" layoutX="1.0" layoutY="121.0" prefHeight="614.0" prefWidth="1020.0" />
    </children>
 </AnchorPane>
