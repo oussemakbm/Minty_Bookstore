@@ -54,12 +54,13 @@ public class DisplayUsersAdminController implements Initializable {
     private JFXButton buttonAdd;
     @FXML
     private JFXTextField textFieldSearch;
-    List<User> allUsers;
     @FXML
     private JFXButton buttonBack;
     @FXML
     private Pagination pagination;
 
+    
+    List<User> allUsers;
     private final int MAX_ELEMENT_PER_PAGE = 10;
 
     /**
@@ -111,7 +112,6 @@ public class DisplayUsersAdminController implements Initializable {
 
     @FXML
     public void search() {
-
         pagination.setPageCount(calculPageCount(searchUsers(textFieldSearch.getText()).size()));
         pagination.setPageFactory((pageIndex) -> {
             return refresh(searchUsers(textFieldSearch.getText()), pageIndex);
@@ -120,16 +120,17 @@ public class DisplayUsersAdminController implements Initializable {
     }
 
     public List<User> searchUsers(String searchText) {
-        List<User> result = new ArrayList();
-
+       /* List<User> result = new ArrayList();
         for (User user : allUsers) {
             if ((user.getName().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
                     || (user.getEmail().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
                     || (user.getRole().toUpperCase().indexOf(searchText.toUpperCase()) != -1)) {
                 result.add(user);
             }
-        }
-        return result;
+        }*/
+        return allUsers.stream().filter((user)->((user.getName().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
+                    || (user.getEmail().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
+                    || (user.getRole().toUpperCase().indexOf(searchText.toUpperCase()) != -1))).collect(Collectors.toList());
     }
 
     public VBox refresh(List<User> users, int pageIndex) {
@@ -235,9 +236,4 @@ public class DisplayUsersAdminController implements Initializable {
         }
         return vBoxUsersList;
     }
-
-    public void changePage(int pageIndex) {
-
-    }
-
 }

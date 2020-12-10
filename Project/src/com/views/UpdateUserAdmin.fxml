@@ -52,7 +52,7 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <JFXButton fx:id="update" layoutX="813.0" layoutY="578.0" prefHeight="44.0" prefWidth="140.0" style="-fx-background-color: #a6a6a6;" text="Update user">
+      <JFXButton fx:id="update" layoutX="813.0" layoutY="578.0" prefHeight="44.0" prefWidth="140.0" style="-fx-background-color: #c9e265;" text="Update user">
          <font>
             <Font size="20.0" />
          </font></JFXButton>
@@ -103,7 +103,7 @@
          <font>
             <Font size="20.0" />
          </font></JFXPasswordField>
-      <JFXButton fx:id="reset" layoutX="686.0" layoutY="578.0" prefHeight="33.0" prefWidth="79.0" style="-fx-background-color: #a6a6a6;" text="Reset">
+      <JFXButton fx:id="reset" layoutX="686.0" layoutY="578.0" prefHeight="33.0" prefWidth="79.0" style="-fx-background-color: #d9d9d9;" text="Reset">
          <font>
             <Font size="20.0" />
          </font></JFXButton>
