@@ -2,7 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-            <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/controllers/HomeController.java</file>
-            <file>file:/C:/Users/DellXPS/Desktop/Minty_Bookstore/Project/src/com/services/ServiceUser.java</file>
+        <group>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/application.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/views/BookDetailAdmin.fxml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/controllers/CartController.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/controllers/BookDetailAdminController.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/controllers/CartManagerController.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/models/CommandList.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/models/CommandLine.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/controllers/ListBookController.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/views/CartManager.fxml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/controllers/ListLanguesController.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Minty/Minty_Bookstore/Project/src/com/SceneLoader.java</file>
         </group>
+    </open-files>
+</project-private>
