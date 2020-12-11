@@ -204,7 +204,7 @@ public class BookDetailsController implements Initializable {
 
         try {
             String result = ServiceCommentProfanity.getInstance().getCleanComment(body);
-            
+
             if (result != "REQUEST_ERROR") {
                 Comment comment = new Comment(userId, bookId, result);
                 ServiceComment.getInstance().addComment(comment, userId, bookId);
@@ -214,19 +214,31 @@ public class BookDetailsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    private void displayComments() {
-
+    private void formCommentsItems(ArrayList<Comment> comments) {
         int bookId = SceneLoader.getInstance().getSelectedBookId();
-
-        ArrayList<Comment> comments = ServiceComment.getInstance().getComments(bookId);
-
-        comments.forEach(comment -> {
-            commentsList.getItems().add(new Label(comment.getBody()));
+        int userId = ServiceUser.getConnectedUser().getId();
+        comments.forEach((comment) -> {
+            if (comment.getUserId() == userId) {
+                Label currentUserComment = new Label(comment.getBody());
+                currentUserComment.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                    System.out.println("Comment Selected  idComment:" + comment.getId());
+                });
+                commentsList.getItems().add(currentUserComment);
+            } else {
+                commentsList.getItems().add(new Label(comment.getBody()));
+            }
         });
+    }
+    
 
+
+    private void displayComments() {
+        int bookId = SceneLoader.getInstance().getSelectedBookId();
+        int userId = ServiceUser.getConnectedUser().getId();
+        ArrayList<Comment> comments = ServiceComment.getInstance().getComments(bookId);
+        this.formCommentsItems(comments);
     }
 
 }
