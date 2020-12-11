@@ -32,6 +32,9 @@ public class HomeAdminController implements Initializable {
 
     @FXML
     private JFXButton profileBtn;
+    
+    @FXML
+    private JFXButton goBooks;
 
     @FXML
     private JFXButton goUsers;
@@ -178,10 +181,6 @@ public class HomeAdminController implements Initializable {
         addUserBtn.setVisible(true);
         ViewUsersbtn.setVisible(true);
         }
-        
-        
-        
-
     }
  
 
@@ -200,57 +199,69 @@ public class HomeAdminController implements Initializable {
         else{
             addBookbtn.setVisible(true);
         biewBookBtn.setVisible(true);
-        }
-        
-
+        }    
     }
-        @FXML
+    
+    @FXML
     void AddAuthor(ActionEvent event) {
         Window currentWindow = this.homeBtn.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "AddAuthorAdmin");
-
     }
 
     @FXML
     void goBook(ActionEvent event) {
-        
+        Window currentWindow = this.homeBtn.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "ListBook");
+    }
+    
+    @FXML
+    void AddBook(ActionEvent event) {
         Window currentWindow = this.homeBtn.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "addBook");
-
-
     }
-        @FXML
+    
+    @FXML
     void AddUser(ActionEvent event) {
         Window currentWindow = this.homeBtn.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "AddUserAdmin");
-        
-
     }
     
         @FXML
     void DisplayUsers(ActionEvent event) {
          Window currentWindow = this.homeBtn.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayUsersAdmin");
-
     }
-
-
 
     @FXML
     void goHome(ActionEvent event) {
         Window currentWindow = this.homeBtn.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
-        
-
     }
 
- 
-        @FXML
+    @FXML
     void AddLanguage(ActionEvent event) {
         Window currentWindow = this.homeBtn.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "addlangue");
-
     }
+    
+    @FXML
+    void DisplayLanguage(ActionEvent event) {
+        Window currentWindow = this.homeBtn.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "ListLangues");
+    }
+    
+    @FXML
+    void AddSerie(ActionEvent event) {
+        Window currentWindow = this.homeBtn.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "AddSerie");
+    }
+    
+    @FXML
+    void DisplaySeries(ActionEvent event) {
+        Window currentWindow = this.homeBtn.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "ListSeries");
+    }
+    
     @FXML
     void View_Authors(ActionEvent event) {
         Window currentWindow = this.homeBtn.getScene().getWindow();
@@ -263,13 +274,6 @@ public class HomeAdminController implements Initializable {
 //    void goUsers(ActionEvent event) {
 //        Window currentWindow = this.homeBtn.getScene().getWindow();
 //        SceneLoader.getInstance().NavigateTo(currentWindow, "AddUserAdmin");
-//
 //    }
- 
-
-    
-    
-    
-     
 
 }

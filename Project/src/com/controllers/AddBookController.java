@@ -47,6 +47,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import javafx.util.StringConverter;
@@ -66,6 +67,9 @@ public class AddBookController implements Initializable {
      */
     @FXML
     private JFXButton jbtnAddBook;
+    
+    @FXML
+    private JFXButton buttonBack;
 
     @FXML
     private JFXTextField title;
@@ -125,6 +129,7 @@ public class AddBookController implements Initializable {
 
     
     }
+    
     public void getCategory() 
     {
         ServiceCategory sc  = ServiceCategory.getInstance();
@@ -150,7 +155,6 @@ public class AddBookController implements Initializable {
             System.out.println("error category list");
         }
     }
-    
     
     public void getSerie() 
     {
@@ -239,6 +243,7 @@ public class AddBookController implements Initializable {
         
 
     }
+    
     @FXML
     void handleDrop(DragEvent event) throws FileNotFoundException {
         List<File> files = event.getDragboard().getFiles();
@@ -246,8 +251,7 @@ public class AddBookController implements Initializable {
         imgGridView.setImage(img);
 
     }
-
-    
+ 
     @FXML
     public void AddBookAction(ActionEvent e) throws SQLException{
         gif.setVisible(true);
@@ -292,8 +296,7 @@ public class AddBookController implements Initializable {
     
     public void transferMessage(String x){
         System.out.println(x);
-    }
-    
+    } 
         @FXML
     public void onUploadClicked(ActionEvent event) throws IOException {
         final JFileChooser fc = new JFileChooser();
@@ -318,5 +321,11 @@ public class AddBookController implements Initializable {
         }  
     }
     
+    @FXML
+    void BackAdmin(ActionEvent event) {
+        Window currentWindow = this.buttonBack.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "ListBook");
+
+    }
     
 }

@@ -8,8 +8,8 @@ package com.controllers;
 import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import com.models.Langue;
-import com.services.ServiceLangue;
+import com.models.Serie;
+import com.services.ServiceSerie;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -26,17 +26,18 @@ import javafx.util.Duration;
  *
  * @author Lenovo
  */
-public class AddLangueController implements Initializable {
+public class AddSerieController implements Initializable {
 
     @FXML
-    private JFXTextField textlangue;
+    private JFXTextField textserie;
     @FXML
     private JFXButton jbtnSave;
     @FXML
     private ImageView gifLoading;
+    
     @FXML
     private JFXButton buttonBack;
-
+    
     /**
      * Initializes the controller class.
      */
@@ -44,7 +45,7 @@ public class AddLangueController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         gifLoading.setVisible(false);
-        textlangue.setStyle("-fx-text-inner-color: #a0a2ab");
+        textserie.setStyle("-fx-text-inner-color: #a0a2ab");
     }   
     
     @FXML
@@ -53,9 +54,9 @@ public class AddLangueController implements Initializable {
         PauseTransition pt = new PauseTransition();
         pt.setDuration(Duration.seconds(3));
         pt.setOnFinished(ev -> {
-            ServiceLangue ls = ServiceLangue.getInstance();
+            ServiceSerie ss = ServiceSerie.getInstance();
             try {
-                ls.addLangue(new Langue(textlangue.getText()));
+                ss.addSerie(new Serie(textserie.getText()));
             } catch (SQLException ex) {
                 System.out.println("Erreur Add LANGUE");;
             }
@@ -64,13 +65,12 @@ public class AddLangueController implements Initializable {
             gifLoading.setVisible(false);
         });
         pt.play();
-    }
+    } 
     
     @FXML
     void BackAdmin(ActionEvent event) {
         Window currentWindow = this.buttonBack.getScene().getWindow();
-        SceneLoader.getInstance().NavigateTo(currentWindow, "ListLangues");
+        SceneLoader.getInstance().NavigateTo(currentWindow, "ListSerie");
 
     }
-    
 }

@@ -12,9 +12,15 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.models.User;
 import com.services.ServiceUser;
+import com.util.HttpPost;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
@@ -25,7 +31,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javax.swing.JFileChooser;
 
 /**
  * FXML Controller class
@@ -63,9 +75,13 @@ public class UpdateUserAdminController implements Initializable {
     @FXML
     private JFXButton reset;
     @FXML
-    private JFXButton btnBack;
-    @FXML
     private JFXButton update;
+    @FXML
+    private ImageView avatar;
+    @FXML
+    private VBox container;
+    @FXML
+    private ImageView ButtonBack;
 
     /**
      * Initializes the controller class.
@@ -81,6 +97,7 @@ public class UpdateUserAdminController implements Initializable {
         tfemail.setText(user.getEmail());
         tftel.setText(user.getNumTel());
         tfpassword.setText(user.getPassword());
+        avatar.setImage(new Image(user.getProfilePicture()));
         if (user.getRole().equalsIgnoreCase("ADMIN")){
             rbadmin.setSelected(true);
             rbmember.setSelected(false);
@@ -100,18 +117,17 @@ public class UpdateUserAdminController implements Initializable {
                 erreurTel.setText("");
                 erreurAddress.setText("");
                 
-                User u=new User();
-                u.setId(ServiceUser.getuserToUpdate().getId());
+                User u=ServiceUser.getuserToUpdate();
                 u.setName(tfname.getText());
                 u.setEmail(tfemail.getText());
                 u.setNumTel(tftel.getText());
                 u.setPassword(tfpassword.getText());
                 u.setAdresse(tfaddress.getText());
-                u.setProfilePicture("");
+                
                 if (rbadmin.isSelected()){
                     u.setRole("ADMIN");
                 }else{
-                    u.setRole("MEMBER");
+                    u.setRole("CLIENT");
                 }
                 ServiceUser su=ServiceUser.getInstance();
 
@@ -168,11 +184,44 @@ public class UpdateUserAdminController implements Initializable {
                 tfaddress.setText("");
             }
         });
-        btnBack.setOnAction((event) -> {
-             Window currentWindow = this.btnBack.getScene().getWindow();
-        SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayUsersAdmin");
-        });
+      
        
-    }    
+    } 
+    
+     @FXML
+    void BackAdmin(MouseEvent event) {
+        Window currentWindow = this.ButtonBack.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayUsersAdmin");
+
+    }
+    
+    @FXML
+    void onClickUpload(MouseEvent event) throws IOException{
+        User currentUser = ServiceUser.getuserToUpdate();
+        final JFileChooser fc = new JFileChooser();
+        fc.showOpenDialog(fc);
+        FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("JPG files(*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter ext2 = new FileChooser.ExtensionFilter("PNG files(*.png)", "*.PNG");
+        File selectedFile = fc.getSelectedFile();
+        String path = selectedFile.getAbsolutePath();
+        System.out.println(selectedFile.getAbsolutePath());
+        String filename = "file:///" + path;
+        Image img = new Image(filename);
+        avatar.setImage(img);
+        
+        try {
+            HttpPost httpPost = new HttpPost(new URL("http://localhost/bookstore/upload_profile_img.php"));
+            httpPost.setFileNames(new String[]{ selectedFile.getAbsolutePath() });
+            httpPost.post();
+            User newUser = currentUser;
+            newUser.setProfilePicture("http://localhost/bookstore/profileImages/"+selectedFile.getName());
+            
+                ServiceUser.setuserToUpdate(newUser);
+            
+            System.out.println(httpPost.getOutput());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(HttpPost.class.getName()).log(Level.ALL.SEVERE, null, ex);
+        }        
+    }
     
 }

@@ -5,6 +5,7 @@
  */
 package com.controllers;
 
+import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.models.Author;
@@ -36,6 +37,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import javafx.util.StringConverter;
 
@@ -85,10 +87,15 @@ public class UpdateBookController implements Initializable {
     @FXML
     private ComboBox serie;
     
-     @FXML
+    @FXML
     private ImageView gif;
-     @FXML
+     
+    @FXML
     private ImageView imgGridView;
+     
+    @FXML
+    private JFXButton buttonBack;
+    
      ObservableList<Author> listAuthor=null;
      ObservableList<Langue> listLangue = null;
      ObservableList<Category> listCategorys = null;
@@ -99,7 +106,7 @@ public class UpdateBookController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gif.setVisible(false);
-        getBook("3");
+        getBook(SceneLoader.getInstance().getSelectedBookId());
         System.out.println(book);
         getAuthors();
         getLangues();
@@ -107,10 +114,10 @@ public class UpdateBookController implements Initializable {
         getSerie();
     }
     
-    public void getBook(String x){
+    public void getBook(int x){
         ServiceBook sb  = ServiceBook.getInstance();
         try {
-                book = sb.getBook(Integer.parseInt(x));
+                book = sb.getBook(x);
                
         } catch (SQLException ex) {
             System.out.println("Error Update Book");
@@ -283,6 +290,13 @@ public class UpdateBookController implements Initializable {
         List<File> files = event.getDragboard().getFiles();
         Image img = new Image(new FileInputStream(files.get(0)));
         imgGridView.setImage(img);
+
+    }
+    
+    @FXML
+    void BackAdmin(ActionEvent event) {
+        Window currentWindow = this.buttonBack.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "ListBook");
 
     }
 }

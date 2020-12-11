@@ -11,80 +11,88 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ListBookController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ListBookController">
    <children>
       <Pane layoutY="-4.0" prefHeight="808.0" prefWidth="250.0" style="-fx-background-color: #000000;">
          <children>
-            <JFXButton layoutX="41.0" layoutY="58.0" onAction="#AddBookAction" prefHeight="80.0" prefWidth="168.0" ripplerFill="#a6a6a6" style="-fx-background-color: #000000;" text="Add Book" textAlignment="RIGHT" textOverrun="CLIP">
+            <JFXButton fx:id="btnAdd" layoutX="41.0" layoutY="58.0" prefHeight="80.0" prefWidth="168.0" ripplerFill="#a6a6a6" style="-fx-background-color: #75900C;" text="Add Book" textAlignment="RIGHT" textFill="#f6ffd4" textOverrun="CLIP">
                <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="55.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/book-icon.png" />
+                        <Image url="@../img/icons/add.png" />
                      </image>
                   </ImageView>
                </graphic>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
             </JFXButton>
-            <Label layoutX="39.0" layoutY="160.0" text="Find Your Book" textFill="#c7f9cc">
+            <Label layoutX="39.0" layoutY="160.0" text="Find Your Book" textFill="#f6ffd4">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="fcode" layoutX="40.0" layoutY="206.0" promptText="Find By Code" />
-            <TextField fx:id="fname" layoutX="40.0" layoutY="270.0" promptText="Find By Title" />
-            <Label layoutX="42.0" layoutY="527.0" text="Range Of Price" textFill="#c7f9cc">
+            <TextField fx:id="fcode" layoutX="40.0" layoutY="206.0" prefHeight="40.0" prefWidth="180.0" promptText="Find By Code" />
+            <TextField fx:id="fname" layoutX="40.0" layoutY="270.0" prefHeight="40.0" prefWidth="180.0" promptText="Find By Title" />
+            <Label layoutX="42.0" layoutY="527.0" text="Range Of Price" textFill="#f6ffd4">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="fauthor" layoutX="40.0" layoutY="338.0" promptText="Find By Author" />
-            <TextField fx:id="fcate" layoutX="40.0" layoutY="404.0" promptText="Find By Category" />
-            <JFXCheckBox fx:id="cbAvail" layoutX="42.0" layoutY="634.0" selected="true" text="Show Unavailable" textFill="#c7f9cc" />
+            <TextField fx:id="fauthor" layoutX="40.0" layoutY="338.0" prefHeight="40.0" prefWidth="180.0" promptText="Find By Author" />
+            <TextField fx:id="fcate" layoutX="40.0" layoutY="404.0" prefHeight="40.0" prefWidth="180.0" promptText="Find By Category" />
+            <JFXCheckBox fx:id="cbAvail" layoutX="42.0" layoutY="634.0" selected="true" text="Show Unavailable" textFill="#f6ffd4" />
             <JFXSlider fx:id="sliderP" blockIncrement="200.0" layoutX="22.0" layoutY="562.0" majorTickUnit="10.0" max="200.0" minorTickCount="2" prefHeight="60.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="200.0" />
-            <TextField fx:id="fserie" layoutX="40.0" layoutY="470.0" promptText="Find By Serie" />
+            <TextField fx:id="fserie" layoutX="40.0" layoutY="470.0" prefHeight="40.0" prefWidth="180.0" promptText="Find By Serie" />
          </children>
       </Pane>
       <Pane layoutX="250.0" layoutY="2.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-region-background: #22577a;">
          <children>
-            <Pane layoutX="14.0" layoutY="15.0" prefHeight="70.0" prefWidth="975.0" style="-fx-background-color: #75900C; -fx-border-color: #22577A;">
+            <Pane layoutX="14.0" layoutY="81.0" prefHeight="70.0" prefWidth="975.0" style="-fx-background-color: #75900C; -fx-border-color: #22577A;">
                <children>
-                  <Label layoutX="14.0" layoutY="18.0" prefHeight="27.0" prefWidth="27.0" text="#" textFill="#c7f9cc">
+                  <Label layoutX="14.0" layoutY="18.0" prefHeight="27.0" prefWidth="27.0" text="#" textFill="#f6ffd4">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="64.0" layoutY="17.0" prefHeight="37.0" prefWidth="80.0" text="Code" textFill="#c7f9cc">
+                  <Label layoutX="64.0" layoutY="17.0" prefHeight="37.0" prefWidth="80.0" text="Code" textFill="#f6ffd4">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="691.0" layoutY="18.0" text="Quantity" textFill="#c7f9cc">
+                  <Label layoutX="691.0" layoutY="18.0" text="Quantity" textFill="#f6ffd4">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="614.0" layoutY="18.0" text="Price" textFill="#c7f9cc">
+                  <Label layoutX="614.0" layoutY="18.0" text="Price" textFill="#f6ffd4">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="450.0" layoutY="18.0" text="Publish Date" textFill="#c7f9cc">
+                  <Label layoutX="450.0" layoutY="18.0" text="Publish Date" textFill="#f6ffd4">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="149.0" layoutY="17.0" prefHeight="37.0" prefWidth="80.0" text="Title" textFill="#c7f9cc">
+                  <Label layoutX="149.0" layoutY="17.0" prefHeight="37.0" prefWidth="80.0" text="Title" textFill="#f6ffd4">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="838.0" layoutY="18.0" text="Actions" textFill="#c7f9cc">
+                  <Label layoutX="838.0" layoutY="18.0" text="Actions" textFill="#f6ffd4">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane id="idPane" fx:id="idPane" focusTraversable="true" layoutX="14.0" layoutY="85.0" prefHeight="704.0" prefWidth="975.0" />
+            <Pane id="idPane" fx:id="idPane" focusTraversable="true" layoutX="14.0" layoutY="151.0" prefHeight="500.0" prefWidth="800.0" />
+            <JFXButton fx:id="buttonBack" layoutX="905.0" layoutY="14.0" onAction="#BackAdmin" prefHeight="54.0" prefWidth="81.0" style="-fx-background-color: #c9e265;" text="Back">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </JFXButton>
          </children>
       </Pane>
    </children>
