@@ -26,6 +26,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
 
 /**
@@ -66,7 +68,7 @@ public class AddUserAdminController implements Initializable {
     @FXML
     private JFXButton reset;
     @FXML
-    private JFXButton btnBack;
+    private ImageView ButtonBack;
 
     
     /**
@@ -95,11 +97,11 @@ public class AddUserAdminController implements Initializable {
                 u.setNumTel(tftel.getText());
                 u.setPassword(tfpassword.getText());
                 u.setAdresse(tfaddress.getText());
-                u.setProfilePicture("");
+                u.setProfilePicture("/com/img/icons/avatar.png");
                 if (rbadmin.isSelected()){
                     u.setRole("ADMIN");
                 }else{
-                    u.setRole("MEMBER");
+                    u.setRole("CLIENT");
                 }
                 ServiceUser su=ServiceUser.getInstance();
 
@@ -153,11 +155,15 @@ public class AddUserAdminController implements Initializable {
                 tfaddress.setText("");
             }
         });
-        btnBack.setOnAction((event) -> {
-             Window currentWindow = this.btnBack.getScene().getWindow();
-        SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayUsersAdmin");
-        });
+       
         
-    }    
+    }  
+    @FXML
+     public void BackAdmin(MouseEvent event) {
+        Window currentWindow = this.ButtonBack.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayUsersAdmin");
+
+    }
+
     
 }

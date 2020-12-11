@@ -55,13 +55,12 @@ public class DisplayUsersAdminController implements Initializable {
     @FXML
     private JFXTextField textFieldSearch;
     @FXML
-    private JFXButton buttonBack;
-    @FXML
     private Pagination pagination;
 
-    
     List<User> allUsers;
     private final int MAX_ELEMENT_PER_PAGE = 10;
+    @FXML
+    private ImageView ButtonBack;
 
     /**
      * Initializes the controller class.
@@ -95,13 +94,6 @@ public class DisplayUsersAdminController implements Initializable {
         SceneLoader.getInstance().NavigateTo(currentWindow, "AddUserAdmin");
     }
 
-    @FXML
-    void BackAdmin(ActionEvent event) {
-        Window currentWindow = this.buttonBack.getScene().getWindow();
-        SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
-
-    }
-
     public int calculPageCount(int size) {
         if (size % MAX_ELEMENT_PER_PAGE == 0) {
             return (size / MAX_ELEMENT_PER_PAGE);
@@ -120,7 +112,7 @@ public class DisplayUsersAdminController implements Initializable {
     }
 
     public List<User> searchUsers(String searchText) {
-       /* List<User> result = new ArrayList();
+        /* List<User> result = new ArrayList();
         for (User user : allUsers) {
             if ((user.getName().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
                     || (user.getEmail().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
@@ -128,9 +120,9 @@ public class DisplayUsersAdminController implements Initializable {
                 result.add(user);
             }
         }*/
-        return allUsers.stream().filter((user)->((user.getName().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
-                    || (user.getEmail().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
-                    || (user.getRole().toUpperCase().indexOf(searchText.toUpperCase()) != -1))).collect(Collectors.toList());
+        return allUsers.stream().filter((user) -> ((user.getName().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
+                || (user.getEmail().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
+                || (user.getRole().toUpperCase().indexOf(searchText.toUpperCase()) != -1))).collect(Collectors.toList());
     }
 
     public VBox refresh(List<User> users, int pageIndex) {
@@ -140,7 +132,7 @@ public class DisplayUsersAdminController implements Initializable {
         vBoxUsersList.getChildren().clear();
         int i = 1;
         for (User user : users) {
-            if ((i <= (pageIndex + 1) * MAX_ELEMENT_PER_PAGE) && (i > ((pageIndex + 1) * MAX_ELEMENT_PER_PAGE - MAX_ELEMENT_PER_PAGE ))) {
+            if ((i <= (pageIndex + 1) * MAX_ELEMENT_PER_PAGE) && (i > ((pageIndex + 1) * MAX_ELEMENT_PER_PAGE - MAX_ELEMENT_PER_PAGE))) {
                 HBox box = new HBox();
                 Label name = new Label(user.getName());
                 Label email = new Label(user.getEmail());
@@ -235,5 +227,11 @@ public class DisplayUsersAdminController implements Initializable {
             i++;
         }
         return vBoxUsersList;
+    }
+
+    @FXML
+    private void BackAdmin(MouseEvent event) {
+        Window currentWindow = this.ButtonBack.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
     }
 }

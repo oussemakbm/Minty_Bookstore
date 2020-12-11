@@ -52,7 +52,7 @@ public class ChooseWishListController implements Initializable {
     private VBox list;
 
     List<WishList> allWishlists;
-    int idUser = 1; // User used for testing
+    int idUser; // User used for testing
     @FXML
     private JFXTextField textFieldSearch;
 
@@ -62,6 +62,7 @@ public class ChooseWishListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ServiceWishList sw = ServiceWishList.getInstance();
+        idUser=ServiceUser.getConnectedUser().getId();
         try {
             allWishlists = sw.getUserWishLists(idUser);
             refresh(allWishlists);
@@ -111,7 +112,7 @@ public class ChooseWishListController implements Initializable {
                 name.setMinWidth(377);
                 name.setMinHeight(50);
                 name.setOnMouseClicked((MouseEvent e) -> {
-                    ServiceWishList.setChosenWishList(wishList);
+                    ServiceWishList.setSelectedWishList(wishList);
                     Window currentWindow = this.list.getScene().getWindow();
                     SceneLoader.getInstance().NavigateTo(currentWindow, "bookDetails");
                 });
@@ -130,9 +131,8 @@ public class ChooseWishListController implements Initializable {
     void addWishList(ActionEvent event) {
         WishList w = new WishList();
         ServiceWishList sw = ServiceWishList.getInstance();
-        w.setIdUser(1);
+        w.setIdUser(idUser);
         w.setName(textFieldSearch.getText());
-        w.setIdBook(1);
         try {
             if (sw.wishListExist(idUser, w.getName())) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "You already have a wishlist with this name !", ButtonType.OK);

@@ -17,8 +17,8 @@ public class WishlistTest {
 
     public static void main(String[] args) throws SQLException {
         ServiceWishList ws = ServiceWishList.getInstance();
-        WishList w1 = new WishList(1, 1, "Wish List 1"); // (idUser,idBook,name)
-        WishList w2 = new WishList(1, 1, "Wish List 2");
+        WishList w1 = new WishList(1, "Wish List 1"); // (idUser,idBook,name)
+        WishList w2 = new WishList( 1, "Wish List 2");
         ws.addWishList(w1);
         ws.addWishList(w2);
         System.out.println(ws.getWishLists());

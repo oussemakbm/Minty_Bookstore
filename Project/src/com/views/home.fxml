@@ -2,6 +2,8 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url(&quot;https://img.freepik.com/free-vector/colorful-blurred-background-made-with-gradient-mesh_105895-545.jpg?size=626&amp;ext=jpg&quot;); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HomeController">
@@ -9,5 +11,10 @@
       <JFXDrawer fx:id="drawer" defaultDrawerSize="190.0" prefHeight="600.0" prefWidth="190.0" />
       <JFXHamburger fx:id="hamburger" layoutX="741.0" layoutY="21.0" />
       <AnchorPane fx:id="booksContainer" layoutX="194.0" layoutY="69.0" prefHeight="491.0" prefWidth="541.0" style="-fx-background-color: #fff;" />
+      <JFXTextField fx:id="textFieldSearch" alignment="CENTER" focusColor="#fdffff" layoutX="374.0" layoutY="29.0" onKeyReleased="#search" promptText="Search" unFocusColor="#fffdfd">
+         <cursor>
+            <Cursor fx:constant="WAIT" />
+         </cursor>
+      </JFXTextField>
    </children>
 </AnchorPane>

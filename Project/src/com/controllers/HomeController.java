@@ -6,15 +6,19 @@
 package com.controllers;
 
 import com.SceneLoader;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.models.Book;
 import com.services.ServiceBook;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -46,10 +50,19 @@ public class HomeController implements Initializable {
 
     HamburgerBackArrowBasicTransition burgerTask;
 
-    ArrayList<Book> bookList;
+    List<Book> bookList;
 
     @FXML
     AnchorPane booksContainer;
+     @FXML
+    private VBox vBoxBookList;
+    @FXML
+    private JFXButton buttonAdd;
+    @FXML
+    private JFXTextField textFieldSearch;
+
+    List<Book> displaybook ;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,6 +78,7 @@ public class HomeController implements Initializable {
 
         try {
             bookList = ServiceBook.getInstance().getBooks();
+            displaybook=bookList;
             if (bookList.size() > 0) {
                 displayBooks(bookList);
             } else {
@@ -73,6 +87,15 @@ public class HomeController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        textFieldSearch.textProperty().addListener((observale, oldtext, newtext)->{
+            System.out.println(" Text Changed from "+ oldtext +" to " + newtext + "\n");
+            if(!(newtext == null || newtext.equals(""))){
+                displaybook = bookList.stream()
+                        .filter(i ->  i.getTitle().toUpperCase().indexOf(newtext.toUpperCase()) >= 0)
+                        .collect(Collectors.toList());
+            }else
+                displaybook = bookList;
+                displayBooks(displaybook);});
 
     }
 
@@ -86,7 +109,8 @@ public class HomeController implements Initializable {
         }
     }
 
-    private void displayBooks(ArrayList<Book> bookList) {
+    private void displayBooks(List<Book> bookList) {
+        booksContainer.getChildren().clear();
         GridPane root = new GridPane();
 //        root.setPadding(new Insets(10, 10, 10, 10));
         root.setHgap(10);
@@ -104,7 +128,12 @@ public class HomeController implements Initializable {
         booksContainer.setPadding(new Insets(0, 0, 0, 0));
         booksContainer.getChildren().add(root);
     }
-
+public void search (){
+    displayBooks(
+    bookList.stream()
+            .filter(i ->  i.getTitle().toUpperCase().indexOf(textFieldSearch.getText().toUpperCase()) >= 0)
+                        .collect(Collectors.toList()));
+}
     private Button getButtonFromBook(Book b) {
 //        Creating BookButton Element START
         //Creating a graphic (image)
