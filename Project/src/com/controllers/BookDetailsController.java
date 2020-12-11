@@ -17,6 +17,7 @@ import com.models.Comment;
 import com.models.Interaction;
 import com.services.ServiceAuthor;
 import com.services.ServiceBook;
+import com.services.ServiceCart;
 import com.services.ServiceComment;
 import com.services.ServiceCommentProfanity;
 import com.services.ServiceInteraction;
@@ -27,6 +28,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,6 +96,12 @@ public class BookDetailsController implements Initializable {
 
     @FXML
     private JFXTextArea commentBody;
+    @FXML
+    private JFXButton likeBtn;
+    @FXML
+    private JFXButton pickWishlist;
+    @FXML
+    private JFXButton addToCart;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -226,6 +235,32 @@ public class BookDetailsController implements Initializable {
         comments.forEach(comment -> {
             commentsList.getItems().add(new Label(comment.getBody()));
         });
+
+    }
+
+    @FXML
+    private void handleRatingDone(DragEvent event) {
+    }
+
+    @FXML
+    private void handleRatingDone(MouseEvent event) {
+    }
+
+    @FXML
+    private void displayWishLists(ActionEvent event) {
+         Window currentWindow = this.pickWishlist.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "ChooseWishList");
+    }
+
+    @FXML
+    private void addBookToCart(ActionEvent event) {
+        try {
+            Book b=ServiceBook.getInstance().getBook(SceneLoader.getInstance().getSelectedBookId());
+            ServiceCart.getInstance().getBooks().put(b, 1);
+            addToCart.setDisable(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

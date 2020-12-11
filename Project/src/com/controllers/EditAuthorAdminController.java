@@ -5,6 +5,7 @@
  */
 package com.controllers;
 
+import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -24,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import javax.swing.JFileChooser;
 
 /**
@@ -102,6 +104,13 @@ public class EditAuthorAdminController implements Initializable {
         } catch (MalformedURLException ex) {
             Logger.getLogger(HttpPost.class.getName()).log(Level.ALL.SEVERE, null, ex);
         }        
+    }
+    
+    @FXML
+    void backTohome(ActionEvent event) {
+        Window currentWindow = this.name.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
+
     }
 
 

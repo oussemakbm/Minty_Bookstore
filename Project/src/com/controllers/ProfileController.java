@@ -6,6 +6,7 @@
 package com.controllers;
 
 import com.SceneLoader;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -47,6 +48,10 @@ public class ProfileController implements Initializable {
     private ImageView avatar;
 
     HamburgerBackArrowBasicTransition burgerTask;
+    @FXML
+    private JFXButton btnCart;
+    @FXML
+    private JFXButton wishlists;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,6 +85,19 @@ public class ProfileController implements Initializable {
     void goToEditProfile(ActionEvent event) {
         Window currentWindow = this.wellcomeTxt.getScene().getWindow();
         SceneLoader.getInstance().NavigateTo(currentWindow, "editProfile");
+    }
+
+    @FXML
+    private void goToCart(ActionEvent event) {
+          Window currentWindow = this.wellcomeTxt.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayCart");
+    }
+
+    @FXML
+    private void goToWishlists(ActionEvent event) {
+          Window currentWindow = this.wellcomeTxt.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "DisplayWishLists");
+        
     }
 
 }

@@ -8,8 +8,10 @@ package com.controllers;
 import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.models.Book;
 import com.models.User;
 import com.models.WishList;
+import com.services.ServiceBook;
 import com.services.ServiceUser;
 import com.services.ServiceWishList;
 import java.net.URL;
@@ -62,7 +64,7 @@ public class ChooseWishListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ServiceWishList sw = ServiceWishList.getInstance();
-        idUser=ServiceUser.getConnectedUser().getId();
+        idUser = ServiceUser.getConnectedUser().getId();
         try {
             allWishlists = sw.getUserWishLists(idUser);
             refresh(allWishlists);
@@ -71,15 +73,16 @@ public class ChooseWishListController implements Initializable {
         }
         // TODO
     }
+
     @FXML
     public void search() {
-       
-            refresh(searchWishlists(textFieldSearch.getText()));
+
+        refresh(searchWishlists(textFieldSearch.getText()));
 
     }
 
     public List<WishList> searchWishlists(String searchText) {
-       /* List<User> result = new ArrayList();
+        /* List<User> result = new ArrayList();
         for (User user : allUsers) {
             if ((user.getName().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
                     || (user.getEmail().toUpperCase().indexOf(searchText.toUpperCase()) != -1)
@@ -87,7 +90,7 @@ public class ChooseWishListController implements Initializable {
                 result.add(user);
             }
         }*/
-        return allWishlists.stream().filter((wishlist)->(wishlist.getName().toUpperCase().indexOf(searchText.toUpperCase()) != -1)).collect(Collectors.toList());
+        return allWishlists.stream().filter((wishlist) -> (wishlist.getName().toUpperCase().indexOf(searchText.toUpperCase()) != -1)).collect(Collectors.toList());
     }
 
     public void refresh(List<WishList> wishLists) {
@@ -95,7 +98,7 @@ public class ChooseWishListController implements Initializable {
         if (wishLists.isEmpty()) {
             Label empty = new Label("No wishlists found");
             empty.setAlignment(Pos.CENTER);
-            empty.setPadding(new Insets(20,0,0,0));
+            empty.setPadding(new Insets(20, 0, 0, 0));
             empty.setStyle("-fx-font-size:22");
             empty.setMinWidth(370);
             list.getChildren().add(empty);
@@ -108,13 +111,23 @@ public class ChooseWishListController implements Initializable {
                 name.setAlignment(Pos.CENTER);
                 name.setStyle("-fx-font-size:14");
 
-                
                 name.setMinWidth(377);
                 name.setMinHeight(50);
                 name.setOnMouseClicked((MouseEvent e) -> {
-                    ServiceWishList.setSelectedWishList(wishList);
-                    Window currentWindow = this.list.getScene().getWindow();
-                    SceneLoader.getInstance().NavigateTo(currentWindow, "bookDetails");
+                    try {
+                        ServiceWishList.setSelectedWishList(wishList);
+                        Book b = ServiceBook.getInstance().getBook(SceneLoader.getInstance().getSelectedBookId());
+                        if (ServiceWishList.getInstance().checkBookInWishList(wishList, b)) {
+                            ServiceWishList.getInstance().addBookToWishList(wishList, b);
+                            Window currentWindow = this.btnBack.getScene().getWindow();
+                            SceneLoader.getInstance().NavigateTo(currentWindow, "bookDetails");
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.WARNING, "Book already exists ", ButtonType.OK);
+                            alert.showAndWait();
+                        }
+                    } catch (SQLException e1) {
+                    }
+
                 });
                 if (odd) {
                     name.setStyle("-fx-background-color:#fff");
