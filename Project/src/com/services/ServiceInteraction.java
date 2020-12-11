@@ -96,11 +96,10 @@ public class ServiceInteraction {
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
-    
-    
+
     public ArrayList<Interaction> getBookInteractions(int bookId) throws SQLException {
         ArrayList<Interaction> results = new ArrayList<>();
-        String request = "SELECT * FROM interactions WHERE idBook = 1 ";
+        String request = "SELECT * FROM interactions WHERE idBook = "+bookId;
         Statement pst = cnx.createStatement();
         ResultSet rst = pst.executeQuery(request);
 
@@ -116,5 +115,27 @@ public class ServiceInteraction {
 
         return results;
     }
-    
+
+    public Interaction getUserInteractionFromBook(int userId, int bookId)  throws SQLException {
+
+        Interaction result = new Interaction();
+        String request = "SELECT * FROM interactions WHERE idBook ="+bookId+" AND idUser= "+userId;
+        Statement pst = cnx.createStatement();
+        ResultSet rst = pst.executeQuery(request);
+
+        if (rst.next()) {
+            
+            result.setId(rst.getInt(1));
+            result.setIdUser(rst.getInt(2));
+            result.setIdBook(rst.getInt(3));
+            result.setRatingValue(rst.getFloat(4));
+            result.setLiked(rst.getInt(5));
+            
+            return result;
+        }
+
+        return null;
+
+    }
+
 }

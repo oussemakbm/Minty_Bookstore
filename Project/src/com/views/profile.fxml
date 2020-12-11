@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ProfileController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ProfileController">
    <children>
       <JFXHamburger fx:id="hamburger" layoutX="734.0" layoutY="26.0" />
       <JFXDrawer fx:id="drawer" defaultDrawerSize="190.0" prefHeight="400.0" prefWidth="169.0" />
@@ -32,5 +32,7 @@
             <Image url="@../img/icons/avatar.png" />
          </image>
       </ImageView>
+      <JFXButton fx:id="btnCart" layoutX="650.0" layoutY="358.0" onAction="#goToCart" prefHeight="42.0" prefWidth="65.0" style="-fx-background-color: #c9e265;" text="Cart" />
+      <JFXButton fx:id="wishlists" layoutX="439.0" layoutY="358.0" onAction="#goToWishlists" prefHeight="42.0" prefWidth="85.0" style="-fx-background-color: #c9e265;" text="Wishlists" />
    </children>
 </AnchorPane>

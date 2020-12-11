@@ -17,23 +17,30 @@ public class InteractionTest {
 
     public static void main(String[] args) throws SQLException {
         ServiceInteraction is = ServiceInteraction.getInstance();
-        Interaction i = new Interaction(1, 1, 4, 0);
-        Interaction i2 = new Interaction(1, 1, 2, 1);
-
+//        Interaction i = new Interaction(1, 1, 4, 0);
+//        Interaction i2 = new Interaction(1, 1, 2, 1);
+//
+//        try {
+//            is.addInteraction(i);
+//            is.addInteraction(i2);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println(is.getInteractions());
+//
+//        Interaction i3 = new Interaction(8, 1, 1, 2, 1);
+//        is.updateInteraction(i3);
+//        System.out.println(is.getInteraction(8));
+//
+//        is.deleteInteraction(4);
+//        System.out.println(is.getInteractions());
         try {
-            is.addInteraction(i);
-            is.addInteraction(i2);
+            System.out.println(is.getUserInteractionFromBook(1, 1).toString());
+   
         } catch (Exception e) {
+            
             e.printStackTrace();
         }
-
-        System.out.println(is.getInteractions());
-
-        Interaction i3 = new Interaction(8, 1, 1, 2, 1);
-        is.updateInteraction(i3);
-        System.out.println(is.getInteraction(8));
-
-        is.deleteInteraction(4);
-        System.out.println(is.getInteractions());
     }
 }

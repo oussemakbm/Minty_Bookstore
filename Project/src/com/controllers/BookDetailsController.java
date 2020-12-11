@@ -17,6 +17,7 @@ import com.models.Comment;
 import com.models.Interaction;
 import com.services.ServiceAuthor;
 import com.services.ServiceBook;
+import com.services.ServiceCart;
 import com.services.ServiceComment;
 import com.services.ServiceCommentProfanity;
 import com.services.ServiceInteraction;
@@ -27,6 +28,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,6 +96,12 @@ public class BookDetailsController implements Initializable {
 
     @FXML
     private JFXTextArea commentBody;
+    @FXML
+    private JFXButton likeBtn;
+    @FXML
+    private JFXButton pickWishlist;
+    @FXML
+    private JFXButton addToCart;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -192,8 +201,20 @@ public class BookDetailsController implements Initializable {
 
     @FXML
     void handleRatingDone(ActionEvent event) {
+        int userId = ServiceUser.getConnectedUser().getId();
+        int bookId = SceneLoader.getInstance().getSelectedBookId();
         double ratingValue = rating.getRating();
         System.out.println("Rating value: " + ratingValue);
+        try {
+            Interaction i = ServiceInteraction.getInstance().getUserInteractionFromBook(userId, bookId);
+            i.setRatingValue((float) ratingValue);
+            
+            ServiceInteraction.getInstance().updateInteraction(i);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
@@ -204,28 +225,63 @@ public class BookDetailsController implements Initializable {
 
         try {
             String result = ServiceCommentProfanity.getInstance().getCleanComment(body);
-            
+
             if (result != "REQUEST_ERROR") {
                 Comment comment = new Comment(userId, bookId, result);
                 ServiceComment.getInstance().addComment(comment, userId, bookId);
                 this.commentBody.setText("");
-                this.displayComments();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private void formCommentsItems(ArrayList<Comment> comments) {
+        int bookId = SceneLoader.getInstance().getSelectedBookId();
+        int userId = ServiceUser.getConnectedUser().getId();
+        comments.forEach((comment) -> {
+            if (comment.getUserId() == userId) {
+                Label currentUserComment = new Label(comment.getBody());
+                currentUserComment.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                    System.out.println("Comment Selected  idComment:" + comment.getId());
+                });
+                commentsList.getItems().add(currentUserComment);
+            } else {
+                commentsList.getItems().add(new Label(comment.getBody()));
+            }
+        });
     }
 
     private void displayComments() {
-
         int bookId = SceneLoader.getInstance().getSelectedBookId();
-
+        int userId = ServiceUser.getConnectedUser().getId();
         ArrayList<Comment> comments = ServiceComment.getInstance().getComments(bookId);
+        this.formCommentsItems(comments);
+    }
 
-        comments.forEach(comment -> {
-            commentsList.getItems().add(new Label(comment.getBody()));
-        });
+    @FXML
+    private void handleRatingDone(DragEvent event) {
+    }
+
+    @FXML
+    private void handleRatingDone(MouseEvent event) {
+    }
+
+    @FXML
+    private void displayWishLists(ActionEvent event) {
+         Window currentWindow = this.pickWishlist.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "ChooseWishList");
+    }
+
+    @FXML
+    private void addBookToCart(ActionEvent event) {
+        try {
+            Book b=ServiceBook.getInstance().getBook(SceneLoader.getInstance().getSelectedBookId());
+            ServiceCart.getInstance().getBooks().put(b, 1);
+            addToCart.setDisable(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
