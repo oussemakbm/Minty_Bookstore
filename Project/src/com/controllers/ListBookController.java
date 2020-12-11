@@ -85,6 +85,9 @@ public class ListBookController implements Initializable {
     @FXML
     private Pane idPane;
     
+    @FXML
+    private JFXButton buttonBack;
+    
     private List<Book> displaylist;
     
     private List<Book> listbooks;
@@ -126,6 +129,7 @@ public class ListBookController implements Initializable {
     
     public void afficher(){
         idPane.getChildren().clear();
+        System.out.println(displaylist);
         VBox vbox = new VBox();
         for (int i = 0; i < displaylist.size(); i++) {
             // Labels
@@ -186,7 +190,7 @@ public class ListBookController implements Initializable {
                 try {
                     System.out.println("Setting BookId: "+ btn.getId().substring(1) + " To Scene Loader setBookId method");
                     SceneLoader.getInstance().setBookId(Integer.parseInt(btn.getId().substring(1)));
-                    Window window = btnc.getScene().getWindow();
+                    Window window = btne.getScene().getWindow();
                     SceneLoader.getInstance().NavigateTo(window, "UpdateBook");  
                 } catch (Exception exception) {
                     exception.printStackTrace();
@@ -388,6 +392,13 @@ public class ListBookController implements Initializable {
                         displaylist = listbooks;
                     afficher();
         });
+
+    }
+    
+    @FXML
+    void BackAdmin(ActionEvent event) {
+        Window currentWindow = this.buttonBack.getScene().getWindow();
+        SceneLoader.getInstance().NavigateTo(currentWindow, "homeAdmin");
 
     }
 }

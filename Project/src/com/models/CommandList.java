@@ -5,6 +5,9 @@
  */
 package com.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author ali
@@ -15,6 +18,8 @@ public class CommandList {
     private String status;
     private float totalprice;
     private int idUser;
+
+    private ArrayList<CommandLine> listOfLines = new ArrayList<CommandLine>();
 
     public CommandList() {
     }
@@ -63,6 +68,22 @@ public class CommandList {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+    
+    public ArrayList<CommandLine> getCls() {
+        return  listOfLines;
+    }
+
+    public void setCls(ArrayList<CommandLine> cls) {
+        this.listOfLines = cls;
+    }
+    
+    public void addLines(CommandLine x) {
+        listOfLines.add(x);
+    }
+    
+    public void deleteCls(CommandLine x) {
+        listOfLines.remove(x);
     }
     
      public String toString() {

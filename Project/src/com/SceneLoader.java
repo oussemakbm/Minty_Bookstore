@@ -7,7 +7,10 @@ package com;
 
 import com.controllers.BookDetailsController;
 import com.models.Book;
+import com.models.CommandLine;
+import com.models.CommandList;
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,9 +28,20 @@ public class SceneLoader {
     private static SceneLoader INSTANCE;
     
     private int bookId;
+    
+    private int langueId;
+    
+    private int serieId;
+    
+    private CommandList cl;
 
-    private SceneLoader() {
-
+    private SceneLoader() {}
+    
+    public void setCommande(){
+        cl = new CommandList(1, "En Cours", 0 , 1);
+        cl.addLines(new CommandLine(1, 1, 1, 4));
+        cl.addLines(new CommandLine(1, 1, 1, 5));
+        cl.addLines(new CommandLine(1, 1, 1, 6));
     }
 
     public Parent GetParent(String fileName) {
@@ -44,11 +58,35 @@ public class SceneLoader {
     }
     
     public void setBookId(int id) {
-        this.bookId = id;
+        this.langueId = id;
     }
     
     public int getSelectedBookId() {
+        return this.langueId;
+    }
+    
+    public void setLangueId(int id) {
+        this.bookId = id;
+    }
+    
+    public int getSelectedLangueId() {
         return this.bookId;
+    }
+    
+    public void setSerieId(int id) {
+        this.serieId = id;
+    }
+    
+    public int getSelectedSerieId() {
+        return this.serieId;
+    }
+    
+    public void setList(CommandList x) {
+        this.cl = x;
+    }
+    
+    public CommandList getSelectedList() {
+        return this.cl;
     }
 
     public VBox getDrawerContent() throws IOException {
