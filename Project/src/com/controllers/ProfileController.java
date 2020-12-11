@@ -56,7 +56,7 @@ public class ProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         wellcomeTxt.setText("Welcome " + ServiceUser.getConnectedUser().getName());
-        //avatar.setImage(new Image(ServiceUser.getConnectedUser().getProfilePicture()));
+        avatar.setImage(new Image(ServiceUser.getConnectedUser().getProfilePicture()));
         try {
             VBox box = SceneLoader.getInstance().getDrawerContent();
             this.drawer.setSidePane(box);

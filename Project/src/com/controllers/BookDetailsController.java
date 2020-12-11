@@ -201,8 +201,20 @@ public class BookDetailsController implements Initializable {
 
     @FXML
     void handleRatingDone(ActionEvent event) {
+        int userId = ServiceUser.getConnectedUser().getId();
+        int bookId = SceneLoader.getInstance().getSelectedBookId();
         double ratingValue = rating.getRating();
         System.out.println("Rating value: " + ratingValue);
+        try {
+            Interaction i = ServiceInteraction.getInstance().getUserInteractionFromBook(userId, bookId);
+            i.setRatingValue((float) ratingValue);
+            
+            ServiceInteraction.getInstance().updateInteraction(i);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
@@ -213,29 +225,38 @@ public class BookDetailsController implements Initializable {
 
         try {
             String result = ServiceCommentProfanity.getInstance().getCleanComment(body);
-            
+
             if (result != "REQUEST_ERROR") {
                 Comment comment = new Comment(userId, bookId, result);
                 ServiceComment.getInstance().addComment(comment, userId, bookId);
                 this.commentBody.setText("");
-                this.displayComments();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private void formCommentsItems(ArrayList<Comment> comments) {
+        int bookId = SceneLoader.getInstance().getSelectedBookId();
+        int userId = ServiceUser.getConnectedUser().getId();
+        comments.forEach((comment) -> {
+            if (comment.getUserId() == userId) {
+                Label currentUserComment = new Label(comment.getBody());
+                currentUserComment.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                    System.out.println("Comment Selected  idComment:" + comment.getId());
+                });
+                commentsList.getItems().add(currentUserComment);
+            } else {
+                commentsList.getItems().add(new Label(comment.getBody()));
+            }
+        });
     }
 
     private void displayComments() {
-
         int bookId = SceneLoader.getInstance().getSelectedBookId();
-
+        int userId = ServiceUser.getConnectedUser().getId();
         ArrayList<Comment> comments = ServiceComment.getInstance().getComments(bookId);
-
-        comments.forEach(comment -> {
-            commentsList.getItems().add(new Label(comment.getBody()));
-        });
-
+        this.formCommentsItems(comments);
     }
 
     @FXML
