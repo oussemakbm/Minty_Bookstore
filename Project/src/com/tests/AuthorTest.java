@@ -24,7 +24,7 @@ public class AuthorTest {
             AuthorPrefer ap = new AuthorPrefer(1, 1);
             spa.addPreferAuthor(ap);
             spa.updateAuthorPrefer(ap);
-            spa.deleteAuthorPrefer(1);
+//            spa.deleteAuthorPrefer(1);
             System.out.println(spa.getAuthorPrefer(2));
             sa.addAuthor(new Author("a", "a", ""));
             sa.deleteAuthor(1);
@@ -32,6 +32,7 @@ public class AuthorTest {
             sa.updateAuthor(a);
             System.out.println(sa.getAuthors());
             System.out.println(sa.getAuthor(2));
+//            System.out.println(sa.getNameAuthors());
         } catch (SQLException ex) {
             System.out.println("ereeur");
         }

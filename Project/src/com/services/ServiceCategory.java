@@ -37,26 +37,42 @@ public class ServiceCategory {
     }
 
     public void addCategory(Category c) throws SQLException {
-        String request = "INSERT INTO 'Categories' ('id', 'name' )"
+        String request = "INSERT INTO `categories` (`id`, `name` )"
                 + " VALUES (NULL, '" + c.getName() + "')";
+        Statement stm = cnx.createStatement();
+        stm.executeUpdate(request);
 
     }
 
     public ArrayList<Category> getCategories() throws SQLException {
         ArrayList<Category> results = new ArrayList<Category>();
-        String request = "SELECT * FROM `Categories`";
+        String request = "SELECT * FROM `categories`";
         Statement stm = cnx.createStatement();
         ResultSet rst = stm.executeQuery(request);
 
         while (rst.next()) {
             Category c = new Category();
-            c.SetId(rst.getInt("id"));
-            c.SetName(rst.getString(2));
+            c.setId(rst.getInt("id"));
+            c.setName(rst.getString(2));
 
             results.add(c);
         }
-        return null;
+        return results;
 
+    }
+    public Category getCategory(int id) throws SQLException {
+        ArrayList<Category> results = new ArrayList<Category>();
+        String request = "SELECT * FROM 'categories' WHERE id =" +id;
+        Statement stm = cnx.createStatement();
+        ResultSet rst = stm.executeQuery(request);
+        if (rst.next()){
+            Category c = new Category();
+            c.setId(rst.getInt(1));
+            c.setName(rst.getString(2));
+            return c;
+            
+        }
+        return null;
     }
 
     public void deleteCategory(int id) throws SQLException {

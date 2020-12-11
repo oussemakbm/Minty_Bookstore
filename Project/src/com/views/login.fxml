@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="448.0" prefWidth="600.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginController">
+    <children>
+        <JFXTextField fx:id="textEmail" layoutX="213.0" layoutY="171.0" prefHeight="30.0" prefWidth="220.0" promptText="example@gmail.com" unFocusColor="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXTextField>
+        <JFXPasswordField fx:id="textPassword" layoutX="213.0" layoutY="242.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" unFocusColor="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXPasswordField>
+        <JFXButton fx:id="jbtnSignUp" layoutX="466.0" layoutY="32.0" onAction="#SignUpAction" prefHeight="39.0" prefWidth="109.0" style="-fx-background-color: #c9e265; -fx-border-color: #a0a2ab;" text="Sign up" textFill="#ffffff8c">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </JFXButton>
+        <JFXButton fx:id="jbtnLLogin" layoutX="265.0" layoutY="313.0" onAction="#loginAction" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #151928; -fx-border-color: #a0a2ab;" text="Login" textFill="#ffffff8c">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <ImageView fitHeight="176.0" fitWidth="176.0" layoutX="213.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../img/Minty.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="21.0" fitWidth="26.0" layoutX="169.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../img/icons/forme-de-l'utilisateur.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="169.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../img/icons/cadenas.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="gifLoading" fitHeight="48.0" fitWidth="47.0" layoutX="277.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../img/loading-waiting.gif" />
+            </image>
+        </ImageView>
+      <JFXButton fx:id="jbtnSignUp1" layoutX="37.0" layoutY="40.0" onAction="#ContactAction" prefHeight="39.0" prefWidth="109.0" style="-fx-background-color: #c9e265; -fx-border-color: #a0a2ab;" text="Contuct Us" textFill="#ffffff8c">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+    </children>
+</AnchorPane>

@@ -62,6 +62,24 @@ public class ServicePreferAuthor {
         return results;
     }
 
+    public ArrayList<Author> getAuthorsPreferUser(int idUser) throws SQLException {
+        ArrayList<Author> results = new ArrayList<>();
+        String request = "SELECT a.name , a.id,a.picUrl , a.description FROM favoriteauthors fa, authors a WHERE fa.idUser=" + idUser + " AND fa.idAuthor=a.id";
+        Statement stm = cnx.createStatement();
+        ResultSet rst = stm.executeQuery(request);
+
+        while (rst.next()) {
+            Author a = new Author();
+            a.setId(rst.getInt("id"));
+            a.setName(rst.getString("name"));
+            a.setDescription(rst.getString("description"));
+            a.setPicUrl(rst.getString("picUrl"));
+            results.add(a);
+        }
+
+        return results;
+    }
+
     public AuthorPrefer getAuthorPrefer(int id) throws SQLException {
         String request = "SELECT * FROM `favoriteauthors` WHERE id =" + id;
         Statement stm = cnx.createStatement();
@@ -92,8 +110,8 @@ public class ServicePreferAuthor {
 
     }
 
-    public void deleteAuthorPrefer(int id) throws SQLException {
-        String request = "DELETE FROM `favoriteauthors` WHERE id =" + id;
+    public void deleteAuthorPrefer(int id, int idUser) throws SQLException {
+        String request = "DELETE FROM `favoriteauthors` WHERE idAuthor =" + id+ " AND idUser =" +idUser;
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }

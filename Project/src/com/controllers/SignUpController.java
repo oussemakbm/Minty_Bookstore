@@ -5,6 +5,7 @@
  */
 package com.controllers;
 
+import com.SceneLoader;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -37,7 +38,6 @@ public class SignUpController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
     @FXML
     private JFXButton BtnSignUp;
 
@@ -70,40 +70,33 @@ public class SignUpController implements Initializable {
         textTel.setStyle("-fx-text-inner-color: #a0a2ab");
         textAdresse.setStyle("-fx-text-inner-color: #a0a2ab");
         textpic.setStyle("-fx-text-inner-color: #a0a2ab");
-        
-    }    
-    
-    
-    public void signUpAction(ActionEvent e){
+
+    }
+
+    public void signUpAction(ActionEvent e) {
         gif.setVisible(true);
         PauseTransition pt = new PauseTransition();
-        pt.setDuration(Duration.seconds(3));
+        pt.setDuration(Duration.seconds(1));
         pt.setOnFinished(ev -> {
             ServiceUser us = ServiceUser.getInstance();
             User u = new User(textUser.getText(), textEmail.getText(), textPassword.getText(), "CLIENT", textTel.getText(), textAdresse.getText(), textpic.getText());
             try {
                 us.addUser(u);
             } catch (SQLException ex) {
+                
                 System.out.println("Erreur Add USER");;
             }
             System.out.println("User Added Successfully");
-//            System.out.println("Sign Up Successfully");
-
+            SceneLoader.getInstance().NavigateTo(this.BtnSignUp.getScene().getWindow(), "login");
             gif.setVisible(false);
         });
-        pt.play(); 
-        
+        pt.play();
+
     }
-    public void loginAction(ActionEvent e1) throws IOException{
-        BtnSignUp.getScene().getWindow().hide();
-        Stage login = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("views/home.fxml"));
-        
-        Scene scene = new Scene(root);
-        login.setScene(scene);
-        login.show();
-        login.setResizable(false);
+
+    public void loginAction(ActionEvent e1) throws IOException {
+
+        SceneLoader.getInstance().NavigateTo(BtnSignUp.getScene().getWindow(), "login");
     }
-    
-    
+
 }

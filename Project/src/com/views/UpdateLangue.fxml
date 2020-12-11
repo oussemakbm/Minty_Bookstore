@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.controllers.UpdateLangueController">
+   <children>
+      <JFXTextField fx:id="textlangue" layoutX="178.0" layoutY="155.0" prefHeight="50.0" prefWidth="220.0" promptText="Langue" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="jbtnSave" layoutX="188.0" layoutY="252.0" onAction="#saveAction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #151928; -fx-border-color: #a0a2ab;" text="Save" textFill="#ffffff8c">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="127.0" fitWidth="176.0" layoutX="224.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Minty.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="gifLoading" fitHeight="48.0" fitWidth="47.0" layoutX="264.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/loading-waiting.gif" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="buttonBack" layoutX="505.0" layoutY="14.0" onAction="#BackAdmin" prefHeight="54.0" prefWidth="81.0" style="-fx-background-color: #c9e265;" text="Back">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

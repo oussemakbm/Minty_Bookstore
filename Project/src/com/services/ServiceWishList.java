@@ -5,6 +5,7 @@
  */
 package com.services;
 
+import com.models.Book;
 import com.models.WishList;
 import com.util.MyConnection;
 import java.sql.Connection;
@@ -31,13 +32,23 @@ public class ServiceWishList {
         return INSTANCE;
     }
 
+    private static WishList selectedWishList;
+
+    public static WishList getSelectedWishList() {
+        return selectedWishList;
+    }
+
+    public static void setSelectedWishList(WishList selectedWishList) {
+        ServiceWishList.selectedWishList = selectedWishList;
+    }
+
     private ServiceWishList() {
         cnx = MyConnection.getInstance().getConnection();
     }
 
     public void addWishList(WishList w) throws SQLException {
-        String request = "INSERT INTO `wishlist` (`id`, `name`, `idUser`, `idBook`)"
-                + " VALUES (NULL, '" + w.getName() + "', '" + w.getIdUser() + "', '" + w.getIdBook() + "')";
+        String request = "INSERT INTO `wishlist` (`id`, `name`, `idUser`)"
+                + " VALUES (NULL, '" + w.getName() + "', '" + w.getIdUser() + "')";
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
@@ -53,7 +64,32 @@ public class ServiceWishList {
             w.setId(rst.getInt(1));
             w.setName(rst.getString(2));
             w.setIdUser(rst.getInt(3));
-            w.setIdBook(rst.getInt(4));
+            results.add(w);
+        }
+
+        return results;
+    }
+
+    public boolean wishListExist(int id,String name) throws SQLException {
+        String request = "SELECT * FROM wishlist WHERE idUser=" +id+" AND UPPER(name)='"+name.toUpperCase()+"'";
+        Statement stm = cnx.createStatement();
+        ResultSet rst = stm.executeQuery(request);
+        if (rst.next()) 
+            return true;
+        return false;
+    }
+
+    public ArrayList<WishList> getUserWishLists(int id) throws SQLException {
+        ArrayList<WishList> results = new ArrayList<>();
+        String request = "SELECT * FROM `wishlist`WHERE idUser=" + id;
+        Statement stm = cnx.createStatement();
+        ResultSet rst = stm.executeQuery(request);
+
+        while (rst.next()) {
+            WishList w = new WishList();
+            w.setId(rst.getInt(1));
+            w.setName(rst.getString(2));
+            w.setIdUser(rst.getInt(3));
             results.add(w);
         }
 
@@ -70,7 +106,6 @@ public class ServiceWishList {
             w.setId(rst.getInt(1));
             w.setName(rst.getString(2));
             w.setIdUser(rst.getInt(3));
-            w.setIdBook(rst.getInt(4));
             return w;
         }
 
@@ -90,6 +125,49 @@ public class ServiceWishList {
 
     public void deleteWishList(int id) throws SQLException {
         String request = "DELETE FROM `wishlist` WHERE id =" + id;
+        Statement stm = cnx.createStatement();
+        stm.executeUpdate(request);
+    }
+
+    public void addBookToWishList(WishList ws, Book book) throws SQLException {
+        String request = "INSERT INTO `wishlistitem` VALUES (NULL,?,?)";
+        PreparedStatement pst = cnx.prepareStatement(request);
+        pst.setInt(1, ws.getId());
+        pst.setInt(2, book.getId());
+        pst.executeUpdate();
+    }
+
+    public ArrayList<Book> getBooksInWishList(WishList ws) throws SQLException {
+        ArrayList<Book> books = new ArrayList<>();
+        String request = "SELECT * FROM `books` b,`wishlist` w,`wishlistitem` wi WHERE w.id=wi.id_wishlist AND wi.id_book=b.id AND w.id=" + ws.getId();
+        Statement stm = cnx.createStatement();
+        ResultSet rst = stm.executeQuery(request);
+
+        while (rst.next()) {
+            Book b = new Book();
+            b.setId(rst.getInt(1));
+            b.setRating((int) rst.getFloat("rating"));
+            b.setTitle(rst.getString("title"));
+            b.setPrix(rst.getFloat("prix"));
+            books.add(b);
+        }
+
+        return books;
+    }
+
+    public boolean checkBookInWishList(WishList ws, Book b) throws SQLException {
+        String request = "SELECT * FROM `wishlistitem` wi WHERE wi.id_wishlist=" + ws.getId() + " AND wi.id_book=" + b.getId();
+        Statement stm = cnx.createStatement();
+        ResultSet rst = stm.executeQuery(request);
+        int i = 0;
+        while (rst.next()) {
+            i++;
+        }
+        return i > 0;
+    }
+
+    public void deleteBookFromWishList(WishList ws, Book b) throws SQLException {
+        String request = "DELETE FROM `wishlistitem` WHERE id_wishlist=" + ws.getId() + " AND id_book=" + b.getId();
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }

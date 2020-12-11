@@ -27,6 +27,16 @@ public class ServiceAuthor {
     private static ServiceAuthor INSTANCE;
     
     
+    private static Author thisAuthor;
+    public static Author getThisAuthor(){
+        return thisAuthor;
+    }
+    public static void setThisAuthor(Author a){
+        thisAuthor = a;
+        
+    }
+    
+    
     public static ServiceAuthor getInstance() {
         if (INSTANCE == null)
             INSTANCE = new ServiceAuthor();
@@ -66,6 +76,21 @@ public class ServiceAuthor {
 
         return results;
     }
+    public ArrayList<String> getNameAuthors() throws SQLException {
+        ArrayList<Author> results = new ArrayList<>();
+        String request = "SELECT name FROM `authors`";
+        Statement stm = cnx.createStatement();
+        ResultSet rst = stm.executeQuery(request);
+        while (rst.next()) {
+            Author a = new Author();
+            a.setName(rst.getString(1));
+            results.add(a);
+            
+        }
+        
+        return null;
+    }
+    
 
     public Author getAuthor(int id) throws SQLException {
         String request = "SELECT * FROM `authors` WHERE id =" + id;

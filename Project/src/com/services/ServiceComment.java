@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class ServiceComment {
 
-    public static ServiceComment INSTANCE;
+    private static ServiceComment INSTANCE;
     private Connection con;
 
     private ServiceComment() {
@@ -83,6 +83,28 @@ public class ServiceComment {
         try {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(fetch);
+            while (rs.next()) {
+                Comment c = new Comment(rs.getString("body"));
+                c.setId(rs.getInt("id"));
+                result.add(c);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public ArrayList<Comment> getComments(int bookId) {
+
+        ArrayList<Comment> result = new ArrayList<Comment>();
+
+        String fetch = "SELECT * FROM comments WHERE idBook = ?";
+
+        try {
+            PreparedStatement statement = con.prepareStatement(fetch);
+            statement.setInt(1, bookId);
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Comment c = new Comment(rs.getString("body"));
                 c.setId(rs.getInt("id"));

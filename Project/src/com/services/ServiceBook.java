@@ -49,7 +49,6 @@ public class ServiceBook {
         String req = "UPDATE `books` SET `title`=?,`description`=?,`imageUrl`=?,"
                 + "`prix`=?,`quantity`=?,`rating`=?,`nbrPages`=?,"
                 + "`idAuthor`=?,`idCategory`=?,`idLanguage`=?,`idSerie`=?,"
-                + "`publishDate`=?"
                 + "WHERE `id` = ?";
 
         PreparedStatement pst = cnx.prepareStatement(req);
@@ -65,8 +64,8 @@ public class ServiceBook {
         pst.setInt(9, b.getIdCategory());
         pst.setInt(10, b.getIdLanguage());
         pst.setInt(11, b.getIdSerie());
-        pst.setString(12, b.getPublishDate());
-        pst.setInt(13, b.getId());
+//        pst.setString(12, b.getPublishDate());
+        pst.setInt(12, b.getId());
         pst.executeUpdate();
 
     }
@@ -97,7 +96,7 @@ public class ServiceBook {
             b.setIdCategory(rst.getInt(10));
             b.setIdLanguage(rst.getInt(11));
             b.setIdSerie(rst.getInt(12));
-            b.setPublishDate(rst.getString(13));
+//            b.setPublishDate(rst.getString(13));
 
             results.add(b);
         }
@@ -124,8 +123,7 @@ public class ServiceBook {
             b.setIdCategory(rst.getInt(10));
             b.setIdLanguage(rst.getInt(11));
             b.setIdSerie(rst.getInt(12));
-            b.setPublishDate(rst.getString(13));
-
+//            b.setPublishDate(rst.getString(13));
             return b;
         }
 
