@@ -32,14 +32,14 @@ public class ServiceWishList {
         return INSTANCE;
     }
 
-    private static WishList chosenWishList;
+    private static WishList selectedWishList;
 
-    public static WishList getChosenWishList() {
-        return chosenWishList;
+    public static WishList getSelectedWishList() {
+        return selectedWishList;
     }
 
-    public static void setChosenWishList(WishList chosenWishList) {
-        ServiceWishList.chosenWishList = chosenWishList;
+    public static void setSelectedWishList(WishList selectedWishList) {
+        ServiceWishList.selectedWishList = selectedWishList;
     }
 
     private ServiceWishList() {
@@ -47,8 +47,8 @@ public class ServiceWishList {
     }
 
     public void addWishList(WishList w) throws SQLException {
-        String request = "INSERT INTO `wishlist` (`id`, `name`, `idUser`, `idBook`)"
-                + " VALUES (NULL, '" + w.getName() + "', '" + w.getIdUser() + "', '" + w.getIdBook() + "')";
+        String request = "INSERT INTO `wishlist` (`id`, `name`, `idUser`)"
+                + " VALUES (NULL, '" + w.getName() + "', '" + w.getIdUser() + "')";
         Statement stm = cnx.createStatement();
         stm.executeUpdate(request);
     }
@@ -64,7 +64,6 @@ public class ServiceWishList {
             w.setId(rst.getInt(1));
             w.setName(rst.getString(2));
             w.setIdUser(rst.getInt(3));
-            w.setIdBook(rst.getInt(4));
             results.add(w);
         }
 
@@ -72,7 +71,7 @@ public class ServiceWishList {
     }
 
     public boolean wishListExist(int id,String name) throws SQLException {
-        String request = "SELECT * FROM wishlist WHERE idUser=" +id+" AND name='"+name+"'";
+        String request = "SELECT * FROM wishlist WHERE idUser=" +id+" AND UPPER(name)='"+name.toUpperCase()+"'";
         Statement stm = cnx.createStatement();
         ResultSet rst = stm.executeQuery(request);
         if (rst.next()) 
@@ -91,7 +90,6 @@ public class ServiceWishList {
             w.setId(rst.getInt(1));
             w.setName(rst.getString(2));
             w.setIdUser(rst.getInt(3));
-            w.setIdBook(rst.getInt(4));
             results.add(w);
         }
 
@@ -108,7 +106,6 @@ public class ServiceWishList {
             w.setId(rst.getInt(1));
             w.setName(rst.getString(2));
             w.setIdUser(rst.getInt(3));
-            w.setIdBook(rst.getInt(4));
             return w;
         }
 

@@ -63,7 +63,7 @@ public class DisplayCartController implements Initializable {
     private JFXButton btnOrder;
 
     ServiceCart cart;
-    int idUser = 1;  // ConnectedUser
+    int idUser;  // ConnectedUser
 
     /**
      * Initializes the controller class.
@@ -71,37 +71,10 @@ public class DisplayCartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         booksList.setSpacing(40);
-        booksList.setPadding(new Insets(30,30,30,30));
+        booksList.setPadding(new Insets(30, 30, 30, 30));
         cart = ServiceCart.getInstance();
-        Book b = new Book();
-        Book b2 = new Book();
-        Book b3 = new Book();
-        Book b4 = new Book();
+        idUser = ServiceUser.getConnectedUser().getId();
 
-        b.setTitle("Book of the books number 1");
-        b2.setTitle("Book of the books number 2");
-        b3.setTitle("Book of the books number 3");
-        b4.setTitle("Book of the books number 4");
-
-        b.setPrix(50);
-        b2.setPrix(30);
-        b3.setPrix(440);
-        b4.setPrix(54);
-        
-        b.setId(1);
-        b2.setId(2);
-        b3.setId(3);
-        b4.setId(4);
-
-        b.setImageUrl("/com/img/Exemplebook.png");
-        b2.setImageUrl("/com/img/Exemplebook.png");
-        b3.setImageUrl("/com/img/Exemplebook.png");
-        b4.setImageUrl("/com/img/Exemplebook.png");
-
-        cart.addToCart(b, 2);
-        cart.addToCart(b2, 3);
-        cart.addToCart(b3, 4);
-        cart.addToCart(b4, 5);
         lbTotal.setText(cart.getTotal() + " DT");
 
         refresh(cart.getBooks());
@@ -109,10 +82,11 @@ public class DisplayCartController implements Initializable {
     }
 
     public void refresh(Map<Book, Integer> books) {
-        if (books.size()==0) 
+        if (books.size() == 0) {
             btnOrder.setDisable(true);
-        else
+        } else {
             btnOrder.setDisable(false);
+        }
         booksList.getChildren().clear();
         if (books.isEmpty()) {
             Label empty = new Label("No books found in your cart !");
@@ -133,7 +107,7 @@ public class DisplayCartController implements Initializable {
                 ImageView bookImage = new ImageView(new Image(book.getImageUrl()));
                 Label lbtitle = new Label(book.getTitle());
                 Label lbprice = new Label("Price : " + Float.toString(book.getPrix()) + " DT");
-                
+
                 Label lbquantity = new Label("Quantity : ");
                 TextField tfQuantity = new TextField(Integer.toString(quantity));
 
@@ -179,7 +153,7 @@ public class DisplayCartController implements Initializable {
                 delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent e) {
-                        Alert alert = new Alert(Alert.AlertType.WARNING, "Delete the user " + book.getTitle() + " ?", ButtonType.YES, ButtonType.NO);
+                        Alert alert = new Alert(Alert.AlertType.WARNING, "Delete the book " + book.getTitle() + " ?", ButtonType.YES, ButtonType.NO);
                         alert.showAndWait();
                         if (alert.getResult() == ButtonType.YES) {
 
@@ -231,7 +205,7 @@ public class DisplayCartController implements Initializable {
 
     @FXML
     public void order() {
-        
+
         ServiceCommandLine scline = ServiceCommandLine.getInstance();
         ServiceCommandList sclist = ServiceCommandList.getInstance();
         CommandList cmd = new CommandList();
@@ -239,8 +213,8 @@ public class DisplayCartController implements Initializable {
         cmd.setStatus("En cours");
         cmd.setTotalprice(cart.getTotal());
         try {
-            int idCmdList=sclist.addCommandList(cmd);
-            
+            int idCmdList = sclist.addCommandList(cmd);
+
             for (Map.Entry<Book, Integer> element : cart.getBooks().entrySet()) {
                 Book book = element.getKey();
                 int quantity = element.getValue();
@@ -256,7 +230,7 @@ public class DisplayCartController implements Initializable {
             Logger.getLogger(DisplayCartController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     void back(ActionEvent event) {
         Window currentWindow = this.btnBack.getScene().getWindow();
