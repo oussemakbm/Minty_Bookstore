@@ -192,8 +192,20 @@ public class BookDetailsController implements Initializable {
 
     @FXML
     void handleRatingDone(ActionEvent event) {
+        int userId = ServiceUser.getConnectedUser().getId();
+        int bookId = SceneLoader.getInstance().getSelectedBookId();
         double ratingValue = rating.getRating();
         System.out.println("Rating value: " + ratingValue);
+        try {
+            Interaction i = ServiceInteraction.getInstance().getUserInteractionFromBook(userId, bookId);
+            i.setRatingValue((float) ratingValue);
+            
+            ServiceInteraction.getInstance().updateInteraction(i);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
@@ -209,7 +221,6 @@ public class BookDetailsController implements Initializable {
                 Comment comment = new Comment(userId, bookId, result);
                 ServiceComment.getInstance().addComment(comment, userId, bookId);
                 this.commentBody.setText("");
-                this.displayComments();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -231,8 +242,6 @@ public class BookDetailsController implements Initializable {
             }
         });
     }
-    
-
 
     private void displayComments() {
         int bookId = SceneLoader.getInstance().getSelectedBookId();
